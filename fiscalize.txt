@@ -1,0 +1,4 @@
+stdClass Object
+(
+    [message] => Зміну не відкрито
+)

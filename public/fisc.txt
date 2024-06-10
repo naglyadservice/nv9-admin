@@ -1,0 +1,226 @@
+stdClass Object
+(
+    [id] => 5b404881-1f34-4209-a307-bd50e7b9afc7
+    [serial] => 1185
+    [status] => CREATED
+    [goods] => Array
+        (
+            [0] => stdClass Object
+                (
+                    [good] => stdClass Object
+                        (
+                            [code] => 1
+                            [barcode] => 
+                            [name] => Послуга
+                            [excise_barcodes] => 
+                            [header] => 
+                            [footer] => 
+                            [uktzed] => 
+                            [price] => 20000
+                        )
+
+                    [good_id] => 
+                    [sum] => 20000
+                    [quantity] => 1000
+                    [is_return] => 
+                    [taxes] => Array
+                        (
+                        )
+
+                    [discounts] => Array
+                        (
+                        )
+
+                )
+
+        )
+
+    [payments] => Array
+        (
+            [0] => stdClass Object
+                (
+                    [type] => CASH
+                    [pawnshop_is_return] => 
+                    [value] => 20000
+                    [label] => Готівка
+                )
+
+        )
+
+    [total_sum] => 20000
+    [total_payment] => 20000
+    [total_rest] => 0
+    [round_sum] => 0
+    [fiscal_code] => 
+    [fiscal_date] => 
+    [delivered_at] => 
+    [taxes] => Array
+        (
+        )
+
+    [discounts] => Array
+        (
+        )
+
+    [created_at] => 2024-05-22T14:07:28.671222+00:00
+    [updated_at] => 
+    [is_created_offline] => 
+    [is_sent_dps] => 
+    [type] => SELL
+    [transaction] => stdClass Object
+        (
+            [id] => ab56722f-d51b-4035-b88c-51120492815d
+            [type] => RECEIPT
+            [serial] => 1242
+            [status] => PENDING
+            [request_signed_at] => 
+            [request_received_at] => 
+            [response_status] => 
+            [response_error_message] => 
+            [response_id] => 
+            [offline_id] => 
+            [created_at] => 2024-05-22T14:07:28.671222+00:00
+            [updated_at] => 
+            [original_datetime] => 2024-05-22T14:07:28.671222+00:00
+            [previous_hash] => 581afa3d7ddec22af46685f225d815564e86e94ba43a0b548c79a650a5ae7776
+        )
+
+    [sum] => 20000
+    [rest] => 0
+    [order_id] => 
+    [header] => 
+    [footer] => 
+    [barcode] => 
+    [custom] => 
+    [context] => 
+    [sent_dps_at] => 
+    [tax_url] => 
+    [related_receipt_id] => 
+    [technical_return] => 
+    [stock_code] => 
+    [currency_exchange] => 
+    [service_currency_exchange] => Array
+        (
+        )
+
+    [control_number] => 
+    [pre_payment_relation_id] => 
+    [shift] => stdClass Object
+        (
+            [id] => 4fc747b2-c23a-46b7-96a3-3f01b7fefa43
+            [serial] => 21
+            [status] => OPENED
+            [z_report] => 
+            [opened_at] => 2024-05-22T05:19:32.804714+00:00
+            [closed_at] => 
+            [initial_transaction] => stdClass Object
+                (
+                    [id] => cbad094a-c81e-4a51-ba3c-234d3225f90b
+                    [type] => SHIFT_OPEN
+                    [serial] => 1208
+                    [status] => DONE
+                    [request_signed_at] => 2024-05-22T05:19:33.954441+00:00
+                    [request_received_at] => 2024-05-22T05:19:34.040879+00:00
+                    [response_status] => OK
+                    [response_error_message] => 
+                    [response_id] => f-pO-cKlTQo
+                    [offline_id] => 
+                    [created_at] => 2024-05-22T05:19:32.804714+00:00
+                    [updated_at] => 2024-05-22T05:19:34.315412+00:00
+                    [original_datetime] => 2024-05-22T05:19:32.804714+00:00
+                    [previous_hash] => 360fb147d732e5bf8dca3700e9cdbd873b708f184b4bee966e36c9ff0620dea1
+                )
+
+            [closing_transaction] => 
+            [created_at] => 2024-05-22T05:19:32.804714+00:00
+            [updated_at] => 2024-05-22T05:19:34.318274+00:00
+            [balance] => stdClass Object
+                (
+                    [initial] => 6238000
+                    [balance] => 6454000
+                    [cash_sales] => 216000
+                    [card_sales] => 0
+                    [discounts_sum] => 0
+                    [extra_charge_sum] => 0
+                    [cash_returns] => 0
+                    [card_returns] => 0
+                    [service_in] => 0
+                    [service_out] => 0
+                    [updated_at] => 2024-05-22T08:43:25.676023+00:00
+                )
+
+            [taxes] => Array
+                (
+                    [0] => stdClass Object
+                        (
+                            [id] => 7c584c2c-2653-4a07-b3e3-47c0f309e6a7
+                            [code] => 8
+                            [label] => Без ПДВ
+                            [symbol] => З
+                            [rate] => 0
+                            [extra_rate] => 
+                            [included] => 1
+                            [created_at] => 2024-03-05T11:48:27.518380+00:00
+                            [updated_at] => 
+                            [no_vat] => 1
+                            [advanced_code] => 
+                            [sales] => 0
+                            [returns] => 0
+                            [sales_turnover] => 0
+                            [returns_turnover] => 0
+                        )
+
+                )
+
+            [emergency_close] => 
+            [emergency_close_details] => 
+            [cash_register] => stdClass Object
+                (
+                    [id] => 9086273a-14c6-4273-a516-2fd4f06d7262
+                    [fiscal_number] => 4000824518
+                    [active] => 1
+                    [created_at] => 2024-03-05T16:27:00+00:00
+                    [updated_at] => 2024-05-05T10:05:38+00:00
+                    [number] => 1
+                )
+
+            [cashier] => stdClass Object
+                (
+                    [id] => 9dbde1ab-dc22-4436-8160-d89ad927fbda
+                    [full_name] => ПРОЦВЄТОВ ІГОР ВОЛОДИМИРОВИЧ
+                    [nin] => 2909717353
+                    [key_id] => c788f91bf71aa0d002c3f7b0656f97a14bfa4d11635d856ae6a4bb09c0b9be3b
+                    [signature_type] => CLOUD_SIGNATURE_3
+                    [permissions] => stdClass Object
+                        (
+                            [self_return] => 1
+                            [orders] => 
+                            [add_discounts] => 1
+                            [editing_goods_sum] => 1
+                            [deferred_receipt] => 1
+                            [editing_good_price] => 1
+                            [can_add_manual_good] => 1
+                            [service_in] => 1
+                            [service_out] => 1
+                            [returns] => 1
+                            [sales] => 1
+                            [card_payment] => 
+                            [cash_payment] => 
+                            [other_payment] => 
+                            [mixed_payment] => 
+                            [branch_params] => 1
+                            [reports_history] => 1
+                            [additional_service_receipt] => 
+                            [free_return] => 
+                            [orders_source] => UNSET
+                        )
+
+                    [created_at] => 2024-03-05T16:37:10+00:00
+                    [updated_at] => 2024-05-17T00:24:33+00:00
+                    [certificate_end] => 2024-10-29T21:57:59+00:00
+                    [blocked] => 
+                )
+
+        )
+
+)

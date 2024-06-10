@@ -1,0 +1,187 @@
+stdClass Object
+(
+    [id] => 8412bd03-6c60-459c-9c92-bf845835baec
+    [serial] => 17
+    [status] => CLOSING
+    [z_report] => stdClass Object
+        (
+            [id] => ed4e7ae7-81d6-4a00-aee4-406037c5887c
+            [shift_id] => 8412bd03-6c60-459c-9c92-bf845835baec
+            [last_receipt_id] => 6f4d26e7-21ea-4d8c-a7fd-cc44e5359cb2
+            [fiscal_code] => 
+            [serial] => 17
+            [is_z_report] => 1
+            [payments] => Array
+                (
+                    [0] => stdClass Object
+                        (
+                            [id] => e253963e-0706-4604-b4b6-a2fc9d2fbfb2
+                            [code] => 
+                            [type] => CASH
+                            [provider_type] => 
+                            [label] => Готівка
+                            [sell_sum] => 348000
+                            [return_sum] => 0
+                            [service_in] => 0
+                            [service_out] => 0
+                            [cash_withdrawal] => 0
+                            [cash_withdrawal_commission] => 0
+                        )
+
+                )
+
+            [taxes] => Array
+                (
+                    [0] => stdClass Object
+                        (
+                            [id] => fd9d9221-4ba4-49ba-9f74-a261ea13cb99
+                            [code] => 8
+                            [label] => Без ПДВ
+                            [symbol] => З
+                            [rate] => 0
+                            [extra_rate] => 
+                            [sell_sum] => 0
+                            [return_sum] => 0
+                            [sales_turnover] => 0
+                            [returns_turnover] => 0
+                            [no_vat] => 1
+                            [advanced_code] => 
+                            [created_at] => 2024-04-07T16:28:42.574635+00:00
+                            [setup_date] => 2024-04-07T16:28:42.574635+00:00
+                        )
+
+                )
+
+            [sell_receipts_count] => 85
+            [return_receipts_count] => 0
+            [cash_withdrawal_receipts_count] => 0
+            [transfers_count] => 0
+            [transfers_sum] => 0
+            [balance] => 6528000
+            [initial] => 6180000
+            [sales_round_up] => 0
+            [sales_round_down] => 0
+            [returns_round_up] => 0
+            [returns_round_down] => 0
+            [created_at] => 2024-05-15T20:49:54.662276+00:00
+            [updated_at] => 
+            [discounts_sum] => 0
+            [extra_charge_sum] => 0
+            [transaction_fail] => 
+            [rates] => Array
+                (
+                )
+
+        )
+
+    [opened_at] => 2024-05-14T15:55:52.527933+00:00
+    [closed_at] => 
+    [initial_transaction] => stdClass Object
+        (
+            [id] => ba31d77a-d2a4-4480-8edf-41b444fdbcd8
+            [type] => SHIFT_OPEN
+            [serial] => 1384
+            [status] => DONE
+            [request_signed_at] => 2024-05-14T15:55:52.627545+00:00
+            [request_received_at] => 2024-05-14T18:48:10.136226+00:00
+            [response_status] => OK
+            [response_error_message] => 
+            [response_id] => 7oWIaKgXjpA
+            [offline_id] => 7oWIaKgXjpA
+            [created_at] => 2024-05-14T15:55:52.527933+00:00
+            [updated_at] => 2024-05-14T18:48:10.411577+00:00
+            [original_datetime] => 2024-05-14T15:55:52.527933+00:00
+            [previous_hash] => 31eebd7683dae6c5442523bf12f582df2ade7b44453d158820efdae6a806d5f8
+        )
+
+    [closing_transaction] => 
+    [created_at] => 2024-05-14T15:55:52.527933+00:00
+    [updated_at] => 2024-05-14T15:55:52.527933+00:00
+    [balance] => stdClass Object
+        (
+            [initial] => 6180000
+            [balance] => 6528000
+            [cash_sales] => 348000
+            [card_sales] => 0
+            [discounts_sum] => 0
+            [extra_charge_sum] => 0
+            [cash_returns] => 0
+            [card_returns] => 0
+            [service_in] => 0
+            [service_out] => 0
+            [updated_at] => 2024-05-15T13:12:57.867058+00:00
+        )
+
+    [taxes] => Array
+        (
+            [0] => stdClass Object
+                (
+                    [id] => 72dd50e1-7888-494e-a45e-2b360ce9015c
+                    [code] => 8
+                    [label] => Без ПДВ
+                    [symbol] => З
+                    [rate] => 0
+                    [extra_rate] => 
+                    [included] => 1
+                    [created_at] => 2024-04-07T16:28:42.574635+00:00
+                    [updated_at] => 
+                    [no_vat] => 1
+                    [advanced_code] => 
+                    [sales] => 0
+                    [returns] => 0
+                    [sales_turnover] => 0
+                    [returns_turnover] => 0
+                )
+
+        )
+
+    [emergency_close] => 
+    [emergency_close_details] => 
+    [cash_register] => stdClass Object
+        (
+            [id] => 3917189a-865a-4c9c-9772-2ac2fda08b1b
+            [fiscal_number] => 4000848351
+            [active] => 1
+            [created_at] => 2024-04-09T13:48:51+00:00
+            [updated_at] => 2024-05-09T10:02:40+00:00
+            [number] => 1
+        )
+
+    [cashier] => stdClass Object
+        (
+            [id] => 6ed7889a-daa4-4b07-942f-fef819ad1398
+            [full_name] => КОЗАЧУК МИКОЛА ДМИТРОВИЧ
+            [nin] => 1859401935
+            [key_id] => d53040c0540d399a1335879ad64980eaeade4560bae6a76895b599106b15490a
+            [signature_type] => CLOUD_SIGNATURE_3
+            [permissions] => stdClass Object
+                (
+                    [self_return] => 1
+                    [orders] => 
+                    [add_discounts] => 1
+                    [editing_goods_sum] => 1
+                    [deferred_receipt] => 1
+                    [editing_good_price] => 1
+                    [can_add_manual_good] => 1
+                    [service_in] => 1
+                    [service_out] => 1
+                    [returns] => 1
+                    [sales] => 1
+                    [card_payment] => 
+                    [cash_payment] => 
+                    [other_payment] => 
+                    [mixed_payment] => 
+                    [branch_params] => 1
+                    [reports_history] => 1
+                    [additional_service_receipt] => 
+                    [free_return] => 
+                    [orders_source] => UNSET
+                )
+
+            [created_at] => 2024-04-09T13:50:50+00:00
+            [updated_at] => 2024-04-09T13:50:50+00:00
+            [certificate_end] => 2024-08-08T21:57:59+00:00
+            [blocked] => 
+        )
+
+)

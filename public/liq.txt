@@ -1,0 +1,39 @@
+stdClass Object
+(
+    [payment_id] => 2474066070
+    [action] => pay
+    [status] => success
+    [version] => 3
+    [type] => buy
+    [paytype] => gpaycard
+    [public_key] => sandbox_i39435704476
+    [acq_id] => 414963
+    [order_id] => 1718051850
+    [liqpay_order_id] => 6QNXI8911718051861792063
+    [description] => Поповнення балансу для ВОДОМАТ
+    [sender_card_mask2] => 444111*84
+    [sender_card_bank] => JSC UNIVERSAL BANK
+    [sender_card_type] => visa
+    [sender_card_country] => 804
+    [ip] => 217.196.161.173
+    [info] => 19
+    [amount] => 10
+    [currency] => UAH
+    [sender_commission] => 0
+    [receiver_commission] => 0.15
+    [agent_commission] => 0
+    [amount_debit] => 10
+    [amount_credit] => 10
+    [commission_debit] => 0
+    [commission_credit] => 0.15
+    [currency_debit] => UAH
+    [currency_credit] => UAH
+    [sender_bonus] => 0
+    [amount_bonus] => 0
+    [mpi_eci] => 7
+    [is_3ds] => 
+    [language] => uk
+    [create_date] => 1718051861793
+    [end_date] => 1718051861973
+    [transaction_id] => 2474066070
+)
