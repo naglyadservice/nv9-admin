@@ -65,6 +65,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach($mySystems as $system)
+                                        <tr>
                                         <td>{{$system->name}}</td>
                                         <td>{{\App\Models\PaymentGateway::systems()[$system->system]}}</td>
                                         <td>{{\Carbon\Carbon::parse($system->created_at)->format('d.m.Y - H:i')}}</td>
@@ -78,6 +79,7 @@
                                                 </button>
                                             </div>
                                         </td>
+                                        </tr>
                                     @endforeach
                                 </tbody>
                             </table>
