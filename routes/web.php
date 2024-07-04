@@ -28,6 +28,7 @@ Route::get('/check/{hash}/reserve_payment', 'App\Http\Controllers\CheckControlle
 Route::get('/check/{hash}/check_allow_payment', 'App\Http\Controllers\CheckController@ajax_check_allow_payment')->name('ajax_check_allow_payment');
 Route::post('/check/{hash}/payment', 'App\Http\Controllers\CheckController@go_payment')->name('go_payment');
 Route::any('/payment/liqpay/callback', 'App\Http\Controllers\CheckController@liqpay_callback')->name('payment.liqpay.callback');
+Route::any('/payment/monopay/callback', 'App\Http\Controllers\CheckController@monopay_callback')->name('payment.monopay.callback');
 
 Route::get('/privacy-policy/{id}', 'App\Http\Controllers\CheckController@privacyPolicy')->name('privacy-policy');
 Route::get('/about-us/{id}', 'App\Http\Controllers\CheckController@aboutUs')->name('about-us');

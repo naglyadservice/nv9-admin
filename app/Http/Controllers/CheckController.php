@@ -143,6 +143,7 @@ class CheckController extends Controller
         }
 
         $data = ["success" => true];
+		
         return response()->json($data);
     }
 
@@ -153,38 +154,115 @@ class CheckController extends Controller
         $amount = (int)$request->amount;
         $system = (int)$request->system;
 
-        $data = $device->payment_system->data;
-        $data = unserialize($data);
+		$data = $device->payment_system->data;
+		$data = unserialize($data);
 
-        $publicKey = $data["public_key"];
-        $privateKey = $data["private_key"];
+		if($system == 0) // LiqPay
+		{
 
-        // $publicKey = 'i76469586488';
-        // $privateKey = 'qr9ABkEHJniEm4JkEvg7CJHFWcrzhDpNk79l8tOk';
+			$publicKey = $data["public_key"];
+			$privateKey = $data["private_key"];
 
-        $payment_id = time();
+			// $publicKey = 'i76469586488';
+			// $privateKey = 'qr9ABkEHJniEm4JkEvg7CJHFWcrzhDpNk79l8tOk';
 
-        $json_string =
-            array(
-                'version'        => '3',
-                'action'         => 'pay',
-                'result_url'     => route('check_hash', $hash),
-                'server_url'     => route('payment.liqpay.callback'),
-                'amount'         => $amount,
-                'currency'       => 'UAH',
-                'description'    => 'Поповнення балансу для '. $device->place_name,
-                'info'           => $device->id,
-                'order_id'       => $payment_id,
-                'language'		 =>	'ua',
-                'public_key'     => $publicKey,
-                'private_key'    => $privateKey,
-            );
+			$payment_id = time();
 
-        $liqpay = new LiqPay($publicKey, $privateKey);
-        $payurl = $liqpay->cnb_pay_url($json_string);
-        return redirect()->to($payurl);
+			$json_string =
+				array(
+					'version'        => '3',
+					'action'         => 'pay',
+					'result_url'     => route('check_hash', $hash),
+					'server_url'     => route('payment.liqpay.callback'),
+					'amount'         => $amount,
+					'currency'       => 'UAH',
+					'description'    => 'Поповнення балансу для '. $device->place_name,
+					'info'           => $device->id,
+					'order_id'       => $payment_id,
+					'language'		 =>	'ua',
+					'public_key'     => $publicKey,
+					'private_key'    => $privateKey,
+				);
+
+			$liqpay = new LiqPay($publicKey, $privateKey);
+			$payurl = $liqpay->cnb_pay_url($json_string);
+			return redirect()->to($payurl);
+		}
+		if($system == 1) // Monopay
+		{
+			$token = $data["private_key"];
+			$ref = md5(microtime());
+			$send = [
+				"amount" => (int)$amount * 100, 
+				"ccy" => 980, 
+				"merchantPaymInfo" => [
+					 "reference" => $ref, 
+					 "destination" => (string)$device->id, 
+					 "comment" => 'Поповнення балансу для '. $device->place_name, 
+				  ], 
+				"redirectUrl" => route('check_hash', $hash), 
+				"webHookUrl" => route('payment.monopay.callback'), 
+				"validity" => 3600, 
+				"paymentType" => "debit", 
+			]; 
+
+			$send = json_encode($send);
+			
+			$ch = curl_init();
+
+			curl_setopt($ch, CURLOPT_URL, "https://api.monobank.ua/api/merchant/invoice/create");
+			curl_setopt($ch, CURLOPT_POST, true);
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $send);
+			curl_setopt($ch, CURLOPT_HTTPHEADER, [
+				'X-Token: '.$token
+			]);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+			$server_output = curl_exec($ch);
+
+			curl_close($ch);
+			
+			$resp = json_decode($server_output);
+			
+			return redirect()->to($resp->pageUrl);
+		}
     }
 
+    public function monopay_callback(Request $request)
+	{
+		$data = $request->getContent();
+		file_put_contents("mono_callback.txt", $data);
+		$data = json_decode($data);
+		$status = $data->status;
+		
+		if($status == "success")
+		{
+			$deviceID = $data->destination;
+			$payment_id = $data->invoiceId;
+			$amount = $data->amount / 100;
+			
+			$device = Device::where('id', $deviceID)->firstOrFail();
+
+			$message = [
+				"factory_number" => $device->factory_number,
+				"payment" => [
+					"order_id" => $payment_id,
+					"amount" => $amount * 100,
+				]
+			];
+			
+			//Отправляем на фискализацию
+			$fisc = new Fiscalization();
+			$fisc->factory_number = $device->factory_number;
+			$fisc->sales_code = 0;
+			$fisc->sales_cashe = $amount * 100;
+			$fisc->cash = 0;
+			$fisc->save();
+
+			$this->new_system_message($device, $message);
+		}
+	}
+	
     public function liqpay_callback(Request $request)
     {
         //Заглушка callback для liqpay

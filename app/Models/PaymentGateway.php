@@ -12,7 +12,8 @@ class PaymentGateway extends Model
     public static function systems()
     {
         return [
-            0 => "LiqPay"
+            0 => "LiqPay",
+            1 => "Monopay",
         ];
     }
 }
