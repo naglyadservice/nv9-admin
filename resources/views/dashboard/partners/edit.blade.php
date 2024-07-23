@@ -67,6 +67,77 @@
                     <!-- /.card -->
                 </div>
                 <!--/.col (right) -->
+
+
+                <div class="col-md-6">
+                    <!-- general form elements -->
+                    <div class="card card-secondary">
+                        <div class="card-header">
+                            <h3 class="card-title">Фискализация</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <!-- form start -->
+                        <form method="POST" action="{{route('partners.edit_fiscalization', $partner->id)}}">
+                            <div class="card-body">
+                                @csrf
+                                <div class="form-group">
+                                    <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
+                                        <input @if($partner->enabled_fiscalization) checked @endif name="enabled_fiscalization" type="checkbox" class="custom-control-input" id="fiscEnableField">
+                                        <label class="custom-control-label" for="fiscEnableField">Включить фискализацию</label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="user_field_id">Ключ фискализации</label>
+                                    <select name="fiscalization_key_id" class="form-control" id="user_field_id">
+                                        <option value="0">Нет</option>
+                                        @foreach($myKeys as $key)
+                                            <option @if($partner->fiscalization_key_id == $key->id) selected @endif value="{{$key->id}}">{{$key->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-primary">Сохранить</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.card -->
+
+                    <div class="card card-secondary">
+                        <div class="card-header">
+                            <h3 class="card-title">Онлайн оплата</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <!-- form start -->
+                        <form method="POST" action="{{route('partners.edit_payment', $partner->id)}}">
+                            <div class="card-body">
+                                @csrf
+                                <div class="form-group">
+                                    <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
+                                        <input @if($partner->enable_payment) checked @endif name="enable_payment" type="checkbox" class="custom-control-input" id="paymentEnableField">
+                                        <label class="custom-control-label" for="paymentEnableField">Включить онлайн оплату</label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="payment_system_field_id">Система онлайн оплаты</label>
+                                    <select name="payment_system_id" class="form-control" id="payment_system_field_id">
+                                        <option value="0">Нет</option>
+                                        @foreach($myPayments as $key)
+                                            <option @if($partner->payment_system_id == $key->id) selected @endif value="{{$key->id}}">{{$key->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-primary">Сохранить</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- /.card -->
+                </div>
+
+
             </div>
 
         </div>

@@ -69,6 +69,8 @@ Route::middleware([
         Route::post('/add', 'App\Http\Controllers\PartnersController@add_save')->name('partners.add_save');
         Route::get('/{partner}/edit', 'App\Http\Controllers\PartnersController@edit')->name('partners.edit');
         Route::post('/{partner}/edit', 'App\Http\Controllers\PartnersController@edit_save')->name('partners.edit_save');
+        Route::post('/{user}/edit_fiscalization', 'App\Http\Controllers\PartnersController@edit_fiscalization')->name('partners.edit_fiscalization');
+        Route::post('/{user}/edit_payment', 'App\Http\Controllers\PartnersController@edit_payment')->name('partners.edit_payment');
 
     });
 
