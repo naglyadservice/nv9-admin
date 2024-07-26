@@ -52,7 +52,14 @@ class CheckController extends Controller
         $address = $device->address;
         $placeName = $device->place_name;
         $user = User::where(['id'=>$device->user_id])->first();
-        return view('fiscalization.check', compact('last_three', 'device', 'device_code', 'hash','user'));
+
+        if($device->design == Device::STANDART) {
+            return view('fiscalization.check', compact('last_three', 'device', 'device_code', 'hash', 'user'));
+        }
+        else if($device->design == Device::MONO)
+        {
+            return view('fiscalization.check_mono', compact('last_three', 'device', 'device_code', 'hash', 'user'));
+        }
     }
 
     public function user_page(Request $request, $userHash)
@@ -114,7 +121,7 @@ class CheckController extends Controller
         $data = ["success" => false];
 
         $resp = DB::table('system_messages')->where('factory_number', $device->factory_number)->first();
-    
+
         if($resp)
         {
             $response = $resp->response;
@@ -139,11 +146,11 @@ class CheckController extends Controller
                 "payment" => "allow"
             ];
             $this->new_system_message($device, $message);
-            
+
         }
 
         $data = ["success" => true];
-		
+
         return response()->json($data);
     }
 
@@ -193,21 +200,21 @@ class CheckController extends Controller
 			$token = $data["private_key"];
 			$ref = md5(microtime());
 			$send = [
-				"amount" => (int)$amount * 100, 
-				"ccy" => 980, 
+				"amount" => (int)$amount * 100,
+				"ccy" => 980,
 				"merchantPaymInfo" => [
-					 "reference" => $ref, 
-					 "destination" => (string)$device->id, 
-					 "comment" => 'Поповнення балансу для '. $device->place_name, 
-				  ], 
-				"redirectUrl" => route('check_hash', $hash), 
-				"webHookUrl" => route('payment.monopay.callback'), 
-				"validity" => 3600, 
-				"paymentType" => "debit", 
-			]; 
+					 "reference" => $ref,
+					 "destination" => (string)$device->id,
+					 "comment" => 'Поповнення балансу для '. $device->place_name,
+				  ],
+				"redirectUrl" => route('check_hash', $hash),
+				"webHookUrl" => route('payment.monopay.callback'),
+				"validity" => 3600,
+				"paymentType" => "debit",
+			];
 
 			$send = json_encode($send);
-			
+
 			$ch = curl_init();
 
 			curl_setopt($ch, CURLOPT_URL, "https://api.monobank.ua/api/merchant/invoice/create");
@@ -221,9 +228,9 @@ class CheckController extends Controller
 			$server_output = curl_exec($ch);
 
 			curl_close($ch);
-			
+
 			$resp = json_decode($server_output);
-			
+
 			return redirect()->to($resp->pageUrl);
 		}
     }
@@ -234,13 +241,13 @@ class CheckController extends Controller
 		file_put_contents("mono_callback.txt", $data);
 		$data = json_decode($data);
 		$status = $data->status;
-		
+
 		if($status == "success")
 		{
 			$deviceID = $data->destination;
 			$payment_id = $data->invoiceId;
 			$amount = $data->amount / 100;
-			
+
 			$device = Device::where('id', $deviceID)->firstOrFail();
 
 			$message = [
@@ -250,7 +257,7 @@ class CheckController extends Controller
 					"amount" => $amount * 100,
 				]
 			];
-			
+
 			//Отправляем на фискализацию
 			$fisc = new Fiscalization();
 			$fisc->factory_number = $device->factory_number;
@@ -262,7 +269,7 @@ class CheckController extends Controller
 			$this->new_system_message($device, $message);
 		}
 	}
-	
+
     public function liqpay_callback(Request $request)
     {
         //Заглушка callback для liqpay
