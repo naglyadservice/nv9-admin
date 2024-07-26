@@ -48,7 +48,12 @@ class PartnersController extends Controller
         $userID = Auth::user()->id;
         $myKeys = FiskalizationKey::where('user_id', $userID)->get();
         $myPayments = PaymentGateway::where('user_id', $userID)->get();
-        return view('dashboard.partners.edit', compact('partner', 'partners', 'myKeys', 'myPayments'));
+        $devices = Device::where(['user_id' => $partner->id])->get();
+
+        $email = $partner->email;
+        $hashedEmail = md5($email);
+
+        return view('dashboard.partners.edit', compact('partner', 'partners', 'myKeys', 'myPayments','devices','hashedEmail'));
     }
 
     public function edit_save(Request $request, User $partner)
@@ -142,4 +147,67 @@ class PartnersController extends Controller
     }
 
 
+    public function edit_enabled(Request $request, User $user)
+    {
+
+        if ($request->has('enabled')) {
+            $user->enabled = true;
+        } else {
+            $user->enabled = false;
+        }
+
+        $user->update();
+
+        $devices = Device::where(['user_id' => $user->id])->get();
+        if (!empty($devices)) {
+            foreach ($devices as $device) {
+                if ($request->has('enabled')) {
+                    $device->enabled = true;
+                } else {
+                    $device->enabled = false;
+                }
+
+                $device->update();
+            }
+        }
+        return back()->with(['success' => 'Успешно сохранено']);
+    }
+
+    public function edit_design(Request $request, User $user)
+    {
+
+        $user->design = $request->design;
+
+        $user->update();
+
+        $devices = Device::where(['user_id' => $user->id])->get();
+        if (!empty($devices)) {
+            foreach ($devices as $device) {
+
+                $device->design = $request->design;
+
+                $device->update();
+            }
+        }
+        return back()->with(['success' => 'Настройки оплаты успешно сохранены']);
+    }
+
+    public function edit_divide_by(Request $request, User $user)
+    {
+
+        $user->divide_by = $request->divide_by;
+
+        $user->update();
+
+        $devices = Device::where(['user_id' => $user->id])->get();
+        if (!empty($devices)) {
+            foreach ($devices as $device) {
+
+                $device->divide_by = $request->divide_by;
+
+                $device->update();
+            }
+        }
+        return back()->with(['success' => 'Настройки оплаты успешно сохранены']);
+    }
 }

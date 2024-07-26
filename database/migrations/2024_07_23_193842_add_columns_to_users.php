@@ -24,7 +24,7 @@ return new class extends Migration
                 ->on('payment_gateways')
                 ->onDelete('set null');
 
-            $table->boolean('design')->default(1)->comment('1-standard | 2-mono');
+            $table->integer('design')->default(1)->comment('1-standard | 2-mono');
 
         });
     }

@@ -71,6 +71,9 @@ Route::middleware([
         Route::post('/{partner}/edit', 'App\Http\Controllers\PartnersController@edit_save')->name('partners.edit_save');
         Route::post('/{user}/edit_fiscalization', 'App\Http\Controllers\PartnersController@edit_fiscalization')->name('partners.edit_fiscalization');
         Route::post('/{user}/edit_payment', 'App\Http\Controllers\PartnersController@edit_payment')->name('partners.edit_payment');
+        Route::post('/{user}/edit_enabled', 'App\Http\Controllers\PartnersController@edit_enabled')->name('partners.edit_enabled');
+        Route::post('/{user}/edit_design', 'App\Http\Controllers\PartnersController@edit_design')->name('partners.edit_design');
+        Route::post('/{user}/edit_divide_by', 'App\Http\Controllers\PartnersController@edit_divide_by')->name('partners.edit_divide_by');
 
     });
 

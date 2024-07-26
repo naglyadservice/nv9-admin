@@ -93,7 +93,7 @@
           </a>
 
            <img src="https://www.npc.com.ua/wp-content/uploads/2024/02/c6251619-ea93-4c53-9f8f-d3c5d0bd2faa.jpg" width="95" >
-  
+
         </header>
       </div>
 
@@ -216,7 +216,9 @@
         console.log("Errors with input buttons")
       }
     </script>
-
+    <script>
+        var divideBy = @json($device->divide_by);
+    </script>
 
       <script>
 
@@ -226,9 +228,15 @@
 
           var amount_field = $("#amount_field");
           let sum = $(amount_field).val();
+            let divideBy = window.divideBy; // Use the value from PHP
 
-          if (sum % 5 !== 0) {
-            alert('Сумма не кратна 5');
+            if (sum === "" || parseFloat(sum) === 0) {
+                alert('Сумма не может быть пустой или равна нулю');
+                return;
+            }
+
+          if (sum % divideBy !== 0) {
+            alert('Сумма не кратна '+divideBy);
             return;
           }
 
@@ -267,7 +275,7 @@
 	  <script>
         function checkPageShow(event) {
             if (event.persisted || window.performance && window.performance.navigation.type === 2) {
-                
+
                 window.location.reload();
             }
         }

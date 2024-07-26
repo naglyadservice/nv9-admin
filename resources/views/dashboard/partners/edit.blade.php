@@ -102,7 +102,8 @@
                         </form>
                     </div>
                     <!-- /.card -->
-
+                </div>
+                <div class="col-md-6">
                     <div class="card card-secondary">
                         <div class="card-header">
                             <h3 class="card-title">Онлайн оплата</h3>
@@ -137,6 +138,107 @@
                     <!-- /.card -->
                 </div>
 
+
+                <div class="col-md-4">
+                    <div class="card card-secondary">
+                        <div class="card-header">
+                            <h3 class="card-title">Доступность устройств</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <!-- form start -->
+                        <form method="POST" action="{{route('partners.edit_enabled', $partner->id)}}">
+                            <div class="card-body">
+                                @csrf
+                                <div class="form-group">
+                                    <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
+                                        <input @if($partner->enabled) checked @endif name="enabled" type="checkbox" class="custom-control-input" id="enableField">
+                                        <label class="custom-control-label" for="enableField">Доступны</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-primary">Сохранить</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.card -->
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card card-secondary">
+                        <div class="card-header">
+                            <h3 class="card-title">Дизайн</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <!-- form start -->
+                        <form method="POST" action="{{route('partners.edit_design', $partner->id)}}">
+                            <div class="card-body">
+                                @csrf
+                                <div class="form-group">
+                                    <label for="design">Дизайны</label>
+                                    <select name="design" class="form-control" id="design">
+                                        @foreach(\App\Models\Device::getDesigns() as $key => $name)
+                                            <option @if($partner->design == $key) selected @endif value="{{$key}}">{{$name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-primary">Сохранить</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.card -->
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card card-secondary">
+                        <div class="card-header">
+                            <h3 class="card-title">Кратность</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <!-- form start -->
+                        <form method="POST" action="{{route('partners.edit_divide_by', $partner->id)}}">
+                            <div class="card-body">
+                                @csrf
+                                <div class="form-group">
+                                    <input type="text"  class="form-control" name="divide_by" value="{{$partner->divide_by}}">
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-primary">Сохранить</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.card -->
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card card-secondary">
+                        <a class="btn btn-success" href="{{route('user_page',['userHash'=>$hashedEmail])}}">Ссылка на страницу партнёра</a>
+                    </div>
+                </div>
+                <?php if(!$devices->isEmpty()){ ?>
+                <div class="col-md-12">
+                    <div class="card card-secondary">
+                        <div class="card-header">
+                            <h3 class="card-title">Устройства</h3>
+                        </div>
+
+                            <div class="card-body">
+
+                                <?php foreach($devices as $device){ ?>
+
+                                <p><a target="_blank" href="{{route('devices.edit',$device->id)}}">{{$device->factory_number}}</a> </p>
+
+                                <?php } ?>
+
+                            </div>
+
+                    </div>
+
+                </div>
+                <?php } ?>
 
             </div>
 
