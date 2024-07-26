@@ -15,6 +15,7 @@ return new class extends Migration
             $table->unsignedBigInteger('fiscalization_key_id')->nullable(true)->default(null);
             $table->foreign('fiscalization_key_id')->references('id')->on('fiskalization_keys')->onDelete('cascade');
         });*/
+
     }
 
     /**
