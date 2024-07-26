@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('payment_gateways', function (Blueprint $table) {
+      /*  Schema::create('payment_gateways', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable(false)->default(null);
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('system', 32)->nullable(false);
             $table->text('data')->nullable(false);
             $table->timestamps();
-        });
+        });*/
     }
 
     /**

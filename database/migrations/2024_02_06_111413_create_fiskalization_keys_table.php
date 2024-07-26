@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('fiskalization_keys', function (Blueprint $table) {
+       /* Schema::create('fiskalization_keys', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->default(0);
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('cashier_password')->nullable(true);
             $table->string('cashier_license_key')->nullable(true);
             $table->timestamps();
-        });
+        });*/
     }
 
     /**

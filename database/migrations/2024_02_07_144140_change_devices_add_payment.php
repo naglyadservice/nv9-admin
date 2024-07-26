@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('devices', function (Blueprint $table) {
+       /* Schema::table('devices', function (Blueprint $table) {
             $table->boolean('enable_payment')->default(false);
             $table->unsignedBigInteger('payment_system_id')->nullable(true)->default(null);
             $table->foreign('payment_system_id')->references('id')->on('payment_gateways')->onDelete('cascade');
-        });
+        });*/
     }
 
     /**
