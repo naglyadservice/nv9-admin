@@ -231,12 +231,12 @@
             let divideBy = window.divideBy; // Use the value from PHP
 
             if (sum === "" || parseFloat(sum) === 0) {
-                alert('Сумма не может быть пустой или равна нулю');
+                alert('Сума не може бути порожньою або дорівнює нулю');
                 return;
             }
 
           if (sum % divideBy !== 0) {
-            alert('Сумма не кратна '+divideBy);
+            alert('Сума не кратна '+divideBy);
             return;
           }
 
