@@ -40,6 +40,54 @@
                                 <x-my-field value="{{$partner->name}}" name="name" title="Имя (название)" type="text"></x-my-field>
                                 <x-my-field value="{{$partner->email}}" name="email" title="Почта" type="email"></x-my-field>
                                 <x-my-field value="{{$partner->title}}" name="title" title="Заголовок" type="text"></x-my-field>
+
+                               <div class="row">
+                                   <div class="col-md-12">
+                                       <x-my-field value="{{$partner->address}}" name="address" title="Адрес" type="text"></x-my-field>
+                                   </div>
+                                  {{-- <div class="col-md-6">
+                                       <x-my-field value="{{$partner->water}}" name="water" title="Вода" type="text"></x-my-field>
+                                   </div>--}}
+                                   <div class="col-md-6">
+                                       <x-my-field value="{{$partner->water_value}}" name="water_value" title="Цена воды" type="text"></x-my-field>
+                                   </div>
+
+                                  {{-- <div class="col-md-6">
+                                       <x-my-field value="{{$partner->foam}}" name="foam" title="Пена" type="text"></x-my-field>
+                                   </div>--}}
+                                   <div class="col-md-6">
+                                       <x-my-field value="{{$partner->foam_value}}" name="foam_value" title="Цена пены" type="text"></x-my-field>
+                                   </div>
+
+                                 {{--  <div class="col-md-6">
+                                       <x-my-field value="{{$partner->osmosis}}" name="osmosis" title="Осмос" type="text"></x-my-field>
+                                   </div>--}}
+                                   <div class="col-md-6">
+                                       <x-my-field value="{{$partner->osmosis_value}}" name="osmosis_value" title="Цена осмоса" type="text"></x-my-field>
+                                   </div>
+
+                                  {{-- <div class="col-md-6">
+                                       <x-my-field value="{{$partner->air}}" name="air" title="Воздух" type="text"></x-my-field>
+                                   </div>--}}
+                                   <div class="col-md-6">
+                                       <x-my-field value="{{$partner->air_value}}" name="air_value" title="Цена воздуха" type="text"></x-my-field>
+                                   </div>
+
+                                 {{--  <div class="col-md-6">
+                                       <x-my-field value="{{$partner->dust_cleaner}}" name="dust_cleaner" title="Пылеочиститель" type="text"></x-my-field>
+                                   </div>--}}
+                                   <div class="col-md-6">
+                                       <x-my-field value="{{$partner->dust_cleaner_value}}" name="dust_cleaner_value" title="Цена пылеочистителя" type="text"></x-my-field>
+                                   </div>
+
+                                   {{--<div class="col-md-6">
+                                       <x-my-field value="{{$partner->cleaner}}" name="cleaner" title="Очиститель" type="text"></x-my-field>
+                                   </div>--}}
+                                   <div class="col-md-6">
+                                       <x-my-field value="{{$partner->cleaner_value}}" name="cleaner_value" title="Цена очистителя" type="text"></x-my-field>
+                                   </div>
+                               </div>
+
                                 <div class="form-group">
                                     <label for="email_field_id">Политика кофиденциальности</label>
                                     <br>
@@ -215,7 +263,7 @@
 
                 <div class="col-md-6">
                     <div class="card card-secondary">
-                        <a class="btn btn-success" href="{{route('user_page',['userHash'=>$hashedEmail])}}">Ссылка на страницу партнёра</a>
+                        <a target="_blank" class="btn btn-success" href="{{route('user_page',['userHash'=>$hashedEmail])}}">Ссылка на страницу партнёра</a>
                     </div>
                 </div>
                 <?php if(!$devices->isEmpty()){ ?>
@@ -227,12 +275,31 @@
 
                             <div class="card-body">
 
+                                <table class="table table-striped">
+                                    <tr>
+                                        <td>Номер</td>
+                                        <td>Опис</td>
+                                        <td>URL</td>
+                                        <td>Settings</td>
+                                        <td>Доступность</td>
+                                    </tr>
                                 <?php foreach($devices as $device){ ?>
+                            <tr>
+                                <td><a target="_blank" href="{{route('devices.edit',$device->id)}}">{{$device->factory_number}}</a> </td>
 
-                                <p><a target="_blank" href="{{route('devices.edit',$device->id)}}">{{$device->factory_number}}</a> </p>
+                                <td>{{$device->place_name}}</td>
+                                <td>@if($device->device_hash) <a href="{{route('check_hash', $device->device_hash)}}" target="_blank">{{route('check_hash', $device->device_hash)}}</a> @endif</td>
+                                <td><a target="_blank" href="{{route('devices.edit',$device->id)}}">{{$device->factory_number}} <i class="fas fa-edit"></i></a></td>
+                            <td>
+                                <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
+                                    <input disabled @if($device->enabled_fiscalization) checked @endif  type="checkbox" class="custom-control-input" id="fiscEnableField{{$device->id}}">
+                                    <label class="custom-control-label" for="fiscEnableField{{$device->id}}">Включить фискализацию</label>
+                                </div>
 
+                            </td>
+                            </tr>
                                 <?php } ?>
-
+                                </table>
                             </div>
 
                     </div>
