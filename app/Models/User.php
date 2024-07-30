@@ -43,6 +43,7 @@ class User extends Authenticatable
         'dust_cleaner_value',
         'cleaner',
         'cleaner_value',
+        'extra_text',
     ];
 
     /**

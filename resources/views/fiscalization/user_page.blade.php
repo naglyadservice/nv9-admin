@@ -132,34 +132,7 @@
 
 			<hr>
 
-			<table >
-			  <tbody>
-              <tr>
-                  <td>Вода</td>
-                  <td>{{$user->water_value}}</td>
-              </tr>
-              <tr>
-                  <td>Піна</td>
-                  <td>{{$user->foam_value}}</td>
-              </tr>
-              <tr>
-                  <td>Осмос</td>
-                  <td>{{$user->osmosis_value}}</td>
-              </tr>
-              <tr>
-                  <td>Повітря</td>
-                  <td>{{$user->air_value}}</td>
-              </tr>
-              <tr>
-                  <td>Пилосос</td>
-                  <td>{{$user->dust_cleaner_value}}</td>
-              </tr>
-              <tr>
-                  <td>Очисник</td>
-                  <td>{{$user->cleaner_value}}</td>
-              </tr>
-			  </tbody>
-			</table>
+			{!! $user->extra_text !!}
 
 			<hr>
 

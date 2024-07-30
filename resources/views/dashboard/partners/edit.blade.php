@@ -48,53 +48,24 @@
                                   {{-- <div class="col-md-6">
                                        <x-my-field value="{{$partner->water}}" name="water" title="Вода" type="text"></x-my-field>
                                    </div>--}}
-                                   <div class="col-md-6">
+                                   <div class="col-md-12">
                                        <x-my-field value="{{$partner->water_value}}" name="water_value" title="Цена воды" type="text"></x-my-field>
-                                   </div>
 
-                                  {{-- <div class="col-md-6">
-                                       <x-my-field value="{{$partner->foam}}" name="foam" title="Пена" type="text"></x-my-field>
-                                   </div>--}}
-                                   <div class="col-md-6">
-                                       <x-my-field value="{{$partner->foam_value}}" name="foam_value" title="Цена пены" type="text"></x-my-field>
+                                   <div class="form-group">
+                                       <label for="extra_text">Доп текст</label>
+                                       <br>
+                                       <textarea name="extra_text" id="extra_text">{{ $partner->extra_text }}</textarea>
                                    </div>
-
-                                 {{--  <div class="col-md-6">
-                                       <x-my-field value="{{$partner->osmosis}}" name="osmosis" title="Осмос" type="text"></x-my-field>
-                                   </div>--}}
-                                   <div class="col-md-6">
-                                       <x-my-field value="{{$partner->osmosis_value}}" name="osmosis_value" title="Цена осмоса" type="text"></x-my-field>
-                                   </div>
-
-                                  {{-- <div class="col-md-6">
-                                       <x-my-field value="{{$partner->air}}" name="air" title="Воздух" type="text"></x-my-field>
-                                   </div>--}}
-                                   <div class="col-md-6">
-                                       <x-my-field value="{{$partner->air_value}}" name="air_value" title="Цена воздуха" type="text"></x-my-field>
-                                   </div>
-
-                                 {{--  <div class="col-md-6">
-                                       <x-my-field value="{{$partner->dust_cleaner}}" name="dust_cleaner" title="Пылеочиститель" type="text"></x-my-field>
-                                   </div>--}}
-                                   <div class="col-md-6">
-                                       <x-my-field value="{{$partner->dust_cleaner_value}}" name="dust_cleaner_value" title="Цена пылеочистителя" type="text"></x-my-field>
-                                   </div>
-
-                                   {{--<div class="col-md-6">
-                                       <x-my-field value="{{$partner->cleaner}}" name="cleaner" title="Очиститель" type="text"></x-my-field>
-                                   </div>--}}
-                                   <div class="col-md-6">
-                                       <x-my-field value="{{$partner->cleaner_value}}" name="cleaner_value" title="Цена очистителя" type="text"></x-my-field>
                                    </div>
                                </div>
 
                                 <div class="form-group">
-                                    <label for="email_field_id">Политика кофиденциальности</label>
+                                    <label for="privacy_policy">Политика кофиденциальности</label>
                                     <br>
                                     <textarea name="privacy_policy" id="privacy_policy">{{ $partner->privacy_policy }}</textarea>
                                 </div>
                                 <div class="form-group">
-                                    <label for="email_field_id2">Договор оферты</label>
+                                    <label for="oferta">Договор оферты</label>
                                     <br>
                                  <textarea name="oferta" id="oferta">{{ $partner->oferta }}</textarea>
                                 </div>
@@ -281,7 +252,8 @@
                                         <td>Опис</td>
                                         <td>URL</td>
                                         <td>Settings</td>
-                                        <td>Доступность</td>
+                                        <td>Фискализация</td>
+                                        <td>Оплата</td>
                                     </tr>
                                 <?php foreach($devices as $device){ ?>
                             <tr>
@@ -289,14 +261,21 @@
 
                                 <td>{{$device->place_name}}</td>
                                 <td>@if($device->device_hash) <a href="{{route('check_hash', $device->device_hash)}}" target="_blank">{{route('check_hash', $device->device_hash)}}</a> @endif</td>
-                                <td><a target="_blank" href="{{route('devices.edit',$device->id)}}">{{$device->factory_number}} <i class="fas fa-edit"></i></a></td>
+                                <td><a target="_blank" href="{{route('devices.edit',$device->id)}}"> <i class="fas fa-edit"></i></a></td>
                             <td>
                                 <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
                                     <input disabled @if($device->enabled_fiscalization) checked @endif  type="checkbox" class="custom-control-input" id="fiscEnableField{{$device->id}}">
-                                    <label class="custom-control-label" for="fiscEnableField{{$device->id}}">Включить фискализацию</label>
+                                    <label class="custom-control-label" for="fiscEnableField{{$device->id}}"></label>
                                 </div>
 
                             </td>
+                                <td>
+                                    <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
+                                        <input disabled @if($device->enable_payment) checked @endif  type="checkbox" class="custom-control-input" id="enable_paymentEnableField{{$device->id}}">
+                                        <label class="custom-control-label" for="enable_paymentEnableField{{$device->id}}"></label>
+                                    </div>
+
+                                </td>
                             </tr>
                                 <?php } ?>
                                 </table>
@@ -319,6 +298,7 @@
         CKEDITOR.replace('privacy_policy');
         CKEDITOR.replace('oferta');
         CKEDITOR.replace('about_us');
+        CKEDITOR.replace('extra_text');
     </script>
 @endsection
 
