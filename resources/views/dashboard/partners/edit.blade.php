@@ -49,7 +49,6 @@
                                        <x-my-field value="{{$partner->water}}" name="water" title="Вода" type="text"></x-my-field>
                                    </div>--}}
                                    <div class="col-md-12">
-                                       <x-my-field value="{{$partner->water_value}}" name="water_value" title="Цена воды" type="text"></x-my-field>
 
                                    <div class="form-group">
                                        <label for="extra_text">Доп текст</label>
