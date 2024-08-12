@@ -30,6 +30,20 @@ class User extends Authenticatable
         'oferta',
         'about_us',
         'title',
+        'address',
+        'water',
+        'water_value',
+        'foam',
+        'foam_value',
+        'osmosis',
+        'osmosis_value',
+        'air',
+        'air_value',
+        'dust_cleaner',
+        'dust_cleaner_value',
+        'cleaner',
+        'cleaner_value',
+        'extra_text',
     ];
 
     /**

@@ -103,7 +103,7 @@
           </a>
 
            <img src="https://www.npc.com.ua/wp-content/uploads/2024/02/c6251619-ea93-4c53-9f8f-d3c5d0bd2faa.jpg" width="95" >
-  
+
         </header>
       </div>
 
@@ -112,54 +112,27 @@
           <section class="top">
             <div class="title">
               <h1>{{$user->title??'СПЛАТИТИ АБО ОТРИМАТИ ФІСКАЛЬНИЙ ЧЕК'}}</h1>
-   
-   
-                <p>{{$user->name}}</p>
+
+
+               {{-- <p>{{$user->name}}</p>--}}
                 <br><br>
-                <p>{{$devices->first()->address}}</p>
+                <p>{{$user->address}}</p>
 
             </div>
 
 
-            
+
             <div class="buttons">
                 @foreach ($devices as $device)
                     <a href="{{route('check_hash', $device->device_hash)}}"><button type="button" id="goPayment">{{$device->place_name}}</button></a>
                 @endforeach
             </div>
-                        
+
 
 
 			<hr>
 
-			<table >
-			  <tbody>
-			    <tr>
-			      <td>Вода</td>
-			      <td>20 грн/хв</td>
-			    </tr>
-			    <tr>
-			      <td>Піна</td>
-			      <td>28 грн/хв</td>
-			    </tr>
-			    <tr>
-			      <td>Осмос</td>
-			      <td>26 грн/хв</td>
-			    </tr>
-			    <tr>
-			      <td>Повітря</td>
-			      <td>10 грн/хв</td>
-			    </tr>
-			    <tr>
-			      <td>Пилосос</td>
-			      <td>10 грн/хв</td>
-			    </tr>
-			    <tr>
-			      <td>Очисник</td>
-			      <td>26 грн/хв</td>
-			    </tr>
-			  </tbody>
-			</table>
+			{!! $user->extra_text !!}
 
 			<hr>
 
@@ -178,7 +151,7 @@
       </footer>
     </div>
 
-    
+
   </body>
 
 </html>

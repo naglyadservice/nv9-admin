@@ -9,7 +9,12 @@ class Device extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['factory_number', 'user_id', 'address', 'place_name','service'];
+    const STANDART = 1;
+    const MONO = 2;
+    const STANDART_TEXT = 'Стандарт';
+    const MONO_TEXT = 'Моно';
+
+    protected $fillable = ['factory_number', 'user_id', 'address', 'place_name','service','design','divide_by'];
 
     public function user()
     {
@@ -165,7 +170,7 @@ class Device extends Model
         //file_put_contents(public_path()."/receipt.txt", print_r($resp, true));
         if(isset($resp->message) && $resp->message == "Зміну не відкрито") //Если прилетает ошибка по смене
         {
-            
+
             $this->createShift($token, $licenseKey); //Открываем смену на кассе.
             //sleep(3);
             //$this->createReceipt($token, $amount, $licenseKey, $device, true);
@@ -173,9 +178,11 @@ class Device extends Model
         if(isset($resp->message) && str_starts_with($resp->message, "Зміну відкрито понад")) //Если прилетает ошибка по смене
         {
             $this->createShift($token, $licenseKey); //Открываем смену на кассе.
-            //sleep(3);
-            //$this->createReceipt($token, $amount, $licenseKey, $device, true);
-        }
+
+            //sleep(5);
+
+            //$this->createReceipt($token, $amount, $licenseKey, $device);
+         }
         return $resp;
     }
 
@@ -189,4 +196,13 @@ class Device extends Model
         $device_hash = strtoupper($device_hash);
         return $device_hash;
     }
+
+    public static function getDesigns()
+    {
+        return [
+            self::STANDART => self::STANDART_TEXT,
+            self::MONO => self::MONO_TEXT,
+        ];
+    }
+
 }

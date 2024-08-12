@@ -47,6 +47,19 @@
                                 <x-my-field name="factory_number" title="Серийный номер" type="text"></x-my-field>
                                 <x-my-field name="address" title="Адрес" type="text"></x-my-field>
                                 <x-my-field name="place_name" title="Название места" placeholder="Например Пост №4" type="text"></x-my-field>
+
+                                <x-my-field  name="divide_by" title="Кратность" type="text"></x-my-field>
+
+
+                                <div class="form-group">
+                                    <label for="user_field_id">Дизайн</label>
+                                    <select name="design" class="form-control" id="design">
+                                        @foreach(\App\Models\Device::getDesigns() as $key => $name)
+                                            <option value="{{$key}}">{{$name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
                                 <div class="form-group">
                                     <label for="user_field_id">Принадлежность</label>
                                     <select name="user_id" class="form-control" id="user_field_id">

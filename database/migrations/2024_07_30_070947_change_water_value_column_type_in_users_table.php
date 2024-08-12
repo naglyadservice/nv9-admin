@@ -11,12 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-       /* Schema::table('users', function (Blueprint $table) {
-            $table->longText('privacy_policy')
-                ->nullable();
-            $table->longText('oferta')
-                ->nullable();
-        });*/
+        Schema::table('users', function (Blueprint $table) {
+            $table->text('extra_text')->nullable();
+        });
     }
 
     /**
@@ -25,8 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('privacy_policy');
-            $table->dropColumn('oferta');
+            $table->dropColumn(['extra_text']);
         });
     }
 };

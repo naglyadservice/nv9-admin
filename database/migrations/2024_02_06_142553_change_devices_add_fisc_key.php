@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('devices', function (Blueprint $table) {
+       /* Schema::table('devices', function (Blueprint $table) {
             $table->unsignedBigInteger('fiscalization_key_id')->nullable(true)->default(null);
             $table->foreign('fiscalization_key_id')->references('id')->on('fiskalization_keys')->onDelete('cascade');
-        });
+        });*/
+
     }
 
     /**

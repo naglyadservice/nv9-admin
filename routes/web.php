@@ -28,6 +28,11 @@ Route::get('/check/{hash}/reserve_payment', 'App\Http\Controllers\CheckControlle
 Route::get('/check/{hash}/check_allow_payment', 'App\Http\Controllers\CheckController@ajax_check_allow_payment')->name('ajax_check_allow_payment');
 Route::post('/check/{hash}/payment', 'App\Http\Controllers\CheckController@go_payment')->name('go_payment');
 Route::any('/payment/liqpay/callback', 'App\Http\Controllers\CheckController@liqpay_callback')->name('payment.liqpay.callback');
+Route::any('/payment/monopay/callback', 'App\Http\Controllers\CheckController@monopay_callback')->name('payment.monopay.callback');
+Route::any('/payment/monoqr/callback', function(){
+    $data = file_get_contents("php://input");
+    file_put_contents("monoqr.txt", $data);
+});
 
 Route::get('/privacy-policy/{id}', 'App\Http\Controllers\CheckController@privacyPolicy')->name('privacy-policy');
 Route::get('/about-us/{id}', 'App\Http\Controllers\CheckController@aboutUs')->name('about-us');
@@ -64,6 +69,11 @@ Route::middleware([
         Route::post('/add', 'App\Http\Controllers\PartnersController@add_save')->name('partners.add_save');
         Route::get('/{partner}/edit', 'App\Http\Controllers\PartnersController@edit')->name('partners.edit');
         Route::post('/{partner}/edit', 'App\Http\Controllers\PartnersController@edit_save')->name('partners.edit_save');
+        Route::post('/{user}/edit_fiscalization', 'App\Http\Controllers\PartnersController@edit_fiscalization')->name('partners.edit_fiscalization');
+        Route::post('/{user}/edit_payment', 'App\Http\Controllers\PartnersController@edit_payment')->name('partners.edit_payment');
+        Route::post('/{user}/edit_enabled', 'App\Http\Controllers\PartnersController@edit_enabled')->name('partners.edit_enabled');
+        Route::post('/{user}/edit_design', 'App\Http\Controllers\PartnersController@edit_design')->name('partners.edit_design');
+        Route::post('/{user}/edit_divide_by', 'App\Http\Controllers\PartnersController@edit_divide_by')->name('partners.edit_divide_by');
 
     });
 

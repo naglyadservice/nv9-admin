@@ -12,6 +12,8 @@ class VerifyCsrfToken extends Middleware
      * @var array<int, string>
      */
     protected $except = [
-        '/payment/liqpay/callback'
+        '/payment/liqpay/callback',
+        '/payment/monopay/callback',
+        '/payment/monoqr/callback'
     ];
 }
