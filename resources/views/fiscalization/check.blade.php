@@ -264,6 +264,15 @@
       });
 
       </script>
+	  <script>
+        function checkPageShow(event) {
+            if (event.persisted || window.performance && window.performance.navigation.type === 2) {
+                
+                window.location.reload();
+            }
+        }
+        window.addEventListener('pageshow', checkPageShow);
+    </script>
   </body>
 
 </html>

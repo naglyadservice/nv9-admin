@@ -157,23 +157,24 @@ class Device extends Model
         //     return ["success" => false, "err" => $resp->message];
         // }
 
+        // if($again)
+        // {
+        //     return $resp;
+        // }
+
         //file_put_contents(public_path()."/receipt.txt", print_r($resp, true));
         if(isset($resp->message) && $resp->message == "Зміну не відкрито") //Если прилетает ошибка по смене
         {
             
             $this->createShift($token, $licenseKey); //Открываем смену на кассе.
-
-            //sleep(5);
-
-            //$this->createReceipt($token, $amount, $licenseKey, $device);
+            //sleep(3);
+            //$this->createReceipt($token, $amount, $licenseKey, $device, true);
         }
-        if(isset($resp->message) && str_starts_with($resp->message, "Зміну відкрито понад 24")) //Если прилетает ошибка по смене
+        if(isset($resp->message) && str_starts_with($resp->message, "Зміну відкрито понад")) //Если прилетает ошибка по смене
         {
             $this->createShift($token, $licenseKey); //Открываем смену на кассе.
-
-            //sleep(5);
-            
-            //$this->createReceipt($token, $amount, $licenseKey, $device);
+            //sleep(3);
+            //$this->createReceipt($token, $amount, $licenseKey, $device, true);
         }
         return $resp;
     }
