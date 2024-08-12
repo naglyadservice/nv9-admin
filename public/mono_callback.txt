@@ -1,1 +1,1 @@
-{"invoiceId":"2407195jxeGgfQZjEw7c","status":"created","amount":10000,"ccy":980,"createdDate":"2024-07-19T08:24:21Z","modifiedDate":"2024-07-19T08:24:21Z","reference":"a1b83dd568c747942a58c0539bd1ab61","destination":"2"}
+{"invoiceId":"240730DH7QEtVTh9iPNx","status":"created","amount":1000,"ccy":980,"createdDate":"2024-07-30T09:53:57Z","modifiedDate":"2024-07-30T09:53:57Z","reference":"5ceedf7c5834d860b50a18d597e6d1b9","destination":"2"}
