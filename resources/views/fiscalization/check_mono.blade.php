@@ -174,7 +174,7 @@
 
   <body style="background-color: white">
     <main>
-      <img class="round-image" src="/public/img/pride_logo_mono.png" alt="">
+      <img class="round-image" src="{{ asset('img/pride_logo_mono.png') }}" alt="">
 
       <h1 class="title">{{$device->place_name}}</h1>
 
