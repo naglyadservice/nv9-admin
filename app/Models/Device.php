@@ -14,7 +14,7 @@ class Device extends Model
     const MONO103050 = 3;
     const STANDART_TEXT = 'Стандарт';
     const MONO_TEXT = 'Моно';
-    const MONO103050_TEXT = 'MONO103050';
+    const MONO103050_TEXT = 'MONO125';
 
     protected $fillable = ['factory_number', 'user_id', 'address', 'place_name','service','design','divide_by'];
 
