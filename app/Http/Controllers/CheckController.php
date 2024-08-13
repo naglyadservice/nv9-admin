@@ -61,6 +61,10 @@ class CheckController extends Controller
         {
             return view('fiscalization.check_mono', compact('last_three', 'device', 'device_code', 'hash', 'user'));
         }
+        else if($device->design == Device::MONO103050)
+        {
+            return view('fiscalization.check_mono103050', compact('last_three', 'device', 'device_code', 'hash', 'user'));
+        }
     }
 
     public function user_page(Request $request, $userHash)

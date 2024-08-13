@@ -11,8 +11,10 @@ class Device extends Model
 
     const STANDART = 1;
     const MONO = 2;
+    const MONO103050 = 3;
     const STANDART_TEXT = 'Стандарт';
     const MONO_TEXT = 'Моно';
+    const MONO103050_TEXT = 'MONO103050';
 
     protected $fillable = ['factory_number', 'user_id', 'address', 'place_name','service','design','divide_by'];
 
@@ -202,6 +204,7 @@ class Device extends Model
         return [
             self::STANDART => self::STANDART_TEXT,
             self::MONO => self::MONO_TEXT,
+            self::MONO103050 => self::MONO103050_TEXT,
         ];
     }
 
