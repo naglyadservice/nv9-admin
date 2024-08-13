@@ -191,9 +191,9 @@
           </div>
 
           <div class="input-buttons">
+            <button type="button" data-increment="10">+10 ₴</button>
             <button type="button" data-increment="20">+20 ₴</button>
             <button type="button" data-increment="50">+50 ₴</button>
-            <button type="button" data-increment="100">+100 ₴</button>
           </div>
           @endif
         </div>
