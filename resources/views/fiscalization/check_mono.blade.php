@@ -174,7 +174,7 @@
 
   <body style="background-color: white">
     <main>
-      <img class="round-image" src="https://www.npc.com.ua/wp-content/uploads/2024/07/03e2736b-69a5-4a11-8edf-a0146d064f8d-removebg-preview.png" alt="">
+      <img class="round-image" src="/public/img/pride_logo_mono.png" alt="">
 
       <h1 class="title">{{$device->place_name}}</h1>
 
@@ -191,18 +191,17 @@
           </div>
 
           <div class="input-buttons">
-            <button type="button" data-increment="10">+10 ₴</button>
             <button type="button" data-increment="20">+20 ₴</button>
             <button type="button" data-increment="50">+50 ₴</button>
+            <button type="button" data-increment="100">+100 ₴</button>
           </div>
           @endif
         </div>
 
-        <div class="buttons">
+       <div class="buttons">
           @if($device->enable_payment)
           <button type="button" id="goPayment">Продовжити&nbsp;&nbsp;&nbsp;→</button>
           @endif
-          <a class="promo" href="tel:+380678187180" target="_blank">замовити систему фіскалізації</a>
         </div>
       </form>
     </main>
