@@ -1,0 +1,1 @@
+{"invoiceId":"240821Bi765JRaALthiN","status":"created","amount":12000,"ccy":980,"createdDate":"2024-08-21T11:31:35Z","modifiedDate":"2024-08-21T11:31:35Z","reference":"40ad3c90ad11fe29472291cd35aee243","destination":"122"}

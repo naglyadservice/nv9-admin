@@ -244,26 +244,82 @@
           let button = $(this);
           let form = $("#paymentForm");
 
-          $(this).after('<p class="cntrlmsg">Очікування відповіді від контроллера...');
-          $(this).remove();
+          
+          $(this).after('<p class="cntrlmsg">Очікування відповіді від контроллера 10...');
+          $(this).hide();
 
           $.get(`/check/${controller}/reserve_payment`);
 
-          var checkPaymentInrerval = setInterval(function(){
-            $.get(`/check/${controller}/check_allow_payment`, function(resp){
-              if(resp.success)
-              {
-                if(resp.msg == "OK")
-                {
+          let cnt = 9;
+
+          var checkPaymentInrerval = setInterval(function () {
+            $.get(`/check/${controller}/check_allow_payment`, function (resp) {
+            //resp.msg = "BUSY";
+            //resp.success = true;
+              if (resp.success) {
+                if (resp.msg == "OK") {
                   $(form).submit();
                 }
-                if(resp.msg == "BUSY")
-                {
-                  $('p.cntrlmsg').text('Контроллер відхилив запит на оплату.');
+                if (resp.msg == "BUSY") {
+                  $('p.cntrlmsg').html('Контроллер відхилив запит на оплату.<br>Спробуйте через 20 сек');
                   $('p.cntrlmsg').css('color', 'red');
+
+                  var disallowTimeout = 19;
+
+                  var disallowPayment = setInterval(function(){
+
+                    if(disallowTimeout == 0)
+                    {
+                      $('p.cntrlmsg').remove();
+                      $("#goPayment").show();
+                      clearInterval(disallowPayment);
+                      return;
+                    }
+
+                    $('p.cntrlmsg').html(`Контроллер відхилив запит на оплату.<br>Спробуйте через ${disallowTimeout} сек`);
+
+                    disallowTimeout = disallowTimeout - 1;
+
+                  }, 1000);
+
                 }
                 clearInterval(checkPaymentInrerval);
+              } else {
+
+                if(cnt == 0)
+                {
+                  clearInterval(checkPaymentInrerval);
+                  $('p.cntrlmsg').html('Не дочекались відповіді від контроллера.<br>Спробуйте через 120 сек');
+                  $('p.cntrlmsg').css('color', 'red');
+
+                  var chAgain = 19;
+
+                  var asdTime = setInterval(function(){
+                    
+                    if(chAgain == 0)
+                    {
+                      $('p.cntrlmsg').remove();
+                      $("#goPayment").show();
+                      clearInterval(asdTime);
+                      return;
+                    }
+
+                    $('p.cntrlmsg').html(`Не дочекались відповіді від контроллера.<br>Спробуйте через ${chAgain} сек`);
+
+                    chAgain = chAgain - 1;
+
+                  }, 1000);
+
+                  return;
+                }
+
+                $('p.cntrlmsg').text(`Очікування відповіді від контроллера ${cnt}...`);
+
+                cnt = cnt - 1;
+
               }
+
+
             });
           }, 1000);
 

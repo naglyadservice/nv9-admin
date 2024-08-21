@@ -1,0 +1,1 @@
+{"invoiceId":"240820CexpJfYhasHMES","status":"created","amount":20000,"ccy":980,"createdDate":"2024-08-20T11:13:35Z","modifiedDate":"2024-08-20T11:13:35Z","reference":"c698e30657fd364624051ed778b7a1ff","destination":"118"}

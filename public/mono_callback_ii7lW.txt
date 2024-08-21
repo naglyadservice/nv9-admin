@@ -1,0 +1,1 @@
+{"invoiceId":"2408145TDzVA193ecfim","status":"processing","amount":2000,"ccy":980,"finalAmount":0,"createdDate":"2024-08-14T15:07:23Z","modifiedDate":"2024-08-14T15:07:33Z","reference":"775545506b6b62917f30f662180a2932","destination":"122"}

@@ -1,0 +1,1 @@
+{"invoiceId":"240818DmoXNCrc2xEXAY","status":"processing","amount":2000,"ccy":980,"finalAmount":0,"createdDate":"2024-08-18T11:44:04Z","modifiedDate":"2024-08-18T11:44:18Z","reference":"a66f640e5edb57b9096277738d2c6022","destination":"118"}
