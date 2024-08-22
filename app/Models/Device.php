@@ -208,4 +208,12 @@ class Device extends Model
         ];
     }
 
+    public static function getLastFiskalizationError($number)
+    {
+        $item = Fiscalization::where(['factory_number'=>$number])->orderBy('id','DESC')->first();
+
+        return $item;
+    }
+
+
 }

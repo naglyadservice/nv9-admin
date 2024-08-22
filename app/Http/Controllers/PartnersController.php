@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
@@ -61,6 +62,43 @@ class PartnersController extends Controller
         $partner->fill($request->all());
         $partner->update();
         return redirect()->route('partners')->with(['success' => 'Партнер успешно изменен']);
+    }
+
+    public function getSalesReport(Request $request)
+    {
+        // Получение дат из запроса
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+
+        // Запрос с агрегацией
+        $salesReport = DB::table('fiskalization_table')
+            ->select(
+                'factory_number',
+                DB::raw('SUM(CASE WHEN cash = 1 AND fiskalized = 1 THEN sales_cashe ELSE 0 END) AS cash_total'),
+                DB::raw('SUM(CASE WHEN cash = 0 AND fiskalized = 1 THEN sales_cashe ELSE 0 END) AS non_cash_total'),
+                DB::raw('SUM(CASE WHEN fiskalized = 1 THEN sales_cashe ELSE 0 END) AS total_sales')
+            )
+            ->whereBetween('date', [$startDate, $endDate])
+            ->groupBy('factory_number')
+            ->orderBy('factory_number')
+            ->get();
+
+        // Расчёт сумм
+        $totalCash = $salesReport->sum('cash_total');
+        $totalNonCash = $salesReport->sum('non_cash_total');
+        $totalSales = $salesReport->sum('total_sales');
+
+        // Сохранение отчета, фильтров и сумм в сессию
+        $request->session()->flash('salesReport', $salesReport);
+        $request->session()->flash('filters', ['start_date' => $startDate, 'end_date' => $endDate]);
+        $request->session()->flash('totals', [
+            'totalCash' => $totalCash,
+            'totalNonCash' => $totalNonCash,
+            'totalSales' => $totalSales
+        ]);
+
+        // Возвращение на ту же страницу
+        return redirect()->back();
     }
 
 

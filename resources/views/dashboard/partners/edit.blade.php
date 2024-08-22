@@ -37,7 +37,114 @@
 
                             <div class="tab-pane fade" id="tab-statistics">
                                 <div class="row">
-                                    
+
+                                    <?php if(!$devices->isEmpty()){ ?>
+
+                                    <div class="col-md-12">
+                                        <div class="card card-secondary">
+                                            <div class="card-header">
+                                                <h3 class="card-title">Устройства</h3>
+                                            </div>
+
+                                            <div class="card-body" style="overflow-x: scroll;">
+
+                                                <table class="table table-striped">
+                                                    <tr>
+                                                        <td><span>Номер</span></td>
+                                                        <td><span>Опис</span></td>
+                                                        <td><span>URL</span></td>
+                                                        <td>
+                                                         Помилка
+                                                        </td>
+                                                        <td>Остання транзакція</td>
+                                                    </tr>
+                                                    <?php foreach($devices as $device){
+                                                        $fError = $device->getLastFiskalizationError($device->factory_number);
+                                                        ?>
+                                                    <tr>
+                                                        <td><a target="_blank" href="{{route('devices.edit',$device->id)}}">{{$device->factory_number}}</a> </td>
+
+                                                        <td>{{$device->place_name}}</td>
+
+                                                        <td>
+                                                            @if($device->device_hash)
+                                                                <a href="{{route('check_hash', $device->device_hash)}}" target="_blank">
+                                                                    <span desktop-only>{{route('check_hash', $device->device_hash)}}</span>
+                                                                    <i class="fas fa-edit"></i>
+                                                                </a>
+                                                            @endif
+                                                        </td>
+
+                                                        <td>
+                                                            {{$fError->error??'Помилок нема'}}
+                                                        </td>
+                                                        <td>
+                                                            {{$fError->date??''}}
+                                                        </td>
+
+                                                    </tr>
+                                                    <?php } ?>
+                                                </table>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <?php } ?>
+
+                                    <!-- Форма фильтрации -->
+                                        <form method="GET" action="{{ route('sales.report') }}">
+                                            @csrf
+                                            <div class="form-group">
+                                                <label for="start_date">Начальна дата</label>
+                                                <input type="date" id="start_date" name="start_date" value="{{ session('filters.start_date', now()->subMonth()->format('Y-m-d')) }}" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="end_date">Кінцева дата</label>
+                                                <input type="date" id="end_date" name="end_date" value="{{ session('filters.end_date', now()->format('Y-m-d')) }}" required>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Отримати звіт</button>
+                                        </form>
+
+                                        @if (!empty(session('salesReport')))
+                                        @if (!(session('salesReport')->isEmpty()))
+
+
+                                            <table class="table">
+                                                <thead>
+                                                <tr>
+                                                    <th>Factory Number</th>
+                                                    <th>Сума готівки</th>
+                                                    <th>Сума безготівки</th>
+                                                    <th>Загальна сума</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                @foreach (session('salesReport') as $report)
+                                                    <tr>
+                                                        <td>{{ $report->factory_number }}</td>
+                                                        <td>{{ $report->cash_total }}</td>
+                                                        <td>{{ $report->non_cash_total }}</td>
+                                                        <td>{{ $report->total_sales }}</td>
+                                                    </tr>
+                                                @endforeach
+                                                <!-- Строка с суммами -->
+                                                <tr>
+                                                    <td><strong>Итого</strong></td>
+                                                    <td><strong>{{ session('totals.totalCash') }}</strong></td>
+                                                    <td><strong>{{ session('totals.totalNonCash') }}</strong></td>
+                                                    <td><strong>{{ session('totals.totalSales') }}</strong></td>
+                                                </tr>
+                                                </tbody>
+
+                                            </table>
+
+                                        @else
+                                            Нічого не знайдено за вказаний період
+
+                                        @endif
+                                        @endif
                                 </div>
                             </div>
 
@@ -75,14 +182,14 @@
                                                     <td>{{$device->place_name}}</td>
 
                                                     <td>
-                                                        @if($device->device_hash) 
+                                                        @if($device->device_hash)
                                                         <a href="{{route('check_hash', $device->device_hash)}}" target="_blank">
                                                             <span desktop-only>{{route('check_hash', $device->device_hash)}}</span>
                                                             <i class="fas fa-edit"></i>
-                                                        </a> 
+                                                        </a>
                                                         @endif
                                                     </td>
-                                                    
+
                                                     <td>
                                                         <a target="_blank" href="{{route('devices.edit',$device->id)}}">
                                                             <i class="fas fa-edit"></i>
@@ -110,7 +217,7 @@
                                         </div>
 
                                     </div>
-                                    
+
                                     <?php } ?>
 
                                     <div class="col-md-12">
