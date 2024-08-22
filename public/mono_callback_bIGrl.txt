@@ -1,0 +1,1 @@
+{"invoiceId":"240819Bo95rRZ8Cytzes","status":"processing","amount":10000,"ccy":980,"finalAmount":0,"createdDate":"2024-08-19T13:55:34Z","modifiedDate":"2024-08-19T13:55:57Z","reference":"4c5a267b34e3d9a2d8882f91f6ba530a","destination":"117"}

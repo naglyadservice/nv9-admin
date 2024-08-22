@@ -1,0 +1,1 @@
+{"invoiceId":"2408197sNA52gMmvs5X8","status":"processing","amount":10000,"ccy":980,"finalAmount":0,"createdDate":"2024-08-19T08:01:01Z","modifiedDate":"2024-08-19T08:01:12Z","reference":"2a7ad63bd4c21a9c470171dddd045fab","destination":"122"}

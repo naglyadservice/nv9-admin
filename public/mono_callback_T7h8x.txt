@@ -1,0 +1,1 @@
+{"invoiceId":"2408209thBUVABo28VhK","status":"processing","amount":7000,"ccy":980,"finalAmount":0,"createdDate":"2024-08-20T17:37:12Z","modifiedDate":"2024-08-20T17:37:24Z","reference":"dda55184fb47af26481aba678c313847","destination":"120"}

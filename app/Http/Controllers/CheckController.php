@@ -8,6 +8,7 @@ use App\Models\Fiscalization;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class CheckController extends Controller
 {
@@ -59,6 +60,10 @@ class CheckController extends Controller
         else if($device->design == Device::MONO)
         {
             return view('fiscalization.check_mono', compact('last_three', 'device', 'device_code', 'hash', 'user'));
+        }
+        else if($device->design == Device::MONO125)
+        {
+            return view('fiscalization.check_mono125', compact('last_three', 'device', 'device_code', 'hash', 'user'));
         }
     }
 
@@ -208,7 +213,8 @@ class CheckController extends Controller
 					 "comment" => 'Поповнення балансу для '. $device->place_name,
 				  ],
 				"redirectUrl" => route('check_hash', $hash),
-				"webHookUrl" => route('payment.monopay.callback'),
+				//"webHookUrl" => route('payment.monopay.callback'),
+				"webHookUrl" => "https://ip-91-227-40-101-96078.vps.hosted-by-mvps.net/monoproxy",
 				"validity" => 3600,
 				"paymentType" => "debit",
 			];
@@ -237,37 +243,42 @@ class CheckController extends Controller
 
     public function monopay_callback(Request $request)
 	{
-		$data = $request->getContent();
-		file_put_contents("mono_callback.txt", $data);
-		$data = json_decode($data);
-		$status = $data->status;
+        try{
+            $data = $request->getContent();
+            $a = Str::random(5);
+            file_put_contents("mono_callback_$a.txt", $data);
+            $data = json_decode($data);
+            $status = $data->status;
 
-		if($status == "success")
-		{
-			$deviceID = $data->destination;
-			$payment_id = $data->invoiceId;
-			$amount = $data->amount / 100;
+            if($status == "success")
+            {
+                $deviceID = $data->destination;
+                $payment_id = $data->invoiceId;
+                $amount = $data->amount / 100;
 
-			$device = Device::where('id', $deviceID)->firstOrFail();
+                $device = Device::where('id', $deviceID)->firstOrFail();
 
-			$message = [
-				"factory_number" => $device->factory_number,
-				"payment" => [
-					"order_id" => $payment_id,
-					"amount" => $amount * 100,
-				]
-			];
+                $message = [
+                    "factory_number" => $device->factory_number,
+                    "payment" => [
+                        "order_id" => $payment_id,
+                        "amount" => $amount * 100,
+                    ]
+                ];
 
-			//Отправляем на фискализацию
-			$fisc = new Fiscalization();
-			$fisc->factory_number = $device->factory_number;
-			$fisc->sales_code = 0;
-			$fisc->sales_cashe = $amount * 100;
-			$fisc->cash = 0;
-			$fisc->save();
+                //Отправляем на фискализацию
+                $fisc = new Fiscalization();
+                $fisc->factory_number = $device->factory_number;
+                $fisc->sales_code = $payment_id;
+                $fisc->sales_cashe = $amount * 100;
+                $fisc->cash = 0;
+                $fisc->save();
 
-			$this->new_system_message($device, $message);
-		}
+                $this->new_system_message($device, $message);
+            }
+        } catch (\Exception $e) {
+            return response()->json(["success" => true], 200);
+        }
 	}
 
     public function liqpay_callback(Request $request)
@@ -292,7 +303,7 @@ class CheckController extends Controller
          //Отправляем на фискализацию
         $fisc = new Fiscalization();
         $fisc->factory_number = $device->factory_number;
-        $fisc->sales_code = 0;
+        $fisc->sales_code = $payment_id;
         $fisc->sales_cashe = $amount * 100;
         $fisc->cash = 0;
         $fisc->save();

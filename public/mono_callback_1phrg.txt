@@ -1,0 +1,1 @@
+{"invoiceId":"2408169WsPAQG3oKP1WN","status":"processing","amount":20000,"ccy":980,"finalAmount":0,"createdDate":"2024-08-16T17:56:42Z","modifiedDate":"2024-08-16T17:56:58Z","reference":"bd6c8dbc2cd19fe062e0ea2be818c9e9","destination":"118"}
