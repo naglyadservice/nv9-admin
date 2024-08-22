@@ -269,7 +269,7 @@ class CheckController extends Controller
                 //Отправляем на фискализацию
                 $fisc = new Fiscalization();
                 $fisc->factory_number = $device->factory_number;
-                $fisc->sales_code = 0;
+                $fisc->sales_code = $payment_id;
                 $fisc->sales_cashe = $amount * 100;
                 $fisc->cash = 0;
                 $fisc->save();
@@ -303,7 +303,7 @@ class CheckController extends Controller
          //Отправляем на фискализацию
         $fisc = new Fiscalization();
         $fisc->factory_number = $device->factory_number;
-        $fisc->sales_code = 0;
+        $fisc->sales_code = $payment_id;
         $fisc->sales_cashe = $amount * 100;
         $fisc->cash = 0;
         $fisc->save();

@@ -1,0 +1,1 @@
+{"invoiceId":"2408229mShopmbK828Rm","status":"created","amount":5000,"ccy":980,"createdDate":"2024-08-22T04:58:21Z","modifiedDate":"2024-08-22T04:58:21Z","reference":"421189cff55a5be40d9d218371569547","destination":"118"}

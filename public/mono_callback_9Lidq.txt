@@ -1,0 +1,1 @@
+{"invoiceId":"240822DPsuLvakocZtan","status":"processing","amount":5000,"ccy":980,"finalAmount":0,"createdDate":"2024-08-22T10:05:10Z","modifiedDate":"2024-08-22T10:05:23Z","reference":"a320213bc120146e2319471b8f9ae3b3","destination":"120"}
