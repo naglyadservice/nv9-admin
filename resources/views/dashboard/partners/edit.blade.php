@@ -52,7 +52,7 @@
                                                     <tr>
                                                         <td><span>Номер</span></td>
                                                         <td><span>Опис</span></td>
-                                                        <td><span>URL</span></td>
+
                                                         <td>
                                                          Помилка
                                                         </td>
@@ -62,18 +62,11 @@
                                                         $fError = $device->getLastFiskalizationError($device->factory_number);
                                                         ?>
                                                     <tr>
-                                                        <td><a target="_blank" href="{{route('devices.edit',$device->id)}}">{{$device->factory_number}}</a> </td>
+                                                        <td><a target="_blank" href="{{route('check_hash', $device->device_hash)}}">{{$device->factory_number}}</a> </td>
 
                                                         <td>{{$device->place_name}}</td>
 
-                                                        <td>
-                                                            @if($device->device_hash)
-                                                                <a href="{{route('check_hash', $device->device_hash)}}" target="_blank">
-                                                                    <span desktop-only>{{route('check_hash', $device->device_hash)}}</span>
-                                                                    <i class="fas fa-edit"></i>
-                                                                </a>
-                                                            @endif
-                                                        </td>
+
 
                                                         <td>
                                                             {{$fError->error??'Помилок нема'}}
@@ -104,6 +97,7 @@
                                                 <label for="end_date">Кінцева дата</label>
                                                 <input type="date" id="end_date" name="end_date" value="{{ session('filters.end_date', now()->format('Y-m-d')) }}" required>
                                             </div>
+                                            <input type="hidden" name="user_id" value="{{$partner->id}}">
                                             <button type="submit" class="btn btn-primary">Отримати звіт</button>
                                         </form>
 
@@ -124,17 +118,17 @@
                                                 @foreach (session('salesReport') as $report)
                                                     <tr>
                                                         <td>{{ $report->factory_number }}</td>
-                                                        <td>{{ $report->cash_total }}</td>
-                                                        <td>{{ $report->non_cash_total }}</td>
-                                                        <td>{{ $report->total_sales }}</td>
+                                                        <td>{{ round($report->cash_total/100,2) }}</td>
+                                                        <td>{{ round($report->non_cash_total/100,2) }}</td>
+                                                        <td>{{ round($report->total_sales/100,2) }}</td>
                                                     </tr>
                                                 @endforeach
                                                 <!-- Строка с суммами -->
                                                 <tr>
                                                     <td><strong>Итого</strong></td>
-                                                    <td><strong>{{ session('totals.totalCash') }}</strong></td>
-                                                    <td><strong>{{ session('totals.totalNonCash') }}</strong></td>
-                                                    <td><strong>{{ session('totals.totalSales') }}</strong></td>
+                                                    <td><strong>{{ round(session('totals.totalCash')/100,2) }}</strong></td>
+                                                    <td><strong>{{ round(session('totals.totalNonCash')/100,2) }}</strong></td>
+                                                    <td><strong>{{ round(session('totals.totalSales')/100,2) }}</strong></td>
                                                 </tr>
                                                 </tbody>
 

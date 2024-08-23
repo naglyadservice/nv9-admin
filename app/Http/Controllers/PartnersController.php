@@ -69,8 +69,17 @@ class PartnersController extends Controller
         // Получение дат из запроса
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
+        $partnerId = $request->input('user_id');
+
+        $devices = Device::where('user_id', $partnerId)->pluck('factory_number'); // Получаем только factory_number
+
+        if ($devices->isEmpty()) {
+            // Если у партнера нет устройств, возвращаем пустой отчет
+            return redirect()->back()->withErrors(['message' => 'У партнера нет устройств.']);
+        }
 
         // Запрос с агрегацией
+        // Запрос с агрегацией по устройствам партнера
         $salesReport = DB::table('fiskalization_table')
             ->select(
                 'factory_number',
@@ -78,6 +87,7 @@ class PartnersController extends Controller
                 DB::raw('SUM(CASE WHEN cash = 0 AND fiskalized = 1 THEN sales_cashe ELSE 0 END) AS non_cash_total'),
                 DB::raw('SUM(CASE WHEN fiskalized = 1 THEN sales_cashe ELSE 0 END) AS total_sales')
             )
+            ->whereIn('factory_number', $devices) // Фильтруем по factory_number устройств партнера
             ->whereBetween('date', [$startDate, $endDate])
             ->groupBy('factory_number')
             ->orderBy('factory_number')
