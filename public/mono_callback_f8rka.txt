@@ -1,0 +1,1 @@
+{"invoiceId":"24082444kpwArPUTy5MR","status":"processing","amount":15000,"ccy":980,"finalAmount":0,"createdDate":"2024-08-24T09:39:26Z","modifiedDate":"2024-08-24T09:39:41Z","reference":"b38823be8973d2aafa5e6ba9522cfd48","destination":"117"}

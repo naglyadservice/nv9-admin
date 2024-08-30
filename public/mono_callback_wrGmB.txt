@@ -1,0 +1,1 @@
+{"invoiceId":"240825AULeMKBNMe3X4a","status":"processing","amount":7000,"ccy":980,"finalAmount":0,"createdDate":"2024-08-25T12:44:09Z","modifiedDate":"2024-08-25T12:44:20Z","reference":"4c496afc3505489ad7015d5f7b21cc04","destination":"122"}

@@ -1,0 +1,1 @@
+{"invoiceId":"2408245QeiXvSz9fDg7f","status":"created","amount":30000,"ccy":980,"createdDate":"2024-08-24T11:11:47Z","modifiedDate":"2024-08-24T11:11:47Z","reference":"018057e14c8caebea06747b2a91986e7","destination":"122"}
