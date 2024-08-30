@@ -12,4 +12,10 @@ class Fiscalization extends Model
     protected $table = 'fiskalization_table';
 
     public $timestamps = false;
+
+    public function device()
+    {
+        return $this->belongsTo(Device::class, 'factory_number', 'factory_number');
+    }
+
 }
