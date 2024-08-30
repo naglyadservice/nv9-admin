@@ -1,0 +1,1 @@
+{"invoiceId":"2408264RNVNfuSogNLdi","status":"processing","amount":10000,"ccy":980,"finalAmount":0,"createdDate":"2024-08-26T05:22:23Z","modifiedDate":"2024-08-26T05:22:35Z","reference":"9639f5ab96b583cc944cc9ad91499e6c","destination":"117"}

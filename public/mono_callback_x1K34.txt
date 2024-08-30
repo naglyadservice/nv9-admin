@@ -1,0 +1,1 @@
+{"invoiceId":"2408242sotTikngRSeV3","status":"processing","amount":10000,"ccy":980,"finalAmount":0,"createdDate":"2024-08-24T09:01:45Z","modifiedDate":"2024-08-24T09:01:56Z","reference":"9db9d34193b713919add24b7bf241157","destination":"118"}

@@ -1,0 +1,1 @@
+{"invoiceId":"2408256yTSs64k3QCapt","status":"processing","amount":15000,"ccy":980,"finalAmount":0,"createdDate":"2024-08-25T16:33:24Z","modifiedDate":"2024-08-25T16:33:36Z","reference":"c7b0d8de3c1425ed29388be3689a4f5d","destination":"120"}
