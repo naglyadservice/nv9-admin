@@ -66,6 +66,8 @@
                                     <th>Сумма фискализации (грн)</th>
                                     <th>Дата/время</th>
                                     <th>Check Code</th>
+                                    <th>Наличка</th>
+                                    <th>Ошибка</th>
                                     <th>Управление отчётом</th>
                                 </tr>
                                 </thead>
@@ -86,6 +88,14 @@
                                         </div>
 
                                     </td>
+                                    <td>
+                                        <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
+
+                                            <input disabled @if(empty($fiscalization->cash)) checked @endif  type="checkbox" class="custom-control-input" id="fiscEnableField{{$fiscalization->id}}">
+                                            <label class="custom-control-label" for="fiscEnableField{{$fiscalization->id}}"></label>
+                                        </div>
+                                    </td>
+                                    <td>{{ \Illuminate\Support\Str::limit($fiscalization->error, 50) }}</td>
                                     <td></td>
                                 </tr>
                                 <?php } ?>
