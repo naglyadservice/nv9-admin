@@ -27,15 +27,15 @@
                 <div class="col-md-12">
                     <nav>
                         <div class="nav nav-tabs" id="nav-tab">
-                            <button class="nav-link" type="button">Statistics</button>
+                            <button class="nav-link active" type="button">Statistics</button>
                             <button class="nav-link" type="button">Devices</button>
                             <button class="nav-link" type="button">Settings</button>
-                            <button class="nav-link active" type="button">Texts</button>
+                            <button class="nav-link" type="button">Texts</button>
                         </div>
                     </nav>
                         <div class="tab-content" id="nav-tabContent">
 
-                            <div class="tab-pane fade" id="tab-statistics">
+                            <div class="tab-pane fade show active" id="tab-statistics">
                                 <div class="row">
 
                                     <?php if(!$devices->isEmpty()){ ?>
@@ -66,11 +66,10 @@
 
                                                         <td>{{$device->place_name}}</td>
 
-
-
-                                                        <td>
+                                                        <td error-row>
                                                             {{$fError->error??'Помилок нема'}}
                                                         </td>
+
                                                         <td>
                                                             {{$fError->date??''}}
                                                         </td>
@@ -363,7 +362,7 @@
                                 </div>
                             </div>
 
-                            <div class="tab-pane fade show active" id="tab-texts">
+                            <div class="tab-pane fade" id="tab-texts">
                                 <div class="card card-primary">
                                     <div class="card-header">
                                         <h3 class="card-title">Заполните данные</h3>
@@ -435,6 +434,13 @@
                         tabContent[index].classList.add("show", "active");
                     }
                 })
+
+                const errorRow = document.querySelectorAll('[error-row]');
+
+                errorRow.forEach(item => {
+                    const text = item.textContent;
+                    if (text) item.textContent = text.trim().slice(0, 50)
+                });
             </script>
 
             <style>
@@ -453,15 +459,18 @@
                         display: none;
                     }
 
-                    #tab-devices .card-body {
+                    #tab-devices .card-body,
+                    #tab-statistics .card-body{
                         padding: 0;
                     }
 
-                    #tab-devices td {
+                    #tab-devices td,
+                    #tab-statistics td {
                         padding: 0.75rem 0.5rem;
                     }
 
-                    #tab-devices table td {
+                    #tab-devices table td,
+                    #tab-statistics table td {
                         text-align: center;
                     }
 

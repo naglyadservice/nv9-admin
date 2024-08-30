@@ -87,7 +87,12 @@
                                         <td>{{$device->factory_number}}</td>
                                         <td>{{$device->user->name}}</td>
                                        {{-- <td>{{$device->address}}</td>--}}
-                                        <td>@if($device->device_hash) <a href="{{route('check_hash', $device->device_hash)}}" target="_blank">{{route('check_hash', $device->device_hash)}}</a> @endif</td>
+                                        <td>
+                                            @if($device->device_hash) 
+                                            <a desktop-only href="{{route('check_hash', $device->device_hash)}}" target="_blank">{{route('check_hash', $device->device_hash)}}</a> 
+                                            <a mobile-only href="{{route('check_hash', $device->device_hash)}}" target="_blank"><i class="fas fa-link"></i></a> 
+                                            @endif
+                                        </td>
                                         <td>{{$device->fiszalization_status}}</td>
                                         <td>
                                             <div class="btn-group" role="group">
@@ -103,6 +108,27 @@
                                 @endforeach
                             </tbody>
                         </table>
+
+                        <style>
+                            @media (min-width: 700px) {
+                                *[mobile-only] {
+                                    display: none;
+                                }
+                            }
+
+                            @media (max-width: 700px) {
+                                *[desktop-only] {
+                                    display: none;
+                                }
+
+                                th, td {
+                                    text-wrap: wrap;
+                                    text-align: center;
+                                    padding: 0.75rem 0.5rem !important;
+                                }
+                            }
+                        </style>
+
                         <div class="pagi">
                             {{$devices->links()}}
                         </div>

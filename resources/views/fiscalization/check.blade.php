@@ -103,6 +103,7 @@
                 <div class="title">
                     <h1>{{$user->title??'СПЛАТИТИ АБО ОТРИМАТИ ФІСКАЛЬНИЙ ЧЕК'}}</h1>
                     <p>{{$device->address}}</p>
+                    <p style="color: #5888FF;">Техпідтримка: <a href="tel:+380960007603">096 000 76 03</a></p>
                 </div>
 
                 <form id="paymentForm" method="POST" action="{{route('go_payment', $device->device_hash)}}">

@@ -63,12 +63,15 @@
                                 <th>Кол-во устройств</th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="table">
                                 @foreach($partners as $partner)
                                     <tr>
                                         <td>{{$partner->id}}</td>
                                         <td>{{$partner->name}}</td>
-                                        <td><a href="mailto:{{$partner->email}}">{{$partner->email}}</a></td>
+                                        <td>
+                                            <a desktop-only href="mailto:{{$partner->email}}">{{$partner->email}}</a>
+                                            <a mobile-only href="mailto:{{$partner->email}}"><i class="fas fa-envelope"></i></a>
+                                        </td>
                                         <td>{{$partner->devices->count()}}</td>
                                         <td>
                                             <div class="btn-group" role="group">
@@ -84,6 +87,27 @@
                                 @endforeach
                             </tbody>
                         </table>
+
+                        <style>
+                            @media (min-width: 700px) {
+                                *[mobile-only] {
+                                    display: none;
+                                }
+                            }
+
+                            @media (max-width: 700px) {
+                                *[desktop-only] {
+                                    display: none;
+                                }
+
+                                th, td {
+                                    text-wrap: wrap;
+                                    text-align: center;
+                                    padding: 0.75rem 0.5rem !important;
+                                }
+                            }
+                        </style>
+
                         <div class="pagi">
                             {{$partners->links()}}
                         </div>
