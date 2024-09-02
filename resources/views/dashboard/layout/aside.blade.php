@@ -11,12 +11,12 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
-                <li class="nav-header">Управление</li>
+                <li class="nav-header">{{__('Управління')}}</li>
 
                 <li class="nav-item">
                     <a href="{{route('devices')}}" class="nav-link @if(Route::currentRouteName() == 'devices') active @endif">
                         <i class="nav-icon fas fa-list"></i>
-                        <p>Устройства</p>
+                        <p>{{__('Пристрої')}}</p>
                     </a>
                 </li>
 

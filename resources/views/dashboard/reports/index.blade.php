@@ -67,7 +67,9 @@
                                     <th>Дата/время</th>
                                     <th>Check Code</th>
                                     <th>Наличка</th>
+                                    <th>Фискализовано</th>
                                     <th>Ошибка</th>
+
                                     <th>Управление отчётом</th>
                                 </tr>
                                 </thead>
@@ -95,7 +97,15 @@
                                             <label class="custom-control-label" for="fiscEnableField{{$fiscalization->id}}"></label>
                                         </div>
                                     </td>
+                                    <td>
+                                        <?php if(!empty($fiscalization->check_code) && empty($fiscalization->error)){ ?>
+                                        V
+                                        <?php } else { ?>
+                                        X
+                                        <?php } ?>
+                                    </td>
                                     <td>{{ \Illuminate\Support\Str::limit($fiscalization->error, 50) }}</td>
+
                                     <td></td>
                                 </tr>
                                 <?php } ?>
