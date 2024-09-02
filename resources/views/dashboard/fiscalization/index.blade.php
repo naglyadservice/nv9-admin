@@ -6,12 +6,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Ключи фискализации</h1>
+                    <h1>{{__('Ключі фіскалізації')}}</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Система</a></li>
-                        <li class="breadcrumb-item active">Ключи фискализации</li>
+                        <li class="breadcrumb-item"><a href="#">{{__('Система')}}</a></li>
+                        <li class="breadcrumb-item active">{{__('Ключі фіскалізації')}}</li>
                     </ol>
                 </div>
             </div>
@@ -38,7 +38,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Ключи фискализации</h3>
+                            <h3 class="card-title">{{__('Ключі фіскалізації')}}</h3>
 
                             <div class="card-tools">
                                 <div class="input-group input-group-sm" style="width: 150px;justify-content: flex-end;">
@@ -57,9 +57,9 @@
                             <table class="table table-hover text-nowrap">
                                 <thead>
                                 <tr>
-                                    <th>Название ключа</th>
-                                    <th>Дата создания</th>
-                                    <th>Управление</th>
+                                    <th>{{__('Назва ключа')}}</th>
+                                    <th>{{__('Дата створення')}}</th>
+                                    <th>{{__('Управління')}}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -109,27 +109,27 @@
                 var deleteDeviceID = $(this).data('id');
 
                 $.confirm({
-                    title: 'Необходимо подтверждение',
-                    content: 'Вы уверены что хотите удалить ключ?',
+                    title: 'Необхідне підтвердження',
+                    content: 'Ви впевнені, що хочете видалити ключ?',
                     autoClose: 'no|9000',
                     buttons: {
                         yes: {
-                            text: 'Удалить',
+                            text: 'Видалити',
                             btnClass: 'btn-red',
                             action: function () {
                                 $.post(`/fiscalization/${deleteDeviceID}/delete`, function(resp){
                                     if(resp.success)
                                     {
                                         $.alert({
-                                            title: 'Удаление',
-                                            content: 'Ключ успешно удалён',
+                                            title: 'Видалення',
+                                            content: 'Ключ успішно видалений',
                                             onClose: function () {
                                                 window.location.reload();
                                             },
                                         });
                                     } else {
                                         $.confirm({
-                                            title: 'Удаление',
+                                            title: 'Видалення',
                                             content: resp.err,
                                             type: 'red',
                                             typeAnimated: true,
@@ -143,7 +143,7 @@
                             }
                         },
                         no: {
-                            text: 'Отмена',
+                            text: 'Відміна',
                             btnClass: 'btn-secondary',
                         }
                     }

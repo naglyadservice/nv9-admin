@@ -49,7 +49,7 @@ class DevicesController extends Controller
         $device->fill($request->all());
         $device->device_hash = $device->my_hash();
         $device->save();
-        return redirect()->route('devices')->with(['success' => 'Устройство успешно добавлено']);
+        return redirect()->route('devices')->with(['success' => __('Пристрій успішно додано')]);
     }
 
     public function edit(Request $request, Device $device)
@@ -72,7 +72,7 @@ class DevicesController extends Controller
         $device->fill($request->all());
         $device->device_hash = $device->my_hash();
         $device->update();
-        return redirect()->route('devices')->with(['success' => 'Устройство успешно изменено']);
+        return redirect()->route('devices')->with(['success' => __('Пристрій успішно змінено')]);
     }
 
     public function edit_fiscalization(Request $request, Device $device)
@@ -96,7 +96,7 @@ class DevicesController extends Controller
 
         $device->updateFiskalizationToken();
 
-        return back()->with(['success' => 'Настройки фискализации успешно сохранены']);
+        return back()->with(['success' => __('Налаштування фіскалізації успішно збережено')]);
     }
 
     public function edit_payment(Request $request, Device $device)
@@ -117,6 +117,6 @@ class DevicesController extends Controller
 
         $device->update();
 
-        return back()->with(['success' => 'Настройки оплаты успешно сохранены']);
+        return back()->with(['success' => __('Налаштування оплати успішно збережено')]);
     }
 }

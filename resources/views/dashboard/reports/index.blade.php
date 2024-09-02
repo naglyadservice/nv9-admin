@@ -6,12 +6,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Управління Звітами</h1>
+                    <h1>{{__('Управління Звітами')}}</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Система</a></li>
-                        <li class="breadcrumb-item active">Звіти</li>
+                        <li class="breadcrumb-item"><a href="#">{{__('Система')}}</a></li>
+                        <li class="breadcrumb-item active">{{__('Звіти')}}</li>
                     </ol>
                 </div>
             </div>
@@ -44,7 +44,7 @@
                                 <div class="input-group input-group-sm" style="width: 150px;justify-content: flex-end;">
                                     <div class="input-group-append">
                                         <div class="row">
-                                        <div class="col-lg-6" style="text-align: right;">Factory Number:</div>
+                                        <div class="col-lg-6" style="text-align: right;">{{__('Серійний номер')}}:</div>
                                         <div class="col-lg-6">
                                             <form method="GET">
                                                 <input class="" value="{{ request('factory_number')??''}}" type="text" name="factory_number">
@@ -61,16 +61,16 @@
                                 <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Автомат</th>
-                                    <th>Владелец</th>
-                                    <th>Сумма фискализации (грн)</th>
-                                    <th>Дата/время</th>
-                                    <th>Check Code</th>
-                                    <th>Наличка</th>
-                                    <th>Фискализовано</th>
-                                    <th>Ошибка</th>
+                                    <th>{{__('Автомат')}}</th>
+                                    <th>{{__('Власник')}}</th>
+                                    <th>{{__('Сума фіскалізації (грн)')}}</th>
+                                    <th>{{__('Дата/час')}}</th>
+                                    <th>{{__('Check Code')}}</th>
+                                    <th>{{__('Готівка')}}</th>
+                                    <th>{{__('Фіскалізовано')}}</th>
+                                    <th>{{__('Помилка')}}</th>
 
-                                    <th>Управление отчётом</th>
+                                    <th>{{__('Управління звітом')}}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -110,7 +110,7 @@
                                 </tr>
                                 <?php } ?>
                                 <?php } else{ ?>
-                                    <td colspan="6" style="text-align: center;">Нет данных для отчёта</td>
+                                    <td colspan="6" style="text-align: center;">{{__('Немає даних для звіту')}}</td>
                                <?php } ?>
                                 </tbody>
                             </table>

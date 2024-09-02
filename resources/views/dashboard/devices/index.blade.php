@@ -6,12 +6,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>DEVICES DASHBOARD</h1>
+                <h1>{{__('Пристрої')}}</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">System</a></li>
-                    <li class="breadcrumb-item active">Devices</li>
+                    <li class="breadcrumb-item"><a href="#">{{__('Система')}}</a></li>
+                    <li class="breadcrumb-item active">{{__('Пристрої')}}</li>
                 </ol>
             </div>
         </div>
