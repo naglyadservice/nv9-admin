@@ -6,12 +6,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Редактирование устройства</h1>
+                    <h1>{{__('Редагування пристрою')}}</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Система</a></li>
-                        <li class="breadcrumb-item active">Устройства</li>
+                        <li class="breadcrumb-item"><a href="#">{{__('Система')}}</a></li>
+                        <li class="breadcrumb-item active">{{__('Пристрої')}}</li>
                     </ol>
                 </div>
             </div>
@@ -40,7 +40,7 @@
                     <!-- general form elements -->
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Основные данные</h3>
+                            <h3 class="card-title">{{__('Основні дані')}}</h3>
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
@@ -50,18 +50,18 @@
                                 <div class="form-group">
                                     <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
                                         <input @if($device->enabled) checked @endif name="enabled" type="checkbox" class="custom-control-input" id="enableField">
-                                        <label class="custom-control-label" for="enableField">Доступен</label>
+                                        <label class="custom-control-label" for="enableField">{{__('Доступний')}}</label>
                                     </div>
                                 </div>
-                                <x-my-field value="{{$device->factory_number}}" name="factory_number" title="Серийный номер" type="text"></x-my-field>
-                                 <x-my-field value="{{$device->address}}" name="address" title="Адрес" type="text"></x-my-field>
-                                <x-my-field value="{{$device->place_name}}" name="place_name" title="Название места" placeholder="Например Пост №4" type="text"></x-my-field>
+                                <x-my-field value="{{$device->factory_number}}" name="factory_number" title="{{__('Серійний номер')}}" type="text"></x-my-field>
+                                 <x-my-field value="{{$device->address}}" name="address" title="{{__('Адреса')}}" type="text"></x-my-field>
+                                <x-my-field value="{{$device->place_name}}" name="place_name" title="{{__('Назва місця')}}" placeholder="{{__('Наприклад Піст №4')}}" type="text"></x-my-field>
 
-                                <x-my-field value="{{$device->divide_by}}" name="divide_by" title="Кратность" type="text"></x-my-field>
+                                <x-my-field value="{{$device->divide_by}}" name="divide_by" title="{{__('Кратність')}}" type="text"></x-my-field>
 
 
                                 <div class="form-group">
-                                    <label for="user_field_id">Дизайн</label>
+                                    <label for="user_field_id">{{__('Дизайн')}}</label>
                                     <select name="design" class="form-control" id="design">
                                         @foreach(\App\Models\Device::getDesigns() as $key => $name)
                                             <option @if($device->design == $key) selected @endif value="{{$key}}">{{$name}}</option>
@@ -70,7 +70,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="user_field_id">Принадлежность</label>
+                                    <label for="user_field_id">{{__('Приналежність')}}</label>
                                     <select name="user_id" class="form-control" id="user_field_id">
                                         @foreach($partners as $partner)
                                             <option @if($partner->id == $device->user_id) selected @endif value="{{$partner->id}}">{{$partner->name}}</option>
@@ -78,12 +78,12 @@
                                     </select>
                                 </div>
 
-                                <x-my-field value="{{$device->service}}" name="service" title="Послуга" type="text"></x-my-field>
+                                <x-my-field value="{{$device->service}}" name="service" title="{{__('Послуга')}}" type="text"></x-my-field>
 
 
                             </div>
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Сохранить</button>
+                                <button type="submit" class="btn btn-primary">{{__('Зберегти')}}</button>
                             </div>
                         </form>
                     </div>
@@ -96,7 +96,7 @@
                     <!-- general form elements -->
                     <div class="card card-secondary">
                         <div class="card-header">
-                            <h3 class="card-title">Фискализация</h3>
+                            <h3 class="card-title">{{__('Фіскалізація')}}</h3>
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
@@ -106,13 +106,13 @@
                                 <div class="form-group">
                                     <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
                                         <input @if($device->enabled_fiscalization) checked @endif name="enabled_fiscalization" type="checkbox" class="custom-control-input" id="fiscEnableField">
-                                        <label class="custom-control-label" for="fiscEnableField">Включить фискализацию</label>
+                                        <label class="custom-control-label" for="fiscEnableField">{{__('Включити фіскалізацію')}}</label>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="user_field_id">Ключ фискализации</label>
+                                    <label for="user_field_id">{{__('Ключ фіскалізації')}}</label>
                                     <select name="fiscalization_key_id" class="form-control" id="user_field_id">
-                                        <option value="0">Нет</option>
+                                        <option value="0">{{__('Ні')}}</option>
                                         @foreach($myKeys as $key)
                                             <option @if($device->fiscalization_key_id == $key->id) selected @endif value="{{$key->id}}">{{$key->name}}</option>
                                         @endforeach
@@ -120,7 +120,7 @@
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Сохранить</button>
+                                <button type="submit" class="btn btn-primary">{{__('Зберегти')}}</button>
                             </div>
                         </form>
                     </div>
@@ -128,7 +128,7 @@
 
                     <div class="card card-secondary">
                         <div class="card-header">
-                            <h3 class="card-title">Онлайн оплата</h3>
+                            <h3 class="card-title">{{__('Онлайн оплата')}}</h3>
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
@@ -138,11 +138,11 @@
                                 <div class="form-group">
                                     <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
                                         <input @if($device->enable_payment) checked @endif name="enable_payment" type="checkbox" class="custom-control-input" id="paymentEnableField">
-                                        <label class="custom-control-label" for="paymentEnableField">Включить онлайн оплату</label>
+                                        <label class="custom-control-label" for="paymentEnableField">{{__('Включити оплату онлайн')}}</label>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="payment_system_field_id">Система онлайн оплаты</label>
+                                    <label for="payment_system_field_id">{{__('Система онлайн оплати')}}</label>
                                     <select name="payment_system_id" class="form-control" id="payment_system_field_id">
                                         <option value="0">Нет</option>
                                         @foreach($myPayments as $key)
@@ -152,7 +152,7 @@
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Сохранить</button>
+                                <button type="submit" class="btn btn-primary">{{__('Зберегти')}}</button>
                             </div>
                         </form>
                     </div>
