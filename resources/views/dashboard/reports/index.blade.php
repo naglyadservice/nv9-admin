@@ -80,9 +80,11 @@
                                 <tr>
                                     <td>{{$fiscalization->id}}</td>
                                     <td>
+                                        @if(!empty($fiscalization->device))
                                         @if($fiscalization->device->device_hash)
                                             <a desktop-only href="{{route('check_hash', $fiscalization->device->device_hash)}}" target="_blank">{{$fiscalization->factory_number}}</a>
                                             <a mobile-only href="{{route('check_hash', $fiscalization->device->device_hash)}}" target="_blank"><i class="fas fa-link"></i></a>
+                                        @endif
                                         @endif
                                     </td>
                                     <td>
