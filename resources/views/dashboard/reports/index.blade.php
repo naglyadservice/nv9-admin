@@ -113,7 +113,8 @@
                                     </td>
                                     <td>
                                         <?php if(!empty($fiscalization->check_code) && empty($fiscalization->error)){ ?>
-                                        V
+                                            <a href="https://check.checkbox.ua/{{$fiscalization->check_code}}"> V</a>
+
                                         <?php } else { ?>
                                         X
                                         <?php } ?>
