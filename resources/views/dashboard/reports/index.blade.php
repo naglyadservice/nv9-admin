@@ -38,7 +38,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Звіти</h3>
+                            <h3 class="card-title">{{__('Звіти')}}</h3>
 
                             <div class="card-tools">
                                 <div class="input-group input-group-sm" style="width: 150px;justify-content: flex-end;">
@@ -65,8 +65,9 @@
                                     <th>{{__('Власник')}}</th>
                                     <th>{{__('Сума фіскалізації (грн)')}}</th>
                                     <th>{{__('Дата/час')}}</th>
-                                    <th>{{__('Check Code')}}</th>
-                                    <th>{{__('Готівка')}}</th>
+                                    <th>{{__('Sales Code')}}</th>
+                                   {{-- <th>{{__('Check Code')}}</th>--}}
+                                    <th>{{__('Тип оплати (Готівка / Картка)')}}</th>
                                     <th>{{__('Фіскалізовано')}}</th>
                                     <th>{{__('Помилка')}}</th>
 
@@ -78,18 +79,28 @@
                                 <?php foreach($fiscalizations as $fiscalization){ ?>
                                 <tr>
                                     <td>{{$fiscalization->id}}</td>
-                                    <td><a target="_blank" href="{{route('devices.edit',$fiscalization->device->id??'')}}">{{$fiscalization->device->factory_number??''}}</a></td>
-                                    <td>{{$fiscalization->device->user->name??''}}</td>
+                                    <td>
+                                        @if($fiscalization->device->device_hash)
+                                            <a desktop-only href="{{route('check_hash', $fiscalization->device->device_hash)}}" target="_blank">{{$fiscalization->factory_number}}</a>
+                                            <a mobile-only href="{{route('check_hash', $fiscalization->device->device_hash)}}" target="_blank"><i class="fas fa-link"></i></a>
+                                        @endif
+                                    </td>
+                                    <td>
+
+                                        <a href="{{route('partners.edit',['partner'=>$fiscalization->device->user->id])}}">{{$fiscalization->device->user->name??''}}</a>
+
+                                    </td>
                                     <td>{{round($fiscalization->sales_cashe/100,2)}} (грн)</td>
                                     <td>{{$fiscalization->date}}</td>
-                                    <td>
+                                    <td>{{$fiscalization->sales_code}}</td>
+                                  {{--  <td>
                                         <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
 
                                         <input disabled @if(empty($fiscalization->check_code)) checked @endif  type="checkbox" class="custom-control-input" id="fiscEnableField{{$fiscalization->id}}">
                                         <label class="custom-control-label" for="fiscEnableField{{$fiscalization->id}}"></label>
                                         </div>
 
-                                    </td>
+                                    </td>--}}
                                     <td>
                                         <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
 
