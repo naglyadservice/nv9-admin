@@ -89,8 +89,9 @@
                                     </td>
                                     <td>
 
+                                        <?php if(!empty($fiscalization->device->user)){ ?>
                                         <a href="{{route('partners.edit',['partner'=>$fiscalization->device->user->id])}}">{{$fiscalization->device->user->name??''}}</a>
-
+                                        <?php } ?>
                                     </td>
                                     <td>{{round($fiscalization->sales_cashe/100,2)}} (грн)</td>
                                     <td>{{$fiscalization->date}}</td>
