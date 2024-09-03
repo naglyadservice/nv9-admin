@@ -6,12 +6,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>DEVICES DASHBOARD</h1>
+                <h1>{{__('Пристрої')}}</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">System</a></li>
-                    <li class="breadcrumb-item active">Devices</li>
+                    <li class="breadcrumb-item"><a href="#">{{__('Система')}}</a></li>
+                    <li class="breadcrumb-item active">{{__('Пристрої')}}</li>
                 </ol>
             </div>
         </div>
@@ -38,13 +38,13 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">DEVICES</h3>
+                        <h3 class="card-title">{{__('Пристрої')}}</h3>
 
                         <div class="card-tools">
 
                             <div class="input-group input-group-sm" style="width: 340px;justify-content: flex-end;align-items: center;">
-                                
-                            <div class="col-lg-4" style="text-align: right;">Owner filter:</div>
+
+                            <div class="col-lg-4" style="text-align: right;">{{__('Власник')}}:</div>
                             <div class="col-lg-6">
                                 <form method="GET">
                                     <select id="ownerFilter" name="owner" class="form-control">
@@ -73,11 +73,11 @@
                             <tr>
                                 <th>ID</th>
                                 <th>SN</th>
-                                <th>OWNER</th>
+                                <th>{{__('Власник')}}</th>
                               {{--  <th>ADRESS</th>--}}
                                 <th>URL</th>
-                                <th>FISCALIZATION</th>
-                                <th>MANAGE</th>
+                                <th>{{__('Фіскалізація')}}</th>
+                                <th>{{__('Управління')}}</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -87,7 +87,12 @@
                                         <td>{{$device->factory_number}}</td>
                                         <td>{{$device->user->name}}</td>
                                        {{-- <td>{{$device->address}}</td>--}}
-                                        <td>@if($device->device_hash) <a href="{{route('check_hash', $device->device_hash)}}" target="_blank">{{route('check_hash', $device->device_hash)}}</a> @endif</td>
+                                        <td>
+                                            @if($device->device_hash)
+                                            <a desktop-only href="{{route('check_hash', $device->device_hash)}}" target="_blank">{{route('check_hash', $device->device_hash)}}</a>
+                                            <a mobile-only href="{{route('check_hash', $device->device_hash)}}" target="_blank"><i class="fas fa-link"></i></a>
+                                            @endif
+                                        </td>
                                         <td>{{$device->fiszalization_status}}</td>
                                         <td>
                                             <div class="btn-group" role="group">
@@ -103,6 +108,27 @@
                                 @endforeach
                             </tbody>
                         </table>
+
+                        <style>
+                            @media (min-width: 700px) {
+                                *[mobile-only] {
+                                    display: none;
+                                }
+                            }
+
+                            @media (max-width: 700px) {
+                                *[desktop-only] {
+                                    display: none;
+                                }
+
+                                th, td {
+                                    text-wrap: wrap;
+                                    text-align: center;
+                                    padding: 0.75rem 0.5rem !important;
+                                }
+                            }
+                        </style>
+
                         <div class="pagi">
                             {{$devices->links()}}
                         </div>
@@ -131,18 +157,18 @@
                 var deleteDeviceID = $(this).data('id');
 
                 $.confirm({
-                    title: 'Необходимо подтверждение',
-                    content: 'Вы уверены что хотите удалить устройство?',
+                    title: 'Необхідне підтвердження',
+                    content: 'Ви впевнені, що хочете видалити пристрій?',
                     autoClose: 'no|9000',
                     buttons: {
                         yes: {
-                            text: 'Удалить',
+                            text: 'Видалити',
                             btnClass: 'btn-red',
                             action: function () {
                                 $.post(`/devices/${deleteDeviceID}/delete`, function(resp){
                                     $.alert({
-                                        title: 'Удаление',
-                                        content: 'Устройство успешно удалено',
+                                        title: 'Видалення',
+                                        content: 'Пристрій успішно видалено',
                                         onClose: function () {
                                             window.location.reload();
                                         },
@@ -152,7 +178,7 @@
                             }
                         },
                         no: {
-                            text: 'Отмена',
+                            text: 'Відміна',
                             btnClass: 'btn-secondary',
                         }
                     }

@@ -28,7 +28,7 @@ class FiscalizationController extends Controller
         $newKey->user_id = $userID;
         $newKey->fill($request->all());
         $newKey->save();
-        return redirect()->route('fiscalization')->with(['success' => 'Ключ успешно создан.']);
+        return redirect()->route('fiscalization')->with(['success' => __('Ключ успішно створено.')]);
     }
 
     public function delete(Request $request, FiskalizationKey $key)
@@ -36,7 +36,7 @@ class FiscalizationController extends Controller
         $devicesInUse = Device::where('fiscalization_key_id', $key->id)->count();
         if ($devicesInUse > 0)
         {
-            return response()->json(['success' => false, 'err' => 'Невозможно удалить данный ключ, т.к он где-то используется.']);
+            return response()->json(['success' => false, 'err' => __('Неможливо видалити цей ключ, тому що він десь використовується.')]);
         } else {
             $key->delete();
             return response()->json(['success' => true]);
@@ -53,6 +53,6 @@ class FiscalizationController extends Controller
     {
         $key->fill($request->all());
         $key->update();
-        return redirect()->route('fiscalization')->with(['success' => 'Ключ успешно изменён.']);
+        return redirect()->route('fiscalization')->with(['success' => __('Ключ успішно змінено.')]);
     }
 }

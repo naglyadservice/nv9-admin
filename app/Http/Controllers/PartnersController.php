@@ -40,7 +40,7 @@ class PartnersController extends Controller
         $partner->fill($request->all());
         $partner->password = Hash::make(Str::random(10));
         $partner->save();
-        return redirect()->route('partners')->with(['success' => 'Партнер успешно добавлен']);
+        return redirect()->route('partners')->with(['success' => __('Партнер успішно доданий')]);
     }
 
     public function edit(Request $request, User $partner)
@@ -61,7 +61,7 @@ class PartnersController extends Controller
     {
         $partner->fill($request->all());
         $partner->update();
-        return redirect()->route('partners')->with(['success' => 'Партнер успешно изменен']);
+        return redirect()->route('partners')->with(['success' => __('Партнера успішно змінено')]);
     }
 
     public function getSalesReport(Request $request)
@@ -75,7 +75,7 @@ class PartnersController extends Controller
 
         if ($devices->isEmpty()) {
             // Если у партнера нет устройств, возвращаем пустой отчет
-            return redirect()->back()->withErrors(['message' => 'У партнера нет устройств.']);
+            return redirect()->back()->withErrors(['message' => __('Партнер не має пристроїв.')]);
         }
 
         // Запрос с агрегацией
@@ -152,7 +152,7 @@ class PartnersController extends Controller
             }
         }
 
-        return back()->with(['success' => 'Настройки фискализации успешно сохранены для всех устройств']);
+        return back()->with(['success' => __('Налаштування фіскалізації успішно збережено для всіх пристроїв')]);
     }
 
 
@@ -191,7 +191,7 @@ class PartnersController extends Controller
                 $device->update();
             }
         }
-        return back()->with(['success' => 'Настройки оплаты успешно сохранены']);
+        return back()->with(['success' => __('Налаштування оплати успішно збережено')]);
     }
 
 
@@ -218,7 +218,7 @@ class PartnersController extends Controller
                 $device->update();
             }
         }
-        return back()->with(['success' => 'Успешно сохранено']);
+        return back()->with(['success' => __('Успішно збережено')]);
     }
 
     public function edit_design(Request $request, User $user)
@@ -237,7 +237,7 @@ class PartnersController extends Controller
                 $device->update();
             }
         }
-        return back()->with(['success' => 'Настройки оплаты успешно сохранены']);
+        return back()->with(['success' => __('Налаштування оплати успішно збережено')]);
     }
 
     public function edit_divide_by(Request $request, User $user)
@@ -256,6 +256,6 @@ class PartnersController extends Controller
                 $device->update();
             }
         }
-        return back()->with(['success' => 'Настройки оплаты успешно сохранены']);
+        return back()->with(['success' => __('Налаштування оплати успішно збережено')]);
     }
 }

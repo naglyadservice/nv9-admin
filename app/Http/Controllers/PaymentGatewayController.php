@@ -36,7 +36,7 @@ class PaymentGatewayController extends Controller
         $paySystem->data = $data;
         $paySystem->save();
 
-        return redirect()->back()->with(['success' => 'Успешно добавлено']);
+        return redirect()->back()->with(['success' => __('Успішно додано')]);
     }
 
     public function delete(Request $request, PaymentGateway $system)
@@ -44,7 +44,7 @@ class PaymentGatewayController extends Controller
         $devicesInUse = Device::where('payment_system_id', $system->id)->count();
         if ($devicesInUse > 0)
         {
-            return response()->json(['success' => false, 'err' => 'Невозможно удалить данную платежную систему, т.к она где-то используется.']);
+            return response()->json(['success' => false, 'err' => __('Неможливо видалити цю платіжну систему, тому що вона десь використовується.')]);
         } else {
             $system->delete();
             return response()->json(['success' => true]);

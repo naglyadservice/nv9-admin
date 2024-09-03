@@ -6,12 +6,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Управление платежными системами</h1>
+                    <h1>{{__('Управління платіжними системами')}}</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Система</a></li>
-                        <li class="breadcrumb-item active">Управление платежными системами</li>
+                        <li class="breadcrumb-item"><a href="#">{{__('Система')}}</a></li>
+                        <li class="breadcrumb-item active">{{__('Управління платіжними системами')}}</li>
                     </ol>
                 </div>
             </div>
@@ -38,7 +38,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Платежные системы</h3>
+                            <h3 class="card-title">{{__('Платіжні системи')}}</h3>
 
                             <div class="card-tools">
                                 <div class="input-group input-group-sm" style="width: 150px;justify-content: flex-end;">
@@ -57,10 +57,10 @@
                             <table class="table table-hover text-nowrap">
                                 <thead>
                                 <tr>
-                                    <th>Название</th>
-                                    <th>Платежная система</th>
-                                    <th>Добавлено</th>
-                                    <th>Управление</th>
+                                    <th>{{__('Назва')}}</th>
+                                    <th>{{__('Платіжна система')}}</th>
+                                    <th>{{__('Додано')}}</th>
+                                    <th>{{__('Управління')}}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -103,7 +103,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Выберите платежную систему</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">{{__('Виберіть платіжну систему')}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -112,7 +112,7 @@
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
-                            <label>Платежная система</label>
+                            <label>{{__('Платіжна система')}}</label>
                             <select name="system" class="form-control">
                                 @foreach(\App\Models\PaymentGateway::systems() as $key => $system)
                                     <option value="{{$key}}">{{$system}}</option>
@@ -120,14 +120,14 @@
                             </select>
                         </div>
 
-                        <x-my-field type="text" name="name" title="Название" placeholder="ФОП Рога и копыта"></x-my-field>
-                        <x-my-field type="text" name="public_key" title="Public key" placeholder="Публичный ключ"></x-my-field>
-                        <x-my-field type="text" name="private_key" title="Private key" placeholder="Приватный ключ"></x-my-field>
+                        <x-my-field type="text" name="name" title="{{__('Назва')}}" placeholder="{{__('ФОП Роги та копита')}}"></x-my-field>
+                        <x-my-field type="text" name="public_key" title="Public key" placeholder="{{__('Публічний ключ')}}"></x-my-field>
+                        <x-my-field type="text" name="private_key" title="Private key" placeholder="{{__('Приватний ключ')}}"></x-my-field>
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                        <button type="submit" class="btn btn-primary">Добавить</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Відміна')}}</button>
+                        <button type="submit" class="btn btn-primary">{{__('Додати')}}</button>
                     </div>
                 </form>
             </div>
@@ -151,27 +151,27 @@
                 var deleteID = $(this).data('id');
 
                 $.confirm({
-                    title: 'Необходимо подтверждение',
-                    content: 'Вы уверены что хотите удалить платежную систему?',
+                    title: 'Необхідне підтвердження',
+                    content: 'Ви впевнені, що хочете видалити платіжну систему?',
                     autoClose: 'no|9000',
                     buttons: {
                         yes: {
-                            text: 'Удалить',
+                            text: 'Видалити',
                             btnClass: 'btn-red',
                             action: function () {
                                 $.post(`/payment-gateways/${deleteID}/delete`, function(resp){
                                     if(resp.success)
                                     {
                                         $.alert({
-                                            title: 'Удаление',
-                                            content: 'Платежная система успешно удалена',
+                                            title: 'Видалення',
+                                            content: 'Платіжну систему успішно видалено',
                                             onClose: function () {
                                                 window.location.reload();
                                             },
                                         });
                                     } else {
                                         $.confirm({
-                                            title: 'Удаление',
+                                            title: 'Видалення',
                                             content: resp.err,
                                             type: 'red',
                                             typeAnimated: true,
@@ -185,7 +185,7 @@
                             }
                         },
                         no: {
-                            text: 'Отмена',
+                            text: 'Відміна',
                             btnClass: 'btn-secondary',
                         }
                     }
