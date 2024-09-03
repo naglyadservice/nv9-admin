@@ -201,6 +201,11 @@
         <div class="buttons">
             @if($device->enable_payment)
                 <button type="button" id="goPayment">Продовжити&nbsp;&nbsp;&nbsp;→</button>
+
+                @if($errors->any())
+                    <p class="cntrlmsg">{{$errors->first()}}</p>
+                @endif
+
             @endif
         </div>
     </form>

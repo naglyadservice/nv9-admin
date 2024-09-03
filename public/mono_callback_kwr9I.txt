@@ -1,0 +1,1 @@
+{"invoiceId":"2409025nBFapk3TKAZRt","status":"created","amount":2000,"ccy":980,"createdDate":"2024-09-02T14:11:45Z","modifiedDate":"2024-09-02T14:11:45Z","reference":"22462b0240728addb30aa0bce85b5c86","destination":"123"}

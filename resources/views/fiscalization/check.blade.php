@@ -134,6 +134,11 @@
                         {{--              <button>Сплатити по NFC</button>--}}
                         @if($device->enable_payment)
                             <button type="button" id="goPayment">Сплатити карткою</button>
+
+                            @if($errors->any())
+                                <p class="cntrlmsg" style="color:red;">{{$errors->first()}}</p>
+                            @endif
+
                         @endif
                     </div>
                 </form>
@@ -184,7 +189,7 @@
             <a href="{{route('oferta',['id'=>$user->id])}}">Договір оферти</a>
             <a href="{{route('about-us',['id'=>$user->id])}}">Про нас</a>
         </div>
-        <p>© Copyright 2024. All Rights Reserved.</p>
+        <p>© Copyright <?=date('Y');?>. All Rights Reserved.</p>
     </footer>
 </div>
 

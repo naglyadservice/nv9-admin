@@ -1,0 +1,1 @@
+{"invoiceId":"2409012PodxM8YTVgbRa","status":"created","amount":2000,"ccy":980,"createdDate":"2024-09-01T13:12:58Z","modifiedDate":"2024-09-01T13:12:58Z","reference":"209c29e2ccb15c6879ea11633a5b805a","destination":"119"}
