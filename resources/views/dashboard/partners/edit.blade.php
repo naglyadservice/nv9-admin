@@ -58,6 +58,7 @@
                                                         </td>
                                                         <td>  {{__('Остання транзакція')}} </td>
                                                     </tr>
+
                                                     <?php foreach($devices as $device){
                                                         $fError = $device->getLastFiskalizationError($device->factory_number);
                                                         ?>
@@ -70,10 +71,9 @@
                                                             {{$fError->error??__('Помилок нема')}}
                                                         </td>
 
-                                                        <td>
+                                                        <td error-date>
                                                             {{$fError->date??''}}
                                                         </td>
-
                                                     </tr>
                                                     <?php } ?>
                                                 </table>
@@ -422,25 +422,51 @@
             </div>
 
             <script>
-                const tabButtons = document.querySelectorAll("#nav-tab button");
-                const tabContent = document.querySelectorAll("#nav-tabContent .tab-pane");
+                try {
+                    const tabButtons = document.querySelectorAll("#nav-tab button");
+                    const tabContent = document.querySelectorAll("#nav-tabContent .tab-pane");
 
-                tabButtons.forEach((_, index) => {
-                    tabButtons[index].onclick = () => {
-                        tabButtons.forEach(item => item.classList.remove("active"));
-                        tabContent.forEach(item => item.classList.remove("show", "active"));
+                    tabButtons.forEach((_, index) => {
+                        tabButtons[index].onclick = () => {
+                            tabButtons.forEach(item => item.classList.remove("active"));
+                            tabContent.forEach(item => item.classList.remove("show", "active"));
 
-                        tabButtons[index].classList.add("active");
-                        tabContent[index].classList.add("show", "active");
-                    }
-                })
+                            tabButtons[index].classList.add("active");
+                            tabContent[index].classList.add("show", "active");
+                        }
+                    })
 
-                const errorRow = document.querySelectorAll('[error-row]');
+                    const errorRow = document.querySelectorAll('[error-row]');
 
-                errorRow.forEach(item => {
-                    const text = item.textContent;
-                    if (text) item.textContent = text.trim().slice(0, 50)
-                });
+                    errorRow.forEach(item => {
+                        const text = item.textContent;
+                        if (text) item.textContent = text.trim().slice(0, 50)
+                    });
+
+                    const errorDateField = document.querySelectorAll('[error-date]');
+                    const dateNow = new Date()
+
+                    errorDateField.forEach(item => {
+                        const text = item.textContent;
+                        const date = new Date(text);
+
+                        if (date) {
+                            const diff = dateNow - date;
+
+                            if (diff <= 6) {
+                                return item;
+                            } else if (diff <= 12) {
+                                return item.style.color = "yellow";
+                            } else if (diff <= 24) {
+                                return item.style.color = "orange";
+                            } else {
+                                return item.style.color = "red";
+                            }
+                        }
+                    })
+                } catch (error) {
+                    console.warn(error)
+                }
             </script>
 
             <style>
