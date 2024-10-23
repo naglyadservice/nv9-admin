@@ -9,5 +9,5 @@ class FiskalizationKey extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'cashier_login', 'cashier_password', 'cashier_license_key'];
+    protected $fillable = ['name', 'cashier_login', 'cashier_password', 'cashier_license_key', 'is_tax_enabled', 'tax_code'];
 }

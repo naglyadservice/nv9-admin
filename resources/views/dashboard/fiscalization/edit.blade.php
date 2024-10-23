@@ -45,6 +45,16 @@
                                 <x-my-field name="cashier_password" value="{{$key->cashier_password}}" title="{{__('Пароль касира')}}" type="text"></x-my-field>
                                 <x-my-field name="cashier_license_key" value="{{$key->cashier_license_key}}" title="{{__('Ключ ліцензії каси')}}" type="text"></x-my-field>
 
+
+                                <div class="form-group">
+                                    <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
+                                        <input @if($key->is_tax_enabled) checked @endif value="1" name="is_tax_enabled" type="checkbox" class="custom-control-input" id="enableField">
+                                        <label class="custom-control-label" for="enableField">{{__('Включити податок')}}</label>
+                                    </div>
+                                </div>
+
+                                <x-my-field name="tax_code" value="{{$key->tax_code}}" title="{{__('Код податку')}}" type="text"></x-my-field>
+
                             </div>
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary">{{__('Зберегти')}}</button>
