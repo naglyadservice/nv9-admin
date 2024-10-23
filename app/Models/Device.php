@@ -120,14 +120,21 @@ class Device extends Model
 
         $ch = curl_init();
 
+        $fiscalizationKey = $device->fiscalization_key;
+        $good = [
+            "code" => "1",
+            "name" => $device->service ?? "Послуга",
+            "price" => $total,
+        ];
+
+        if ($fiscalizationKey && $fiscalizationKey->is_tax_enabled && $fiscalizationKey->tax_code) {
+            $good['tax'] = [$fiscalizationKey->tax_code];
+        }
+
         $data = [
             "goods" => [
                 [
-                    "good" => [
-                        "code" => "1",
-                        "name" => $device->service ?? "Послуга",
-                        "price" => $total
-                    ],
+                    "good" => $good,
                     "quantity" => 1000, // 1 шт
                     "is_return" => false
                 ]
