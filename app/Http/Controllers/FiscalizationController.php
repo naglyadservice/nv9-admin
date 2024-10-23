@@ -51,7 +51,11 @@ class FiscalizationController extends Controller
 
     public function edit_save(Request $request, FiskalizationKey $key)
     {
-        $key->fill($request->all());
+        $data = array_merge($request->all(), [
+            'is_tax_enabled' => $request->has('is_tax_enabled') ? 1 : 0
+        ]);
+
+        $key->fill($data);
         $key->update();
         return redirect()->route('fiscalization')->with(['success' => __('Ключ успішно змінено.')]);
     }
