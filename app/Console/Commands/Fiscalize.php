@@ -39,11 +39,14 @@ class Fiscalize extends Command
             ->where('fiskalized', false)
             ->where('date', '>=', Carbon::now()->subMinutes(10))
             ->get();
-        
+
         //Проверка необходимости фискализации
         foreach ($need_fiscalize as $order) {
             print_r($order->id);
             $device = Device::where('factory_number', $order->factory_number)
+                ->orWhereHas('serialNumbers', function($q) use ($order) {
+                    $q->where('serial_number', $order->factory_number);
+                })
                 ->first();
 
             if($device && $device->enabled_fiscalization && $device->cashier_token && $device->fiscalization_key_id)
