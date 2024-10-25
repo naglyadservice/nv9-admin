@@ -92,11 +92,17 @@ class Fiscalize extends Command
                         print_r($check->message);
                     }
 
+                    $fiskalized = true;
+                    if (isset($check->message) && ($check->message == "Зміну не відкрито" || str_starts_with($check->message, "Зміну відкрито понад")))
+                    {
+                        $fiskalized = false;
+                    }
+
                     DB::table('fiskalization_table')
                         ->where('id', $order->id)
                         ->update([
                             'check_code' => $checkField,
-                            'fiskalized' => true,
+                            'fiskalized' => $fiskalized,
                             'error' => $err
                         ]);
 
