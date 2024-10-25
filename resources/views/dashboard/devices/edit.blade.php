@@ -162,8 +162,11 @@
                 <!--/.col (right) -->
             </div>
 
-
-
+            <div class="row">
+                <div class="col">
+                    <livewire:device-serial-number :device="$device"/>
+                </div>
+            </div>
         </div>
     </section>
 @endsection

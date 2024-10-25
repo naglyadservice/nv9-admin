@@ -40,8 +40,11 @@ class CheckController extends Controller
     {
         $deviceID = (int)$request->id;
         $device = Device::where('device_hash', $hash)->firstOrFail();
+        $serialNumbers = $device->serialNumbers()->pluck('serial_number')->toArray();
+        $serialNumbers[] = $device->factory_number;
+
         $last_three = DB::table('fiskalization_table')
-            ->where('factory_number', $device->factory_number)
+            ->whereIn('factory_number', $serialNumbers)
            // ->where('fiskalized', true)
          //   ->whereNotNull('check_code')
            ->where('sales_cashe', '<>', 0)
