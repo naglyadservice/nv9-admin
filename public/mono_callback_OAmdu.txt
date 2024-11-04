@@ -1,0 +1,1 @@
+{"invoiceId":"240831F7LkSkUnAkaBrb","status":"processing","amount":25000,"ccy":980,"finalAmount":0,"createdDate":"2024-08-31T15:39:56Z","modifiedDate":"2024-08-31T15:40:20Z","reference":"75cfe0bb14f60aadeacb06fed2fa7d89","destination":"122"}

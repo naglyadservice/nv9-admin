@@ -1,0 +1,1 @@
+{"invoiceId":"240902FEnde6QfvMysSd","status":"processing","amount":3000,"ccy":980,"finalAmount":0,"createdDate":"2024-09-02T16:38:39Z","modifiedDate":"2024-09-02T16:38:54Z","reference":"bb8102a8b75801814960c9fe6b725a71","destination":"121"}

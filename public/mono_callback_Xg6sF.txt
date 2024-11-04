@@ -1,0 +1,1 @@
+{"invoiceId":"240903CmALDeT7PpXGA9","status":"processing","amount":10000,"ccy":980,"finalAmount":0,"createdDate":"2024-09-03T06:03:00Z","modifiedDate":"2024-09-03T06:03:29Z","reference":"540036fc36105958c68eaf827979007a","destination":"123"}

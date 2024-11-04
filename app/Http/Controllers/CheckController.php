@@ -240,7 +240,12 @@ class CheckController extends Controller
 
 			$resp = json_decode($server_output);
 
-			return redirect()->to($resp->pageUrl);
+            if(isset($resp->pageUrl))
+            {
+                return redirect()->to($resp->pageUrl);
+            }
+
+			return redirect()->back()->withErrors(['msg' => 'Вибачте помилка зі сторони банку, спробуйте пізніше']);
 		}
     }
 

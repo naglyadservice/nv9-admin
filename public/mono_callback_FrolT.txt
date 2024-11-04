@@ -1,0 +1,1 @@
+{"invoiceId":"240901Tvh49M9wZ7sva","status":"processing","amount":15000,"ccy":980,"finalAmount":0,"createdDate":"2024-09-01T16:05:22Z","modifiedDate":"2024-09-01T16:05:34Z","reference":"ab56c661b2abdbb88ddb70ba0b819ff4","destination":"119"}

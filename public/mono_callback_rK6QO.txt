@@ -1,0 +1,1 @@
+{"invoiceId":"240901DReSo83vd1jpsg","status":"processing","amount":20000,"ccy":980,"finalAmount":0,"createdDate":"2024-09-01T15:40:59Z","modifiedDate":"2024-09-01T15:41:14Z","reference":"e1ef1675a1f6da483a680912483adfcb","destination":"121"}

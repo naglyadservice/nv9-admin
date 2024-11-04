@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DeviceRequest;
 use App\Models\Device;
 use App\Models\FiskalizationKey;
 use App\Models\PaymentGateway;
@@ -43,7 +44,7 @@ class DevicesController extends Controller
         return view('dashboard.devices.add', compact('partners'));
     }
 
-    public function add_save(Request $request)
+    public function add_save(DeviceRequest $request)
     {
         $device = new Device();
         $device->fill($request->all());
