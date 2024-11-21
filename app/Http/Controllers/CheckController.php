@@ -230,7 +230,8 @@ class CheckController extends Controller
 			curl_setopt($ch, CURLOPT_POST, true);
 			curl_setopt($ch, CURLOPT_POSTFIELDS, $send);
 			curl_setopt($ch, CURLOPT_HTTPHEADER, [
-				'X-Token: '.$token
+				'X-Token: '.$token,
+				'X-Cms: '.config('services.x_cms'),
 			]);
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
