@@ -1,1 +1,0 @@
-{"invoiceId":"240901CJaqBPusoHPG7M","status":"processing","amount":5000,"ccy":980,"finalAmount":0,"createdDate":"2024-09-01T06:22:50Z","modifiedDate":"2024-09-01T06:23:11Z","reference":"b88494b7d2b6c4ec8bffae35d3f15640","destination":"117"}

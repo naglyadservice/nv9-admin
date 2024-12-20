@@ -1,1 +1,0 @@
-{"invoiceId":"2409018TULTbgtUUSekw","status":"created","amount":2000,"ccy":980,"createdDate":"2024-09-01T10:32:27Z","modifiedDate":"2024-09-01T10:32:27Z","reference":"26ef8cf05e5537c5d0948867341c89d3","destination":"121"}

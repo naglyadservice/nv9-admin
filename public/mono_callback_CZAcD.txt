@@ -1,1 +1,0 @@
-{"invoiceId":"240830CULdSLeFGkJKa8","status":"created","amount":7000,"ccy":980,"createdDate":"2024-08-30T05:57:24Z","modifiedDate":"2024-08-30T05:57:24Z","reference":"b97f50503d1da30e6f1f079d94903fd9","destination":"123"}

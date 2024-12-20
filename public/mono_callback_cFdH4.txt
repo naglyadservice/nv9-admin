@@ -1,1 +1,0 @@
-{"invoiceId":"240831AfL5agKHyK1nKR","status":"processing","amount":10000,"ccy":980,"finalAmount":0,"createdDate":"2024-08-31T15:30:02Z","modifiedDate":"2024-08-31T15:30:18Z","reference":"ebc32aa4678e95d5430d157f3e28a335","destination":"123"}

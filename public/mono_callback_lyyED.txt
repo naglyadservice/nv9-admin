@@ -1,1 +1,0 @@
-{"invoiceId":"2408235iP9Bdoxe6mabG","status":"processing","amount":2500,"ccy":980,"finalAmount":0,"createdDate":"2024-08-23T12:51:42Z","modifiedDate":"2024-08-23T12:52:01Z","reference":"957010e2d1142c357552e14f14230fdc","destination":"122"}

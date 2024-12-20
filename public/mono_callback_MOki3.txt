@@ -1,1 +1,0 @@
-{"invoiceId":"240819DhpLDK3nd2uSoo","status":"processing","amount":2000,"ccy":980,"finalAmount":0,"createdDate":"2024-08-19T16:49:53Z","modifiedDate":"2024-08-19T16:50:08Z","reference":"a69ba8af881a0214cedcc7d72160e85e","destination":"121"}

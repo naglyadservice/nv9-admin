@@ -1,1 +1,0 @@
-{"invoiceId":"240831DnsP8k3K7mE1sA","status":"processing","amount":2000,"ccy":980,"finalAmount":0,"createdDate":"2024-08-31T11:25:00Z","modifiedDate":"2024-08-31T11:25:11Z","reference":"8f2c46ed938ec1e4a3b1cc8711a13a06","destination":"119"}

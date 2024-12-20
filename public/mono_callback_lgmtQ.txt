@@ -1,1 +1,0 @@
-{"invoiceId":"240829CmMPimpP6MZ48H","status":"created","amount":20000,"ccy":980,"createdDate":"2024-08-29T16:33:01Z","modifiedDate":"2024-08-29T16:33:01Z","reference":"f38f36a22daf86ce80b37aa4f7bfd4e3","destination":"117"}

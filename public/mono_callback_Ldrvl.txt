@@ -1,1 +1,0 @@
-{"invoiceId":"240830BzZMyHD9wiSgis","status":"processing","amount":5000,"ccy":980,"finalAmount":0,"createdDate":"2024-08-30T15:36:05Z","modifiedDate":"2024-08-30T15:36:18Z","reference":"73133a0fe9ab51add429f81b849dd05f","destination":"118"}

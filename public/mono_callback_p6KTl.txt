@@ -1,1 +1,0 @@
-{"invoiceId":"2408309uLbcJwPbSbLKB","status":"failure","failureReason":"Стався технічний збій","errCode":"8003","amount":2000,"ccy":980,"finalAmount":0,"createdDate":"2024-08-30T05:53:39Z","modifiedDate":"2024-08-30T05:55:46Z","reference":"acfd9804f50dfec2657c173e95ff5762","destination":"117"}

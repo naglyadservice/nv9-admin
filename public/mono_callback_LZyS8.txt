@@ -1,1 +1,0 @@
-{"invoiceId":"2408168LeAR2WmxiCBCs","status":"created","amount":2000,"ccy":980,"createdDate":"2024-08-16T14:51:26Z","modifiedDate":"2024-08-16T14:51:26Z","reference":"b90e72558d50b5b1bc548307aae1178d","destination":"123"}

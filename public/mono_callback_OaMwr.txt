@@ -1,1 +1,0 @@
-{"invoiceId":"2408289HgKomoinZ7p3B","status":"processing","amount":7000,"ccy":980,"finalAmount":0,"createdDate":"2024-08-28T09:02:20Z","modifiedDate":"2024-08-28T09:02:30Z","reference":"39b6cd2fd75b93f632db3e96e055a672","destination":"121"}

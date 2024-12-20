@@ -1,1 +1,0 @@
-{"invoiceId":"2408244UutRPNbbDnoR8","status":"processing","amount":10000,"ccy":980,"finalAmount":0,"createdDate":"2024-08-24T12:08:45Z","modifiedDate":"2024-08-24T12:09:37Z","reference":"bfdfd650eb239f4ba593545f41cb97ca","destination":"118"}
