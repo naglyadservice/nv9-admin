@@ -254,8 +254,7 @@ class CheckController extends Controller
 	{
         try{
             $data = $request->getContent();
-            $a = Str::random(5);
-            file_put_contents("mono_callback_$a.txt", $data);
+            file_put_contents("mono_callback_log.txt", $data, FILE_APPEND);
             $data = json_decode($data);
             $status = $data->status;
 
@@ -295,7 +294,13 @@ class CheckController extends Controller
         //Заглушка callback для liqpay
         $data = $request->data;
         $data = json_decode(base64_decode($data));
-        file_put_contents(public_path()."/liq.txt", print_r($data, true));
+        file_put_contents(public_path()."/liq.txt", print_r($data, true), FILE_APPEND);
+
+        if($data->action != "pay" || $data->status != "success")
+        {
+            return;
+        }
+
         $deviceID = $data->info;
         $amount = $data->amount;
         $payment_id = $data->order_id;
