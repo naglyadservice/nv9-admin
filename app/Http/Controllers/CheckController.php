@@ -259,7 +259,7 @@ class CheckController extends Controller
             LogMy::info(['data' => $data], 'monopay_callback.txt');
             $status = $data->status;
 
-            if($status == "success" || $status == 'wait_secure')
+            if($status == "success")
             {
                 $deviceID = $data->destination;
                 $payment_id = $data->invoiceId;
@@ -297,8 +297,11 @@ class CheckController extends Controller
         $data = json_decode(base64_decode($data));
         LogMy::info(['data' => $data], 'liqpay_callback.txt');
 
-        if($data->action != "pay" || $data->status != "success")
+        if($data->action != "pay")
         {
+            return;
+        }
+        if( !in_array($data->status, ["success", "wait_secure"])){
             return;
         }
 
