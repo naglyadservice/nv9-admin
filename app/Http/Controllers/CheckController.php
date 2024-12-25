@@ -258,7 +258,7 @@ class CheckController extends Controller
             $data = json_decode($data);
             $status = $data->status;
 
-            if($status == "success")
+            if($status == "success" || $status == 'wait_secure')
             {
                 $deviceID = $data->destination;
                 $payment_id = $data->invoiceId;
