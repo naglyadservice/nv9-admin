@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\LiqPay;
+use App\Helpers\LogMy;
 use App\Models\Device;
 use App\Models\Fiscalization;
 use App\Models\User;
@@ -253,6 +254,18 @@ class CheckController extends Controller
     public function monopay_callback(Request $request)
 	{
         try{
+            $tmp1 = file_get_contents('php://input');
+            $tmp2 = $request->all();
+            $tmp3 = $request->post();
+            $tmp4 = $request->getContent();
+
+            LogMy::info([
+                'tmp1' => $tmp1,
+                'tmp2' => $tmp2,
+                'tmp3' => $tmp3,
+                'tmp4' => $tmp4,
+            ], 'monopay_callbackTEST.txt');
+
             $data = $request->getContent();
             $a = Str::random(5);
             file_put_contents("mono_callback_$a.txt", $data);
