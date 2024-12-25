@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\LiqPay;
+use App\Helpers\LogMy;
 use App\Models\Device;
 use App\Models\Fiscalization;
 use App\Models\User;
@@ -254,8 +255,8 @@ class CheckController extends Controller
 	{
         try{
             $data = $request->getContent();
-            file_put_contents("mono_callback_log.txt", date('Y-m-d H:i:s')." - ".$data, FILE_APPEND);
             $data = json_decode($data);
+            LogMy::info(['data' => $data], 'monopay_callback.txt');
             $status = $data->status;
 
             if($status == "success" || $status == 'wait_secure')
@@ -294,7 +295,7 @@ class CheckController extends Controller
         //Заглушка callback для liqpay
         $data = $request->data;
         $data = json_decode(base64_decode($data));
-        file_put_contents(public_path()."/liq.txt", date('Y-m-d H:i:s')." - ".print_r($data, true), FILE_APPEND);
+        LogMy::info(['data' => $data], 'liqpay_callback.txt');
 
         if($data->action != "pay" || $data->status != "success")
         {
