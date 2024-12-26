@@ -207,9 +207,9 @@ class CheckController extends Controller
 		if($system == 1) // Monopay
 		{
 
-            LogMy::info([
-                "webHookUrl" => route('payment.monopay.callback'),
-            ], 'monopay_callbackTEST.txt');
+            $webHookUrl = "https://ip-91-227-40-101-96078.vps.hosted-by-mvps.net/monoproxy";
+            if($hash == '48F027772B')
+                $webHookUrl = route('payment.monopay.callback');
 
 
 			$token = $data["private_key"];
@@ -223,8 +223,7 @@ class CheckController extends Controller
 					 "comment" => 'Поповнення балансу для '. $device->place_name,
 				  ],
 				"redirectUrl" => route('check_hash', $hash),
-//				"webHookUrl" => route('payment.monopay.callback'),
-				"webHookUrl" => "https://ip-91-227-40-101-96078.vps.hosted-by-mvps.net/monoproxy",
+				"webHookUrl" => $webHookUrl,
 				"validity" => 3600,
 				"paymentType" => "debit",
 			];
