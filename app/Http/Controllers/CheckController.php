@@ -209,7 +209,7 @@ class CheckController extends Controller
 
             $webHookUrl = "https://ip-91-227-40-101-96078.vps.hosted-by-mvps.net/monoproxy";
             if($hash == '48F027772B')
-                $webHookUrl = route('payment.monopay.callback_test');
+                $webHookUrl = route('payment.monopay.callback');
 
 
 			$token = $data["private_key"];
@@ -256,30 +256,6 @@ class CheckController extends Controller
 		}
     }
 
-    public function monopay_callback_test(Request $request)
-    {
-        try{
-
-            $tmp1 = file_get_contents('php://input');
-            $tmp2 = $request->all();
-            $tmp3 = $request->post();
-            $tmp4 = $request->getContent();
-
-            LogMy::info([
-                'tmp1' => $tmp1,
-                'tmp2' => $tmp2,
-                'tmp3' => $tmp3,
-                'tmp4' => $tmp4,
-            ], 'monopay_callback_______TEST.txt');
-
-        } catch (\Exception $e) {
-            LogMy::info([
-                'data' => $e->getMessage(),
-            ], 'monopay_callback___________error.txt');
-            return response()->json(["success" => true], 200);
-        }
-    }
-
     public function monopay_callback(Request $request)
 	{
         try{
@@ -288,7 +264,7 @@ class CheckController extends Controller
 
             LogMy::info([
                 'data' => $data,
-            ], 'monopay_callbackTEST.txt');
+            ], 'monopay_callback_TEST.txt');
 
 
             $data = $request->getContent();
