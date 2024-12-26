@@ -312,6 +312,12 @@ class CheckController extends Controller
             return;
         }
 
+        $f = Fiscalization::where('sales_code', $data->order_id)->where('factory_number', $data->info)->first();
+        if($f)
+        {
+            return;
+        }
+
         $deviceID = $data->info;
         $amount = $data->amount;
         $payment_id = $data->order_id;
