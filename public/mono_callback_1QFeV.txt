@@ -1,1 +1,0 @@
-{"invoiceId":"240901BibG5UcexpRiNs","status":"processing","amount":5000,"ccy":980,"finalAmount":0,"createdDate":"2024-09-01T18:19:46Z","modifiedDate":"2024-09-01T18:20:08Z","reference":"12d992a8001daabfeca5d99901a061e3","destination":"118"}

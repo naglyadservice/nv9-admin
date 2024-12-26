@@ -1,1 +1,0 @@
-{"invoiceId":"2408304nznoyMAnueMSm","status":"created","amount":2000,"ccy":980,"createdDate":"2024-08-30T05:37:38Z","modifiedDate":"2024-08-30T05:37:38Z","reference":"e6bc00d5f1f739105edf53ad84f04e9a","destination":"120"}

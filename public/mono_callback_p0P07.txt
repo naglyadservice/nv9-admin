@@ -1,1 +1,0 @@
-{"invoiceId":"2408276NsdwoAukHPHoc","status":"processing","amount":50000,"ccy":980,"finalAmount":0,"createdDate":"2024-08-27T16:23:39Z","modifiedDate":"2024-08-27T16:24:33Z","reference":"e4660b9a456b6e5b3e8898ca1876cc69","destination":"122"}

@@ -217,8 +217,8 @@ class CheckController extends Controller
 					 "comment" => 'Поповнення балансу для '. $device->place_name,
 				  ],
 				"redirectUrl" => route('check_hash', $hash),
-				//"webHookUrl" => route('payment.monopay.callback'),
-				"webHookUrl" => "https://ip-91-227-40-101-96078.vps.hosted-by-mvps.net/monoproxy",
+				"webHookUrl" => route('payment.monopay.callback'),
+//				"webHookUrl" => "https://ip-91-227-40-101-96078.vps.hosted-by-mvps.net/monoproxy",
 				"validity" => 3600,
 				"paymentType" => "debit",
 			];
@@ -254,22 +254,10 @@ class CheckController extends Controller
     public function monopay_callback(Request $request)
 	{
         try{
-            $tmp1 = file_get_contents('php://input');
-            $tmp2 = $request->all();
-            $tmp3 = $request->post();
-            $tmp4 = $request->getContent();
-
-            LogMy::info([
-                'tmp1' => $tmp1,
-                'tmp2' => $tmp2,
-                'tmp3' => $tmp3,
-                'tmp4' => $tmp4,
-            ], 'monopay_callbackTEST.txt');
 
             $data = $request->getContent();
-            $a = Str::random(5);
-            file_put_contents("mono_callback_$a.txt", $data);
             $data = json_decode($data);
+            LogMy::info(['data' => $data], 'monopay_callback.txt');
             $status = $data->status;
 
             if($status == "success")
@@ -308,7 +296,16 @@ class CheckController extends Controller
         //Заглушка callback для liqpay
         $data = $request->data;
         $data = json_decode(base64_decode($data));
-        file_put_contents(public_path()."/liq.txt", print_r($data, true));
+        LogMy::info(['data' => $data], 'liqpay_callback.txt');
+
+        if($data->action != "pay")
+        {
+            return;
+        }
+        if( !in_array($data->status, ["success", "wait_secure"])){
+            return;
+        }
+
         $deviceID = $data->info;
         $amount = $data->amount;
         $payment_id = $data->order_id;

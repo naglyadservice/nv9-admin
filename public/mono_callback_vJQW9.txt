@@ -1,1 +1,0 @@
-{"invoiceId":"24081982Mosep7Vsq2hE","status":"created","amount":2000,"ccy":980,"createdDate":"2024-08-19T15:04:22Z","modifiedDate":"2024-08-19T15:04:22Z","reference":"070f9e74769380c17333666fa16c281b","destination":"119"}

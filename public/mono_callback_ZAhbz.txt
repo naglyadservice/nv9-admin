@@ -1,1 +1,0 @@
-{"invoiceId":"240815A4aJNXucyEgypz","status":"processing","amount":7000,"ccy":980,"finalAmount":0,"createdDate":"2024-08-15T16:37:47Z","modifiedDate":"2024-08-15T16:38:09Z","reference":"707e281d3916f513ff05458420387e17","destination":"118"}

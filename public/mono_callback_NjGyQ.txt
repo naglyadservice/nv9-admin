@@ -1,1 +1,0 @@
-{"invoiceId":"2408262dnuitbiFi28i1","status":"processing","amount":10000,"ccy":980,"finalAmount":0,"createdDate":"2024-08-26T09:45:16Z","modifiedDate":"2024-08-26T09:45:35Z","reference":"35e83ffec97636e1b0bbcb047a09e6d0","destination":"122"}

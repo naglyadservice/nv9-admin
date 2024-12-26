@@ -1,1 +1,0 @@
-{"invoiceId":"240901HaSabaziAV8q2","status":"processing","amount":10000,"ccy":980,"finalAmount":0,"createdDate":"2024-09-01T10:36:28Z","modifiedDate":"2024-09-01T10:36:48Z","reference":"f546cde53785f9298840a78846270bb5","destination":"116"}

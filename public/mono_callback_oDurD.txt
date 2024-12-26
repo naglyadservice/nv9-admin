@@ -1,1 +1,0 @@
-{"invoiceId":"240822ELRJMHHVmsweur","status":"processing","amount":7000,"ccy":980,"finalAmount":0,"createdDate":"2024-08-22T09:51:38Z","modifiedDate":"2024-08-22T09:51:48Z","reference":"41f435a230e1604f43e59a7592983469","destination":"120"}

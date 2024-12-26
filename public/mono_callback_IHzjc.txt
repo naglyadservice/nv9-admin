@@ -1,1 +1,0 @@
-{"invoiceId":"2408252LidEDec44rAxL","status":"processing","amount":5000,"ccy":980,"finalAmount":0,"createdDate":"2024-08-25T05:35:54Z","modifiedDate":"2024-08-25T05:36:19Z","reference":"60a8bb64183484298393a6e2bfd0b2b4","destination":"118"}

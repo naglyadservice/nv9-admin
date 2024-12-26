@@ -1,1 +1,0 @@
-{"invoiceId":"240830ELpticHynQe5s6","status":"created","amount":7000,"ccy":980,"createdDate":"2024-08-30T09:00:14Z","modifiedDate":"2024-08-30T09:00:14Z","reference":"b9c078230522a51b3790053f110b1ff2","destination":"121"}

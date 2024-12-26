@@ -1,1 +1,0 @@
-{"invoiceId":"2408239AZtmexcRM7azf","status":"created","amount":2000,"ccy":980,"createdDate":"2024-08-23T15:42:00Z","modifiedDate":"2024-08-23T15:42:00Z","reference":"bc80b8644dee32a868209e673f18f4f1","destination":"120"}

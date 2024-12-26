@@ -1,1 +1,0 @@
-{"invoiceId":"240815EKkSDMrv5Gpmmk","status":"processing","amount":2000,"ccy":980,"finalAmount":0,"createdDate":"2024-08-15T17:13:43Z","modifiedDate":"2024-08-15T17:13:53Z","reference":"92ee7fa7a9e4d3fd296a7218c105306c","destination":"122"}

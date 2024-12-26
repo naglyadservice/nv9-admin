@@ -1,1 +1,0 @@
-{"invoiceId":"240830CtgMgspKSEDnJs","status":"created","amount":2000,"ccy":980,"createdDate":"2024-08-30T05:56:00Z","modifiedDate":"2024-08-30T05:56:00Z","reference":"3558012b5f953be806fffe7bdac49834","destination":"117"}

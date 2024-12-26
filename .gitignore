@@ -6,6 +6,7 @@
 /public/TS.zip
 /public/storage
 /storage/*.key
+/storage/app/public/logs/*
 /vendor
 .env
 .env.backup
