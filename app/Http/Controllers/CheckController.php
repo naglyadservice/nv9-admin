@@ -223,8 +223,8 @@ class CheckController extends Controller
 					 "comment" => 'Поповнення балансу для '. $device->place_name,
 				  ],
 				"redirectUrl" => route('check_hash', $hash),
-				"webHookUrl" => route('payment.monopay.callback'),
-//				"webHookUrl" => "https://ip-91-227-40-101-96078.vps.hosted-by-mvps.net/monoproxy",
+//				"webHookUrl" => route('payment.monopay.callback'),
+				"webHookUrl" => "https://ip-91-227-40-101-96078.vps.hosted-by-mvps.net/monoproxy",
 				"validity" => 3600,
 				"paymentType" => "debit",
 			];
