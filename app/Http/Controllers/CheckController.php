@@ -94,7 +94,7 @@ class CheckController extends Controller
         $deviceID = (int)$request->id;
         $device = Device::where('device_hash', $hash)->firstOrFail();
         $fisk = DB::table('fiskalization_table')
-            ->where('factory_number', $device->factory_number)
+//            ->where('factory_number', $device->factory_number)
             ->where('id', $id)
             // ->where('fiskalized', true)
          //   ->orderBy('id', 'DESC')
