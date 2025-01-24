@@ -100,11 +100,11 @@
         <div class="divider"></div>
 
         <section class="sale">
-          <span>@if($fisk->cash == 0)
+          <span>@if($fisk->cash === 0)
                   еквайрінг
-              @elseif($fisk->cash == 1)
+              @elseif($fisk->cash === 1)
                   готівка
-              @elseif($fisk->cash == 2)
+              @elseif($fisk->cash === 2)
                   картка
               @endif
           </span>
