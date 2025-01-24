@@ -65,7 +65,7 @@ class Fiscalize extends Command
 
                     $cashType = "CASH";
 
-                    if($order->cash == 0)
+                    if($order->cash == 0 || $order->cash == 2)
                     {
                         $cashType = "CASHLESS";
                     }
