@@ -17,6 +17,11 @@ class Device extends Model
     const MONO_TEXT = 'Моно';
     const MONO125_TEXT = 'MONO125';
 
+    const CHECKBOX_HEADER = [
+        "X-Client-Name: NV9",
+        "X-Client-Version: V.1.9"
+    ];
+
     protected $fillable = ['factory_number', 'user_id', 'address', 'place_name','service','design','divide_by'];
 
     public function user()
@@ -87,6 +92,7 @@ class Device extends Model
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, self::CHECKBOX_HEADER);
 
         $resp = curl_exec($ch);
         curl_close($ch);
@@ -99,13 +105,14 @@ class Device extends Model
 
         $ch = curl_init();
 
+        $header = self::CHECKBOX_HEADER;
+        $header[] = "Authorization: Bearer $token";
+        $header[] = "X-License-Key: $licenseKey";
+
         curl_setopt($ch, CURLOPT_URL, "https://api.checkbox.in.ua/api/v1/shifts");
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, [
-            "Authorization: Bearer $token",
-            "X-License-Key: $licenseKey"
-        ]);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
         $resp = curl_exec($ch);
         curl_close($ch);
         $resp = json_decode($resp);
@@ -157,15 +164,15 @@ class Device extends Model
         //dd($data);
 
         $data = json_encode($data);
+        $header = self::CHECKBOX_HEADER;
+        $header[] = "Authorization: Bearer $token";
 
         curl_setopt($ch, CURLOPT_URL, "https://api.checkbox.in.ua/api/v1/receipts/sell");
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_COOKIEJAR, '');
-        curl_setopt($ch, CURLOPT_HTTPHEADER, [
-            "Authorization: Bearer $token"
-        ]);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
         $resp = curl_exec($ch);
         curl_close($ch);
         $resp = json_decode($resp);
