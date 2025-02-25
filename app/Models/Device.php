@@ -120,26 +120,30 @@ class Device extends Model
         return $resp;
     }
 
-    public function createReceipt($token, $amount, $licenseKey, $device, $cashType = "CASH")
+    public function createReceipt($device, $order)
     {
 
-        $total = $amount;
-//        $total = round($total, 2);
-//        $total = (int)($total * 100);
-//
-//        $amount = round(number_format($amount, 2, '.', '') * 100);
-
-        //$liters = round(number_format($liters, 2, '.', '') * 1000);
-
-        $ch = curl_init();
+        switch ($order->cash) {
+            case 1:
+                $cashType = "CASH";
+                $label = 'Готівка';
+                break;
+            case 2:
+                $cashType = "CASHLESS";
+                $label = 'Картка';
+                break;
+            case 0:
+                $cashType = "CASHLESS";
+                $label = 'LiqPay';
+                break;
+        }
 
         $fiscalizationKey = $device->fiscalization_key;
         $good = [
             "code" => "1",
             "name" => $device->service ?? "Послуга",
-            "price" => $total,
+            "price" => $order->sales_cashe,
         ];
-
         if ($fiscalizationKey && $fiscalizationKey->is_tax_enabled && $fiscalizationKey->tax_code) {
             $good['tax'] = [$fiscalizationKey->tax_code];
         }
@@ -156,17 +160,17 @@ class Device extends Model
             "payments" => [
                 [
                     "type" => $cashType,
-                    "value" => (int)$total
+                    "value" => (int)$order->sales_cashe,
+                    "label" => $label,
                 ]
             ]
         ];
 
-        //dd($data);
-
         $data = json_encode($data);
         $header = self::CHECKBOX_HEADER;
-        $header[] = "Authorization: Bearer $token";
+        $header[] = "Authorization: Bearer $device->cashier_token";
 
+        $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, "https://api.checkbox.in.ua/api/v1/receipts/sell");
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -179,31 +183,13 @@ class Device extends Model
 
         file_put_contents("fiscalize.txt", print_r($resp, true));
 
-        // if(isset($resp->message))
-        // {
-        //     return ["success" => false, "err" => $resp->message];
-        // }
-
-        // if($again)
-        // {
-        //     return $resp;
-        // }
-
-        //file_put_contents(public_path()."/receipt.txt", print_r($resp, true));
         if(isset($resp->message) && $resp->message == "Зміну не відкрито") //Если прилетает ошибка по смене
         {
-
-            $this->createShift($token, $licenseKey); //Открываем смену на кассе.
-            //sleep(3);
-            //$this->createReceipt($token, $amount, $licenseKey, $device, true);
+            $this->createShift($device->cashier_token, $device->fiscalization_key->cashier_license_key); //Открываем смену на кассе.
         }
         if(isset($resp->message) && str_starts_with($resp->message, "Зміну відкрито понад")) //Если прилетает ошибка по смене
         {
-            $this->createShift($token, $licenseKey); //Открываем смену на кассе.
-
-            //sleep(5);
-
-            //$this->createReceipt($token, $amount, $licenseKey, $device);
+            $this->createShift($device->cashier_token, $device->fiscalization_key->cashier_license_key); //Открываем смену на кассе.
          }
         return $resp;
     }
