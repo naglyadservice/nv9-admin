@@ -208,7 +208,7 @@ class CheckController extends Controller
 		{
 
             $webHookUrl = "https://ip-91-227-40-101-96078.vps.hosted-by-mvps.net/monoproxy";
-            if($hash == '48F027772B')
+            if(config('app.env') != 'production')
                 $webHookUrl = route('payment.monopay.callback');
 
 
@@ -260,13 +260,6 @@ class CheckController extends Controller
 	{
         try{
 
-            $data = (object)$request->post();
-
-            LogMy::info([
-                'data' => $data,
-            ], 'monopay_callback_TEST.txt');
-
-
             $data = $request->getContent();
             $data = json_decode($data);
             LogMy::info(['data' => $data], 'monopay_callback.txt');
@@ -299,9 +292,6 @@ class CheckController extends Controller
                 $this->new_system_message($device, $message);
             }
         } catch (\Exception $e) {
-            LogMy::info([
-                'data' => $e->getMessage(),
-            ], 'monopay_callback_error.txt');
             return response()->json(["success" => true], 200);
         }
 	}
@@ -320,10 +310,7 @@ class CheckController extends Controller
         if( !in_array($data->status, ["success", "wait_secure"])){
             return;
         }
-
-        $f = Fiscalization::where('sales_code', $data->order_id)->where('factory_number', $data->info)->first();
-        if($f)
-        {
+        if(Fiscalization::where('sales_code', $data->order_id)->where('factory_number', $data->info)->first()) {
             return;
         }
 

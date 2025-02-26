@@ -63,15 +63,10 @@ class Fiscalize extends Command
                         continue;
                     }
 
-                    $cashType = "CASH";
-
-                    if($order->cash == 0 || $order->cash == 2)
-                    {
-                        $cashType = "CASHLESS";
-                    }
 
 
-                    $check = $device->createReceipt($device->cashier_token, $order->sales_cashe, $device->fiscalization_key->cashier_license_key, $device, $cashType);
+
+                    $check = $device->createReceipt( $device, $order);
 
                     // if(isset($check["err"]))
                     // {
