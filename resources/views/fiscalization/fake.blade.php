@@ -100,7 +100,14 @@
         <div class="divider"></div>
 
         <section class="sale">
-          <span>Готівка</span>
+          <span>@if($fisk->cash === 0)
+                  еквайрінг
+              @elseif($fisk->cash === 1)
+                  готівка
+              @elseif($fisk->cash === 2)
+                  картка
+              @endif
+          </span>
           <span>{{$fisk->sales_cashe / 100}}</span>
           <span>ГРН</span>
         </section>

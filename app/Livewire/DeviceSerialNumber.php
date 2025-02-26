@@ -20,7 +20,7 @@ class DeviceSerialNumber extends Component
     public function store(): void
     {
         $this->validate();
-        $this->device->serialNumbers()->firstOrCreate($this->form->pull());
+        $this->device->serialNumbers()->firstOrCreate($this->form->toArray());
     }
 
     public function delete($serialNumberId): void
