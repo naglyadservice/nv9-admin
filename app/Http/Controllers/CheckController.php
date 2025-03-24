@@ -264,7 +264,7 @@ class CheckController extends Controller
 
             $data = $request->getContent();
             $data = json_decode($data, true);
-            $log->notice('request: '. json_encode($data).' '.__FILE__.':'.__LINE__);
+            $log->notice('request: '. json_encode($data, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT).' '.__FILE__.':'.__LINE__);
 
 
             $status = $data->status;
@@ -309,7 +309,7 @@ class CheckController extends Controller
         $data = $request->data;
         $data = json_decode(base64_decode($data));
 
-        $log->notice('request: '. json_encode($data).' '.__FILE__.':'.__LINE__);
+        $log->notice('request: '. json_encode($data, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT).' '.__FILE__.':'.__LINE__);
 
         if($data->action != "pay")
         {
