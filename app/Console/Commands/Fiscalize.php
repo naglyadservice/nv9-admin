@@ -35,7 +35,7 @@ class Fiscalize extends Command
      */
     public function handle()
     {
-        $log = Log::build(['driver' => 'single', 'path' => storage_path('logs/fiscalizeCron.log')]);
+        $log = Log::build(['driver' => 'single', 'path' => storage_path('logs/fiscalize.log')]);
 
         //Проверяем еще необходимость фискализировать по включенной фискализации на устройстве
         $need_fiscalize = DB::table('fiskalization_table')
@@ -45,7 +45,7 @@ class Fiscalize extends Command
 
         //Проверка необходимости фискализации
         foreach ($need_fiscalize as $order) {
-            $log->info('fiscalization : '.$order->id.' '.__FILE__.':'.__LINE__);
+            $log->info('fiscalization ID : '.$order->id.' '.__FILE__.':'.__LINE__);
             print_r($order->id);
             $device = Device::where('factory_number', $order->factory_number)
                 ->orWhereHas('serialNumbers', function($q) use ($order) {
