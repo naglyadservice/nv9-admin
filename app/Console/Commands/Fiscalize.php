@@ -40,7 +40,7 @@ class Fiscalize extends Command
         //Проверяем еще необходимость фискализировать по включенной фискализации на устройстве
         $need_fiscalize = DB::table('fiskalization_table')
             ->where('fiskalized', false)
-            ->where('date', '>=', Carbon::now()->subHours(2))
+            ->where('date', '>=', Carbon::now()->subMinutes(30))
             ->orderBy('date', 'ASC')
             ->get();
 
