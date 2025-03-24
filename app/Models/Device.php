@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Log;
 
 class Device extends Model
 {
@@ -96,6 +97,10 @@ class Device extends Model
 
         $resp = curl_exec($ch);
         curl_close($ch);
+
+        $log = Log::build(['driver' => 'single', 'path' => storage_path('logs/shift.log')]);
+        $log->notice('авторизація касира: '. $resp.' дата: '. $data . ' '.__FILE__.':'.__LINE__);
+
         $resp = json_decode($resp);
         return $resp;
     }
@@ -115,8 +120,11 @@ class Device extends Model
         curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
         $resp = curl_exec($ch);
         curl_close($ch);
+
+        $log = Log::build(['driver' => 'single', 'path' => storage_path('logs/shift.log')]);
+        $log->notice('відкриття зміни: '. $resp.' '.__FILE__.':'.__LINE__);
         $resp = json_decode($resp);
-        file_put_contents(public_path()."/shift.json", print_r($resp, true));
+
         return $resp;
     }
 
@@ -179,9 +187,11 @@ class Device extends Model
         curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
         $resp = curl_exec($ch);
         curl_close($ch);
-        $resp = json_decode($resp);
 
-        file_put_contents("fiscalize.txt", print_r($resp, true));
+        $log = Log::build(['driver' => 'single', 'path' => storage_path('logs/fiscalize.log')]);
+        $log->notice('fiskalization: '. $resp.' дата: '. $data . ' '.__FILE__.':'.__LINE__);
+
+        $resp = json_decode($resp);
 
         if(isset($resp->message) && $resp->message == "Зміну не відкрито") //Если прилетает ошибка по смене
         {

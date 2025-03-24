@@ -9,6 +9,7 @@ use App\Models\Fiscalization;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class CheckController extends Controller
@@ -258,11 +259,14 @@ class CheckController extends Controller
 
     public function monopay_callback(Request $request)
 	{
+        $log = Log::build(['driver' => 'single', 'path' => storage_path('logs/monopay_callback.log')]);
         try{
 
             $data = $request->getContent();
+
+            $log->notice('request: '. $data.' '.__FILE__.':'.__LINE__);
+
             $data = json_decode($data);
-            LogMy::info(['data' => $data], 'monopay_callback.txt');
             $status = $data->status;
 
             if($status == "success")
@@ -292,16 +296,20 @@ class CheckController extends Controller
                 $this->new_system_message($device, $message);
             }
         } catch (\Exception $e) {
+            $log->error('Exception: '. $e->getMessage().' '.__FILE__.':'.__LINE__);
             return response()->json(["success" => true], 200);
         }
 	}
 
     public function liqpay_callback(Request $request)
     {
+        $log = Log::build(['driver' => 'single', 'path' => storage_path('logs/liqpay_callback.log')]);
+
         //Заглушка callback для liqpay
         $data = $request->data;
         $data = json_decode(base64_decode($data));
-        LogMy::info(['data' => $data], 'liqpay_callback.txt');
+
+        $log->notice('request: '. json_encode($data).' '.__FILE__.':'.__LINE__);
 
         if($data->action != "pay")
         {
