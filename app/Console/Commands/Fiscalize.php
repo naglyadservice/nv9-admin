@@ -45,7 +45,7 @@ class Fiscalize extends Command
 
         //Проверка необходимости фискализации
         foreach ($need_fiscalize as $order) {
-            $log->info('fiscalization : '.$order->id.__FILE__.':'.__LINE__);
+            $log->info('fiscalization : '.$order->id.' '.__FILE__.':'.__LINE__);
             print_r($order->id);
             $device = Device::where('factory_number', $order->factory_number)
                 ->orWhereHas('serialNumbers', function($q) use ($order) {

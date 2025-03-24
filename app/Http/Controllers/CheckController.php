@@ -263,7 +263,7 @@ class CheckController extends Controller
         try{
 
             $data = $request->getContent();
-            $data = json_decode($data, true);
+            $data = json_decode($data);
             $log->notice('request: '. json_encode($data, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT).' '.__FILE__.':'.__LINE__);
 
 
