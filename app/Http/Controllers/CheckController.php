@@ -263,10 +263,10 @@ class CheckController extends Controller
         try{
 
             $data = $request->getContent();
+            $data = json_decode($data, true);
+            $log->notice('request: '. json_encode($data).' '.__FILE__.':'.__LINE__);
 
-            $log->notice('request: '. $data.' '.__FILE__.':'.__LINE__);
 
-            $data = json_decode($data);
             $status = $data->status;
 
             if($status == "success")
