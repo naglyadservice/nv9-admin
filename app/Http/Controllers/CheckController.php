@@ -9,6 +9,7 @@ use App\Models\Fiscalization;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class CheckController extends Controller
@@ -31,7 +32,7 @@ class CheckController extends Controller
 
            // dd($user);
 
-            return view('fiscalization.check', compact('last_three','user'));
+            return view('fiscalization.check_dewash', compact('last_three','user'));
         } else {
             abort(404);
         }
@@ -59,7 +60,7 @@ class CheckController extends Controller
         $user = User::where(['id'=>$device->user_id])->first();
 
         if($device->design == Device::STANDART) {
-            return view('fiscalization.check', compact('last_three', 'device', 'device_code', 'hash', 'user'));
+            return view('fiscalization.check_dewash', compact('last_three', 'device', 'device_code', 'hash', 'user'));
         }
         else if($device->design == Device::MONO)
         {
@@ -68,6 +69,9 @@ class CheckController extends Controller
         else if($device->design == Device::MONO125)
         {
             return view('fiscalization.check_mono125', compact('last_three', 'device', 'device_code', 'hash', 'user'));
+        }
+        else if($device->design == Device::STANDART_NOT_DEWASH){
+            return view('fiscalization.check', compact('last_three', 'device', 'device_code', 'hash', 'user'));
         }
     }
 
@@ -258,11 +262,14 @@ class CheckController extends Controller
 
     public function monopay_callback(Request $request)
 	{
+        $log = Log::build(['driver' => 'single', 'path' => storage_path('logs/monopay_callback.log')]);
         try{
 
             $data = $request->getContent();
             $data = json_decode($data);
-            LogMy::info(['data' => $data], 'monopay_callback.txt');
+            $log->notice('request: '. json_encode($data, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT).' '.__FILE__.':'.__LINE__);
+
+
             $status = $data->status;
 
             if($status == "success")
@@ -292,16 +299,20 @@ class CheckController extends Controller
                 $this->new_system_message($device, $message);
             }
         } catch (\Exception $e) {
+            $log->error('Exception: '. $e->getMessage().' '.__FILE__.':'.__LINE__);
             return response()->json(["success" => true], 200);
         }
 	}
 
     public function liqpay_callback(Request $request)
     {
+        $log = Log::build(['driver' => 'single', 'path' => storage_path('logs/liqpay_callback.log')]);
+
         //Заглушка callback для liqpay
         $data = $request->data;
         $data = json_decode(base64_decode($data));
-        LogMy::info(['data' => $data], 'liqpay_callback.txt');
+
+        $log->notice('request: '. json_encode($data, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT).' '.__FILE__.':'.__LINE__);
 
         if($data->action != "pay")
         {

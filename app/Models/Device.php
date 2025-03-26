@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Log;
 
 class Device extends Model
 {
@@ -13,7 +14,9 @@ class Device extends Model
     const STANDART = 1;
     const MONO = 2;
     const MONO125 = 3;
+    const STANDART_NOT_DEWASH = 4;
     const STANDART_TEXT = 'Стандарт';
+    const STANDART_NOT_DEWASH_TEXT = 'Стандарт без логотипу';
     const MONO_TEXT = 'Моно';
     const MONO125_TEXT = 'MONO125';
 
@@ -97,6 +100,11 @@ class Device extends Model
         $resp = curl_exec($ch);
         curl_close($ch);
         $resp = json_decode($resp);
+
+        $log = Log::build(['driver' => 'single', 'path' => storage_path('logs/fiscalize.log')]);
+        $log->notice('авторизація касира: '. json_encode($resp, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT).' дата: '. $data . ' '.__FILE__.':'.__LINE__);
+
+
         return $resp;
     }
 
@@ -116,7 +124,11 @@ class Device extends Model
         $resp = curl_exec($ch);
         curl_close($ch);
         $resp = json_decode($resp);
-        file_put_contents(public_path()."/shift.json", print_r($resp, true));
+
+        $log = Log::build(['driver' => 'single', 'path' => storage_path('logs/fiscalize.log')]);
+        $log->notice('відкриття зміни: '. json_encode($resp, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT).' '.__FILE__.':'.__LINE__);
+
+
         return $resp;
     }
 
@@ -148,6 +160,23 @@ class Device extends Model
             $good['tax'] = [$fiscalizationKey->tax_code];
         }
 
+        $payment = [
+            "type" => $cashType,
+            "value" => (int)$order->sales_cashe,
+            "label" => $label
+        ];
+        if(!empty($order->rrn))
+            $payment['rrn'] = $order->rrn;
+        if(!empty($order->paysys))
+            $payment['payment_system'] = $order->paysys;
+        if(!empty($order->paysys))
+            $payment['auth_code'] = $order->auth_code;
+        if(!empty($order->merchant_id))
+            $payment['terminal'] = $order->merchant_id;
+        if(!empty($order->bank_card))
+            $payment['card_mask'] = $order->bank_card;
+        
+
         $data = [
             "goods" => [
                 [
@@ -158,11 +187,7 @@ class Device extends Model
             ],
             "rounding" => true,
             "payments" => [
-                [
-                    "type" => $cashType,
-                    "value" => (int)$order->sales_cashe,
-                    "label" => $label,
-                ]
+                $payment
             ]
         ];
 
@@ -181,7 +206,10 @@ class Device extends Model
         curl_close($ch);
         $resp = json_decode($resp);
 
-        file_put_contents("fiscalize.txt", print_r($resp, true));
+        $log = Log::build(['driver' => 'single', 'path' => storage_path('logs/fiscalize.log')]);
+        $log->notice('fiskalization: '. json_encode($resp).' дата: '. $data . ' '.__FILE__.':'.__LINE__);
+
+
 
         if(isset($resp->message) && $resp->message == "Зміну не відкрито") //Если прилетает ошибка по смене
         {
@@ -211,6 +239,7 @@ class Device extends Model
             self::STANDART => self::STANDART_TEXT,
             self::MONO => self::MONO_TEXT,
             self::MONO125 => self::MONO125_TEXT,
+            self::STANDART_NOT_DEWASH => self::STANDART_NOT_DEWASH_TEXT,
         ];
     }
 

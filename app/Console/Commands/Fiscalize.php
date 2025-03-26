@@ -6,6 +6,7 @@ use App\Models\Device;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 
 class Fiscalize extends Command
 {
@@ -34,14 +35,18 @@ class Fiscalize extends Command
      */
     public function handle()
     {
+        $log = Log::build(['driver' => 'single', 'path' => storage_path('logs/fiscalize.log')]);
+
         //Проверяем еще необходимость фискализировать по включенной фискализации на устройстве
         $need_fiscalize = DB::table('fiskalization_table')
             ->where('fiskalized', false)
             ->where('date', '>=', Carbon::now()->subMinutes(10))
+            ->orderBy('date', 'ASC')
             ->get();
 
         //Проверка необходимости фискализации
         foreach ($need_fiscalize as $order) {
+            $log->info('fiscalization ID : '.$order->id.' '.__FILE__.':'.__LINE__);
             print_r($order->id);
             $device = Device::where('factory_number', $order->factory_number)
                 ->orWhereHas('serialNumbers', function($q) use ($order) {
@@ -105,11 +110,14 @@ class Fiscalize extends Command
 
                 } catch (\Exception $e)
                 {
+                    $log->error('Exception: '.$e->getMessage().__FILE__.':'.__LINE__);
                     print_r($e->getMessage());
                     continue;
                 }
 
             } else {
+
+                $log->warning('fiscalization not enabled: '.__FILE__.':'.__LINE__);
 
                 DB::table('fiskalization_table')
                     ->where('id', $order->id)
