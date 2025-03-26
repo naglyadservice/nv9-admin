@@ -32,7 +32,7 @@ class CheckController extends Controller
 
            // dd($user);
 
-            return view('fiscalization.check', compact('last_three','user'));
+            return view('fiscalization.check_dewash', compact('last_three','user'));
         } else {
             abort(404);
         }
@@ -60,7 +60,7 @@ class CheckController extends Controller
         $user = User::where(['id'=>$device->user_id])->first();
 
         if($device->design == Device::STANDART) {
-            return view('fiscalization.check', compact('last_three', 'device', 'device_code', 'hash', 'user'));
+            return view('fiscalization.check_dewash', compact('last_three', 'device', 'device_code', 'hash', 'user'));
         }
         else if($device->design == Device::MONO)
         {
@@ -69,6 +69,9 @@ class CheckController extends Controller
         else if($device->design == Device::MONO125)
         {
             return view('fiscalization.check_mono125', compact('last_three', 'device', 'device_code', 'hash', 'user'));
+        }
+        else if($device->design == Device::STANDART_NOT_DEWASH){
+            return view('fiscalization.check', compact('last_three', 'device', 'device_code', 'hash', 'user'));
         }
     }
 

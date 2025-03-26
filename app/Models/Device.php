@@ -14,7 +14,9 @@ class Device extends Model
     const STANDART = 1;
     const MONO = 2;
     const MONO125 = 3;
+    const STANDART_NOT_DEWASH = 4;
     const STANDART_TEXT = 'Стандарт';
+    const STANDART_NOT_DEWASH_TEXT = 'Стандарт без логотипу';
     const MONO_TEXT = 'Моно';
     const MONO125_TEXT = 'MONO125';
 
@@ -224,6 +226,7 @@ class Device extends Model
             self::STANDART => self::STANDART_TEXT,
             self::MONO => self::MONO_TEXT,
             self::MONO125 => self::MONO125_TEXT,
+            self::STANDART_NOT_DEWASH => self::STANDART_NOT_DEWASH_TEXT,
         ];
     }
 

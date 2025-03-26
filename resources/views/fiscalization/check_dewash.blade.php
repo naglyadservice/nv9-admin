@@ -92,6 +92,8 @@
                 </svg>
             </a>
 
+            <img src="https://www.npc.com.ua/wp-content/uploads/2024/02/c6251619-ea93-4c53-9f8f-d3c5d0bd2faa.jpg" width="95" >
+
         </header>
     </div>
 
@@ -159,16 +161,16 @@
                             <td>{{\Carbon\Carbon::parse($check->date)->format('d.m.Y - H:i')}}</td>
                             <td>{{$check->sales_cashe / 100}} грн.</td>
                             <td>
-                                <?php if($check->fiskalized==1 && $check->check_code){ ?>
+                                    <?php if($check->fiskalized==1 && $check->check_code){ ?>
                                 <a href="https://check.checkbox.ua/{{$check->check_code}}">
                                     <button>Отримати</button>
                                 </a>
                                 <?php } else {
-                                ?>
+                                    ?>
                                 <a  href="{{route('temp-receipt',['hash'=>$hash,'id'=>$check->id])}}">
                                     <button style="background: gray"> Отримати</button>
                                 </a>
-                                <?php
+                                    <?php
                                 } ?>
                             </td>
                         </tr>
