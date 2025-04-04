@@ -102,7 +102,7 @@ class Device extends Model
         $resp = json_decode($resp);
 
         $log = Log::build(['driver' => 'single', 'path' => storage_path('logs/fiscalize.log')]);
-        $log->notice('авторизація касира: '. json_encode($resp, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT).' дата: '. $data . ' '.__FILE__.':'.__LINE__);
+        $log->notice('авторизація касира: '.$login.' '. json_encode($resp, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT).' дата: '. $data . ' '.__FILE__.':'.__LINE__);
 
 
         return $resp;
@@ -160,7 +160,7 @@ class Device extends Model
             $good['tax'] = [$fiscalizationKey->tax_code];
         }
 
-        $data = [
+        $data1 = [
             "goods" => [
                 [
                     "good" => $good,
@@ -178,7 +178,7 @@ class Device extends Model
             ]
         ];
 
-        $data = json_encode($data);
+        $data = json_encode($data1);
         $header = self::CHECKBOX_HEADER;
         $header[] = "Authorization: Bearer $device->cashier_token";
 
@@ -194,7 +194,7 @@ class Device extends Model
         $resp = json_decode($resp);
 
         $log = Log::build(['driver' => 'single', 'path' => storage_path('logs/fiscalize.log')]);
-        $log->notice('fiskalization: '. json_encode($resp).' дата: '. $data . ' '.__FILE__.':'.__LINE__);
+        $log->notice('fiskalization: '. json_encode($resp, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT).' дата: '. json_encode($data1, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) . ' '.__FILE__.':'.__LINE__);
 
 
 
