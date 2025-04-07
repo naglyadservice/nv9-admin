@@ -139,14 +139,17 @@ class Device extends Model
             case 1:
                 $cashType = "CASH";
                 $label = 'Готівка';
+                $code = 0;
                 break;
             case 2:
                 $cashType = "CASHLESS";
                 $label = 'Картка';
+                $code = 1;
                 break;
             case 0:
                 $cashType = "CASHLESS";
                 $label = 'LiqPay';
+                $code = 1;
                 break;
         }
 
@@ -164,7 +167,8 @@ class Device extends Model
         $payment = [
             "type" => $cashType,
             "value" => (int)$order->sales_cashe,
-            "label" => $label
+            "label" => $label,
+            "code" => $code,
         ];
         if(!empty($order->rrn))
             $payment['rrn'] = $order->rrn;
