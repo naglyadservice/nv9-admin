@@ -185,7 +185,6 @@ class Device extends Model
                     "good" => $good,
                     "quantity" => 1000, // 1 шт
                     "is_return" => false,
-                    "total_sum" => (int)$order->sales_cashe
                 ]
             ],
             "rounding" => true,
