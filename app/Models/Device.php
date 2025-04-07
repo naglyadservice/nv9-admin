@@ -176,7 +176,7 @@ class Device extends Model
             $payment['terminal'] = $order->merchant_id;
         if(!empty($order->bank_card))
             $payment['card_mask'] = $order->bank_card;
-        
+
 
         $data1 = [
 
@@ -184,7 +184,8 @@ class Device extends Model
                 [
                     "good" => $good,
                     "quantity" => 1000, // 1 шт
-                    "is_return" => false
+                    "is_return" => false,
+                    "total_sum" => (int)$order->sales_cashe
                 ]
             ],
             "rounding" => true,
