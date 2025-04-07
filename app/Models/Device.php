@@ -160,7 +160,26 @@ class Device extends Model
             $good['tax'] = [$fiscalizationKey->tax_code];
         }
 
+
+        $payment = [
+            "type" => $cashType,
+            "value" => (int)$order->sales_cashe,
+            "label" => $label
+        ];
+        if(!empty($order->rrn))
+            $payment['rrn'] = $order->rrn;
+        if(!empty($order->paysys))
+            $payment['payment_system'] = $order->paysys;
+        if(!empty($order->paysys))
+            $payment['auth_code'] = $order->auth_code;
+        if(!empty($order->merchant_id))
+            $payment['terminal'] = $order->merchant_id;
+        if(!empty($order->bank_card))
+            $payment['card_mask'] = $order->bank_card;
+        
+
         $data1 = [
+
             "goods" => [
                 [
                     "good" => $good,
@@ -170,11 +189,7 @@ class Device extends Model
             ],
             "rounding" => true,
             "payments" => [
-                [
-                    "type" => $cashType,
-                    "value" => (int)$order->sales_cashe,
-                    "label" => $label,
-                ]
+                $payment
             ]
         ];
 
