@@ -191,7 +191,6 @@ class Device extends Model
                     "is_return" => false,
                 ]
             ],
-            "rounding" => true,
             "payments" => [
                 $payment
             ]
