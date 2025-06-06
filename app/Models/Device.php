@@ -126,7 +126,7 @@ class Device extends Model
         $resp = json_decode($resp);
 
         $log = Log::build(['driver' => 'single', 'path' => storage_path('logs/fiscalize.log')]);
-        $log->notice('відкриття зміни: '. json_encode($resp, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT).' '.__FILE__.':'.__LINE__);
+        $log->notice('відкриття зміни: '.$licenseKey.' '. json_encode($resp, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT).' '.__FILE__.':'.__LINE__);
 
 
         return $resp;
