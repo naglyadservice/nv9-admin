@@ -71,7 +71,9 @@ class Fiscalize extends Command
 
 
 
-                    $check = $device->createReceipt( $device, $order);
+                    $resp = $device->createReceipt( $device, $order);
+                    $check = $resp['check'];
+                    $shift = $resp['shift'];
 
                     // if(isset($check["err"]))
                     // {
@@ -89,7 +91,10 @@ class Fiscalize extends Command
                         $checkField = $check->id;
                     } elseif (isset($check->message)) {
                         $err = $check->message;
-                        print_r($check->message);
+                        if($shift && isset($shift->message)){
+                            $err .= ' '.$shift->message;
+                        }
+                        print_r($err);
                     }
 
                     $fiskalized = true;

@@ -215,16 +215,16 @@ class Device extends Model
         $log->notice('fiskalization: '. json_encode($resp, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT).' дата: '. json_encode($data1, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) . ' '.__FILE__.':'.__LINE__);
 
 
-
+        $respShift = null;
         if(isset($resp->message) && $resp->message == "Зміну не відкрито") //Если прилетает ошибка по смене
         {
-            $this->createShift($device->cashier_token, $device->fiscalization_key->cashier_license_key); //Открываем смену на кассе.
+            $respShift = $this->createShift($device->cashier_token, $device->fiscalization_key->cashier_license_key); //Открываем смену на кассе.
         }
         if(isset($resp->message) && str_starts_with($resp->message, "Зміну відкрито понад")) //Если прилетает ошибка по смене
         {
-            $this->createShift($device->cashier_token, $device->fiscalization_key->cashier_license_key); //Открываем смену на кассе.
+            $respShift = $this->createShift($device->cashier_token, $device->fiscalization_key->cashier_license_key); //Открываем смену на кассе.
          }
-        return $resp;
+        return ['check'=>$resp, 'shift'=>$respShift];
     }
 
     public function my_hash()
