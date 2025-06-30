@@ -35,7 +35,8 @@ class Fiscalize extends Command
      */
     public function handle()
     {
-        $log = Log::build(['driver' => 'single', 'path' => storage_path('logs/fiscalize.log')]);
+        $log = Log::build(['driver' => 'single', 'path' => storage_path('logs/'.date('Y-m-d').'_fiscalize.log')]);
+        $log->info('Start fiscalization '.date('Y-m-d H:i:s').' '.__FILE__.':'.__LINE__);
 
         //Проверяем еще необходимость фискализировать по включенной фискализации на устройстве
         $need_fiscalize = DB::table('fiskalization_table')

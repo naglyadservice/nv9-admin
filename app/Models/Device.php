@@ -101,7 +101,7 @@ class Device extends Model
         curl_close($ch);
         $resp = json_decode($resp);
 
-        $log = Log::build(['driver' => 'single', 'path' => storage_path('logs/fiscalize.log')]);
+        $log = Log::build(['driver' => 'single', 'path' => storage_path('logs/'.date('Y-m-d').'_fiscalize.log')]);
         $log->notice('авторизація касира: '.$login.' '. json_encode($resp, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT).' дата: '. $data . ' '.__FILE__.':'.__LINE__);
 
 
@@ -125,7 +125,7 @@ class Device extends Model
         curl_close($ch);
         $resp = json_decode($resp);
 
-        $log = Log::build(['driver' => 'single', 'path' => storage_path('logs/fiscalize.log')]);
+        $log = Log::build(['driver' => 'single', 'path' => storage_path('logs/'.date('Y-m-d').'_fiscalize.log')]);
         $log->notice('відкриття зміни: '.$licenseKey.' '. json_encode($resp, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT).' '.__FILE__.':'.__LINE__);
 
 
@@ -211,7 +211,7 @@ class Device extends Model
         curl_close($ch);
         $resp = json_decode($resp);
 
-        $log = Log::build(['driver' => 'single', 'path' => storage_path('logs/fiscalize.log')]);
+        $log = Log::build(['driver' => 'single', 'path' => storage_path('logs/'.date('Y-m-d').'_fiscalize.log')]);
         $log->notice('fiskalization: '. json_encode($resp, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT).' дата: '. json_encode($data1, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) . ' '.__FILE__.':'.__LINE__);
 
 
