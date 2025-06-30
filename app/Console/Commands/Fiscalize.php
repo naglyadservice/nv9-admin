@@ -36,12 +36,18 @@ class Fiscalize extends Command
     public function handle()
     {
         $log = Log::build(['driver' => 'single', 'path' => storage_path('logs/'.date('Y-m-d').'_fiscalize.log')]);
-        $log->info('Start fiscalization '.date('Y-m-d H:i:s').' '.__FILE__.':'.__LINE__);
+
+        $now = Carbon::now();
+        $time = $now->format('H:i');
+        $log->info('time: '.$time.' '.__FILE__.':'.__LINE__);
+        if($time >= '23:45' || $time <= '00:15'){
+            return Command::SUCCESS;
+        }
 
         //Проверяем еще необходимость фискализировать по включенной фискализации на устройстве
         $need_fiscalize = DB::table('fiskalization_table')
             ->where('fiskalized', false)
-            ->where('date', '>=', Carbon::now()->subMinutes(10))
+            ->where('date', '>=', Carbon::now()->subMinutes(40))
             ->orderBy('date', 'ASC')
             ->get();
 
