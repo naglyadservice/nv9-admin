@@ -400,5 +400,63 @@ class CheckController extends Controller
         }
     }
 
+    public function fiscalization_check(Request $request)
+    {
+        $log = Log::build(['driver' => 'single', 'path' => storage_path('logs/'.date('Y-m-d').'_fiscalize.log')]);
+        $order = Fiscalization::where('id', $request->post('id'))->first();
+        $device = $order->device;
+        $link = route('temp-receipt',['hash'=>$device->device_hash,'id'=>$order->id]);
+        if ($order->check_code){
+            return response()->json([
+                'link' => $link,
+            ]);
+        }
+
+        if($device && $device->cashier_token && $device->fiscalization_key_id)
+        {
+            $log->notice('web start fiskalization_table.id: '.$order->id.' '.__FILE__.':'.__LINE__);
+            try{
+                $resp = $device->createReceipt( $device, $order);
+                $check = $resp['check'];
+                $shift = $resp['shift'];
+
+                $checkField = $err = null;
+
+                if(isset($check->id) && $check->id)
+                {
+                    $link = 'https://check.checkbox.ua/'.$check->id;
+                    $checkField = $check->id;
+                } elseif (isset($check->message)) {
+                    $err = $check->message;
+                    if($shift && isset($shift->message)){
+                        $err .= ' '.$shift->message;
+                    }
+                }
+
+                $fiskalized = true;
+                if (isset($check->message) && ($check->message == "Зміну не відкрито" || str_starts_with($check->message, "Зміну відкрито понад")))
+                {
+                    $fiskalized = false;
+                }
+
+                DB::table('fiskalization_table')
+                    ->where('id', $order->id)
+                    ->update([
+                        'check_code' => $checkField,
+                        'fiskalized' => $fiskalized,
+                        'error' => $err
+                    ]);
+            } catch (\Exception $e) {
+                $log->error('web Exception: '.$e->getMessage().__FILE__.':'.__LINE__);
+            }
+
+        } else {
+            $log->warning('web fiscalization  not enabled: '.__FILE__.':'.__LINE__);
+        }
+
+        return response()->json([
+            'link' => $link,
+        ]);
+    }
 
 }

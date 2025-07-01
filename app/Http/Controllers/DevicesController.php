@@ -78,6 +78,12 @@ class DevicesController extends Controller
 
     public function edit_fiscalization(Request $request, Device $device)
     {
+        $device->not_fiscal_cash = false;
+        if($request->has('not_fiscal_cash'))
+        {
+            $device->not_fiscal_cash = true;
+        }
+
         if($request->has('enabled_fiscalization'))
         {
             $device->enabled_fiscalization = true;
