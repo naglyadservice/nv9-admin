@@ -211,7 +211,7 @@ class CheckController extends Controller
 		if($system == 1) // Monopay
 		{
 
-            $webHookUrl = "https://ip-91-227-40-101-96078.vps.hosted-by-mvps.net/monoproxy";
+            $webHookUrl = "https://nv9-mono.iotapps.net/mono-proxy";
             if(config('app.env') != 'production')
                 $webHookUrl = route('payment.monopay.callback');
 
