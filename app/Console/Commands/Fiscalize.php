@@ -35,12 +35,19 @@ class Fiscalize extends Command
      */
     public function handle()
     {
-        $log = Log::build(['driver' => 'single', 'path' => storage_path('logs/fiscalize.log')]);
+        $log = Log::build(['driver' => 'single', 'path' => storage_path('logs/'.date('Y-m-d').'_fiscalize.log')]);
+
+        $now = Carbon::now();
+        $time = $now->format('H:i');
+        $log->info('time: '.$time.' '.__FILE__.':'.__LINE__);
+        if($time >= '23:40' || $time <= '00:05'){
+            return Command::SUCCESS;
+        }
 
         //Проверяем еще необходимость фискализировать по включенной фискализации на устройстве
         $need_fiscalize = DB::table('fiskalization_table')
             ->where('fiskalized', false)
-            ->where('date', '>=', Carbon::now()->subMinutes(10))
+            ->where('date', '>=', Carbon::now()->subMinutes(40))
             ->orderBy('date', 'ASC')
             ->get();
 
@@ -58,7 +65,8 @@ class Fiscalize extends Command
             {
                 try{
                     //Фискализируем продажу
-                    if($order->sales_cashe <= 0)
+                    $fiskal = $device->not_fiscal_cash && $order->cash == 1;
+                    if($order->sales_cashe <= 0 || $fiskal)
                     {
                         DB::table('fiskalization_table')
                             ->where('id', $order->id)
@@ -68,18 +76,9 @@ class Fiscalize extends Command
                         continue;
                     }
 
-
-
-
-                    $check = $device->createReceipt( $device, $order);
-
-                    // if(isset($check["err"]))
-                    // {
-                    //     $order->error = $check["err"];
-                    //     $order->update();
-                    //     continue;
-                    // }
-                    //file_put_contents(public_path()."/fisc.txt", print_r($check, true));
+                    $resp = $device->createReceipt( $device, $order);
+                    $check = $resp['check'];
+                    $shift = $resp['shift'];
 
                     $checkField = $this->errorFiscalize;
                     $err = null;
@@ -89,7 +88,10 @@ class Fiscalize extends Command
                         $checkField = $check->id;
                     } elseif (isset($check->message)) {
                         $err = $check->message;
-                        print_r($check->message);
+                        if($shift && isset($shift->message)){
+                            $err .= ' '.$shift->message;
+                        }
+                        print_r($err);
                     }
 
                     $fiskalized = true;

@@ -29,6 +29,7 @@ Route::get('/check/{hash}/check_allow_payment', 'App\Http\Controllers\CheckContr
 Route::post('/check/{hash}/payment', 'App\Http\Controllers\CheckController@go_payment')->name('go_payment');
 Route::any('/payment/liqpay/callback', 'App\Http\Controllers\CheckController@liqpay_callback')->name('payment.liqpay.callback');
 Route::any('/payment/monopay/callback', 'App\Http\Controllers\CheckController@monopay_callback')->name('payment.monopay.callback');
+Route::post('/fiscalization-check', [\App\Http\Controllers\CheckController::class, 'fiscalization_check'])->name('fiscalization_check');
 // Route::any('/payment/monoqr/callback', function(){
 //     $data = file_get_contents("php://input");
 //     file_put_contents("monoqr.txt", $data);

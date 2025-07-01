@@ -110,6 +110,12 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
+                                        <input @if($device->not_fiscal_cash) checked @endif name="not_fiscal_cash" type="checkbox" class="custom-control-input" id="not_fiscal_cash">
+                                        <label class="custom-control-label" for="not_fiscal_cash">{{__('Не фіскалізувати готівку')}}</label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <label for="user_field_id">{{__('Ключ фіскалізації')}}</label>
                                     <select name="fiscalization_key_id" class="form-control" id="user_field_id">
                                         <option value="0">{{__('Ні')}}</option>

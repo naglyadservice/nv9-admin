@@ -101,8 +101,8 @@ class Device extends Model
         curl_close($ch);
         $resp = json_decode($resp);
 
-        $log = Log::build(['driver' => 'single', 'path' => storage_path('logs/fiscalize.log')]);
-        $log->notice('авторизація касира: '. json_encode($resp, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT).' дата: '. $data . ' '.__FILE__.':'.__LINE__);
+        $log = Log::build(['driver' => 'single', 'path' => storage_path('logs/'.date('Y-m-d').'_fiscalize.log')]);
+        $log->notice('авторизація касира: '.$login.' '. json_encode($resp, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT).' дата: '. $data . ' '.__FILE__.':'.__LINE__);
 
 
         return $resp;
@@ -125,7 +125,7 @@ class Device extends Model
         curl_close($ch);
         $resp = json_decode($resp);
 
-        $log = Log::build(['driver' => 'single', 'path' => storage_path('logs/fiscalize.log')]);
+        $log = Log::build(['driver' => 'single', 'path' => storage_path('logs/'.date('Y-m-d').'_fiscalize.log')]);
         $log->notice('відкриття зміни: '.$licenseKey.' '. json_encode($resp, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT).' '.__FILE__.':'.__LINE__);
 
 
@@ -163,6 +163,7 @@ class Device extends Model
             $good['tax'] = [$fiscalizationKey->tax_code];
         }
 
+
         $payment = [
             "type" => $cashType,
             "value" => (int)$order->sales_cashe,
@@ -181,12 +182,13 @@ class Device extends Model
             $payment['card_mask'] = $order->bank_card;
 
 
-        $data = [
+        $data1 = [
+
             "goods" => [
                 [
                     "good" => $good,
                     "quantity" => 1000, // 1 шт
-                    "is_return" => false
+                    "is_return" => false,
                 ]
             ],
             "payments" => [
@@ -194,7 +196,7 @@ class Device extends Model
             ]
         ];
 
-        $data = json_encode($data);
+        $data = json_encode($data1);
         $header = self::CHECKBOX_HEADER;
         $header[] = "Authorization: Bearer $device->cashier_token";
 
@@ -209,20 +211,20 @@ class Device extends Model
         curl_close($ch);
         $resp = json_decode($resp);
 
-        $log = Log::build(['driver' => 'single', 'path' => storage_path('logs/fiscalize.log')]);
-        $log->notice('fiskalization: '. json_encode($resp).' дата: '. $data . ' '.__FILE__.':'.__LINE__);
+        $log = Log::build(['driver' => 'single', 'path' => storage_path('logs/'.date('Y-m-d').'_fiscalize.log')]);
+        $log->notice('fiskalization: '. json_encode($resp, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT).' дата: '. json_encode($data1, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) . ' '.__FILE__.':'.__LINE__);
 
 
-
+        $respShift = null;
         if(isset($resp->message) && $resp->message == "Зміну не відкрито") //Если прилетает ошибка по смене
         {
-            $this->createShift($device->cashier_token, $device->fiscalization_key->cashier_license_key); //Открываем смену на кассе.
+            $respShift = $this->createShift($device->cashier_token, $device->fiscalization_key->cashier_license_key); //Открываем смену на кассе.
         }
         if(isset($resp->message) && str_starts_with($resp->message, "Зміну відкрито понад")) //Если прилетает ошибка по смене
         {
-            $this->createShift($device->cashier_token, $device->fiscalization_key->cashier_license_key); //Открываем смену на кассе.
+            $respShift = $this->createShift($device->cashier_token, $device->fiscalization_key->cashier_license_key); //Открываем смену на кассе.
          }
-        return $resp;
+        return ['check'=>$resp, 'shift'=>$respShift];
     }
 
     public function my_hash()

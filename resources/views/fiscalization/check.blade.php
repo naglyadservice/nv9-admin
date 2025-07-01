@@ -159,17 +159,22 @@
                             <td>{{\Carbon\Carbon::parse($check->date)->format('d.m.Y - H:i')}}</td>
                             <td>{{$check->sales_cashe / 100}} грн.</td>
                             <td>
-                                <?php if($check->fiskalized==1 && $check->check_code){ ?>
-                                <a href="https://check.checkbox.ua/{{$check->check_code}}">
-                                    <button>Отримати</button>
-                                </a>
-                                <?php } else {
-                                ?>
-                                <a  href="{{route('temp-receipt',['hash'=>$hash,'id'=>$check->id])}}">
-                                    <button style="background: gray"> Отримати</button>
-                                </a>
-                                <?php
-                                } ?>
+                                @if($check->fiskalized==1 && $check->check_code)
+                                    <a href="https://check.checkbox.ua/{{$check->check_code}}">
+                                        <button>Отримати</button>
+                                    </a>
+                                @elseif($device->not_fiscal_cash && $check->cash == 1)
+                                    <a  href="#" class="js-send-to-fiscal" data-id="{{$check->id}}">
+                                        <img width="20px" style="display: none" src="{{ asset('img/load.gif') }}" >
+                                        <button style="background: gray">
+                                            Отримати
+                                        </button>
+                                    </a>
+                                @else
+                                    <a  href="{{route('temp-receipt',['hash'=>$hash,'id'=>$check->id])}}">
+                                        <button style="background: gray">Отримати</button>
+                                    </a>
+                                @endif
                             </td>
                         </tr>
                     @endforeach
@@ -226,6 +231,24 @@
 <script>
 
     $(document).ready(function(){
+
+        $('.js-send-to-fiscal').click(function(e){
+            e.preventDefault();
+            let id = $(this).data('id');
+            let hash = '{{$hash}}';
+            let block = $(this);
+            $(block).find('img').show();
+            $(block).find('button').hide();
+
+            $.post('/fiscalization-check', {
+                id:id,
+                hash:hash
+            }, function(resp){
+                if(resp.link){
+                    window.location.href = resp.link;
+                }
+            });
+        });
 
         $("#goPayment").click(function(){
 
