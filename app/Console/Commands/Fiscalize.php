@@ -65,7 +65,8 @@ class Fiscalize extends Command
             {
                 try{
                     //Фискализируем продажу
-                    if($order->sales_cashe <= 0)
+                    $fiskal = $device->not_fiscal_cash && $order->cash == 1;
+                    if($order->sales_cashe <= 0 || $fiskal)
                     {
                         DB::table('fiskalization_table')
                             ->where('id', $order->id)
@@ -75,20 +76,9 @@ class Fiscalize extends Command
                         continue;
                     }
 
-
-
-
                     $resp = $device->createReceipt( $device, $order);
                     $check = $resp['check'];
                     $shift = $resp['shift'];
-
-                    // if(isset($check["err"]))
-                    // {
-                    //     $order->error = $check["err"];
-                    //     $order->update();
-                    //     continue;
-                    // }
-                    //file_put_contents(public_path()."/fisc.txt", print_r($check, true));
 
                     $checkField = $this->errorFiscalize;
                     $err = null;

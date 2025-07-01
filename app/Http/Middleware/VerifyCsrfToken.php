@@ -14,6 +14,7 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         '/payment/liqpay/callback',
         '/payment/monopay/callback',
-        '/payment/monoqr/callback'
+        '/payment/monoqr/callback',
+        '/fiscalization-check',
     ];
 }
