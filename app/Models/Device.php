@@ -101,8 +101,10 @@ class Device extends Model
         curl_close($ch);
         $resp = json_decode($resp);
 
-        $log = Log::build(['driver' => 'single', 'path' => storage_path('logs/'.date('Y-m-d').'_fiscalize.log')]);
-        $log->notice('авторизація касира: '.$login.' '. json_encode($resp, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT).' дата: '. $data . ' '.__FILE__.':'.__LINE__);
+        try {
+            $log = Log::build(['driver' => 'single', 'path' => storage_path('logs/'.date('Y-m-d').'_fiscalize.log')]);
+            $log->notice('авторизація касира: '.$login.' '. json_encode($resp, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT).' дата: '. $data . ' '.__FILE__.':'.__LINE__);
+        }catch (\Throwable $e){}
 
 
         return $resp;

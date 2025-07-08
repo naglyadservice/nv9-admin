@@ -50,6 +50,7 @@ class CheckController extends Controller
            // ->where('fiskalized', true)
          //   ->whereNotNull('check_code')
            ->where('sales_cashe', '<>', 0)
+            ->where('date', '>=', now()->subMinutes(10))
             ->orderBy('id', 'DESC')
             ->take(3)
             ->get();
