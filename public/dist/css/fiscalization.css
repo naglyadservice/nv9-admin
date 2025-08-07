@@ -229,6 +229,10 @@ header a:hover {
   color: white;
   background: #5888FF;
 }
+.input-buttons button.active {
+    color: white;
+    background: #5888FF;
+}
 
 .buttons {
   display: flex;
@@ -301,7 +305,7 @@ header a:hover {
 .transactions tr td:first-child {
   width: 40%;
 }
-.transactions tr td:nth-child(2), 
+.transactions tr td:nth-child(2),
 .transactions tr th:nth-child(2) {
   text-align: center;
 }

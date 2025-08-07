@@ -74,6 +74,9 @@ class CheckController extends Controller
         else if($device->design == Device::STANDART_NOT_DEWASH){
             return view('fiscalization.check', compact('last_three', 'device', 'device_code', 'hash', 'user'));
         }
+        else if($device->design == Device::STANDART_NOT_IMPUT){
+            return view('fiscalization.check_dewash_no_input', compact('last_three', 'device', 'device_code', 'hash', 'user'));
+        }
     }
 
     public function user_page(Request $request, $userHash)

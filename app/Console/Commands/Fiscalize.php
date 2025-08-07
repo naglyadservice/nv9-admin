@@ -95,7 +95,12 @@ class Fiscalize extends Command
                     }
 
                     $fiskalized = true;
-                    if (isset($check->message) && ($check->message == "Зміну не відкрито" || str_starts_with($check->message, "Зміну відкрито понад")))
+                    if (isset($check->message) &&
+                        (
+                            $check->message == "Зміну не відкрито"
+                            || $check->message == "Невірний токен доступу"
+                            || str_starts_with($check->message, "Зміну відкрито понад")
+                        ))
                     {
                         $fiskalized = false;
                     }

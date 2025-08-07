@@ -15,7 +15,9 @@ class Device extends Model
     const MONO = 2;
     const MONO125 = 3;
     const STANDART_NOT_DEWASH = 4;
+    const STANDART_NOT_IMPUT = 5;
     const STANDART_TEXT = 'Стандарт';
+    const STANDART_TEXT_NOT_IMPUT = 'Стандарт без поля вводу';
     const STANDART_NOT_DEWASH_TEXT = 'Стандарт без логотипу';
     const MONO_TEXT = 'Моно';
     const MONO125_TEXT = 'MONO125';
@@ -225,7 +227,11 @@ class Device extends Model
         if(isset($resp->message) && str_starts_with($resp->message, "Зміну відкрито понад")) //Если прилетает ошибка по смене
         {
             $respShift = $this->createShift($device->cashier_token, $device->fiscalization_key->cashier_license_key); //Открываем смену на кассе.
-         }
+        }
+        if (isset($resp->message) && $resp->message == "Невірний токен доступу"){
+            $this->updateFiskalizationToken();
+            $respShift = $this->createShift($this->cashier_token, $device->fiscalization_key->cashier_license_key); //Открываем смену на кассе.
+        }
         return ['check'=>$resp, 'shift'=>$respShift];
     }
 
@@ -247,6 +253,7 @@ class Device extends Model
             self::MONO => self::MONO_TEXT,
             self::MONO125 => self::MONO125_TEXT,
             self::STANDART_NOT_DEWASH => self::STANDART_NOT_DEWASH_TEXT,
+            self::STANDART_NOT_IMPUT => self::STANDART_TEXT_NOT_IMPUT,
         ];
     }
 
