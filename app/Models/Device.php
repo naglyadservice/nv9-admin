@@ -27,7 +27,10 @@ class Device extends Model
         "X-Client-Version: V.1.9"
     ];
 
-    protected $fillable = ['factory_number', 'user_id', 'address', 'place_name','service','design','divide_by'];
+    protected $fillable = ['factory_number', 'user_id', 'address', 'place_name', 'service', 'design',
+        'divide_by',
+        'redirect'
+    ];
 
     public function user()
     {

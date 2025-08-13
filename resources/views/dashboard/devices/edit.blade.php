@@ -80,6 +80,7 @@
 
                                 <x-my-field value="{{$device->service}}" name="service" title="{{__('Послуга')}}" type="text"></x-my-field>
 
+                                <x-my-field value="{{$device->redirect}}" name="redirect" title="Редірект" type="text"></x-my-field>
 
                             </div>
                             <div class="card-footer">

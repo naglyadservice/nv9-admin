@@ -42,6 +42,9 @@ class CheckController extends Controller
     {
         $deviceID = (int)$request->id;
         $device = Device::where('device_hash', $hash)->firstOrFail();
+        if($device->redirect){
+            return redirect($device->redirect, 302);
+        }
         $serialNumbers = $device->serialNumbers()->pluck('serial_number')->toArray();
         $serialNumbers[] = $device->factory_number;
 
