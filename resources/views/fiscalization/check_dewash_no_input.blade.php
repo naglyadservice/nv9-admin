@@ -92,8 +92,6 @@
                 </svg>
             </a>
 
-            <img src="https://www.npc.com.ua/wp-content/uploads/2024/02/c6251619-ea93-4c53-9f8f-d3c5d0bd2faa.jpg" width="95" >
-
         </header>
     </div>
 
