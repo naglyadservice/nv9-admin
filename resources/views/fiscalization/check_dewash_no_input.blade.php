@@ -117,7 +117,6 @@
 
                             <p>оберіть суму для поповнення</p>
                             <div class="input-buttons">
-                                <button type="button">5</button>
                                 <button type="button">10</button>
                                 <button type="button">20</button>
                                 <button type="button">50</button>
